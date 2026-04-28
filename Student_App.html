@@ -653,6 +653,27 @@ textarea{resize:vertical;min-height:90px;line-height:1.6}
 }
 @keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
 .prog-row .sub{font-family:var(--f-en);font-size:11px;color:var(--text-4);margin-top:4px;font-weight:600}
+.prog-row .type-chips{
+  margin-top:6px;display:flex;flex-wrap:wrap;gap:4px;
+}
+.type-chip{
+  font-family:var(--f-ar);font-size:10.5px;color:var(--text-3);
+  background:var(--surface-2);border:1px solid var(--line);
+  padding:2px 8px;border-radius:999px;font-weight:600;
+  display:inline-flex;align-items:center;gap:4px;
+  transition:var(--t-fast);
+}
+.type-chip b{
+  font-family:var(--f-en);font-weight:700;color:var(--primary);
+  font-size:10.5px;
+}
+.track-pill{
+  display:inline-block;margin-inline-start:6px;
+  font-family:var(--f-ar);font-size:10px;font-weight:700;
+  color:var(--primary);background:var(--primary-soft);
+  padding:1px 7px;border-radius:999px;letter-spacing:0;
+  vertical-align:middle;
+}
 
 /* CALENDAR */
 .cal-wrap{margin-top:10px;width:100%;max-width:100%;overflow:hidden}
@@ -1400,6 +1421,19 @@ img,video,canvas,svg{max-width:100%;height:auto}
    ════════════════════════════════════════════════════════════════════ */
 (function(){
 'use strict';
+
+/* ════════════════════════════════════════════════════════════════════
+   CONSOLE POLYFILL — Safari/iOS sometimes lacks console.debug/info/etc.
+   Stub any missing methods with a no-op so log calls never throw.
+   ════════════════════════════════════════════════════════════════════ */
+(function(){
+  if(typeof console==='undefined'){ window.console={}; }
+  const noop=function(){};
+  ['debug','info','log','warn','error','trace','dir','table','group','groupEnd','time','timeEnd','assert','count'].forEach(function(m){
+    if(typeof console[m]!=='function'){ console[m]=(console.log||noop).bind?console.log.bind(console):noop; }
+  });
+})();
+
 /* ════════════════════════════════════════════════════════════════════
    OFFICIAL MoE LOGO — embedded base64 (PNG with transparency)
    Source: official high-res file from MoE visual identity guide v3.
@@ -2231,42 +2265,91 @@ function renderProgress(){
   $('pg-mature').textContent=m;
   $('pg-acc').textContent=(c+w>0?Math.round(c/(c+w)*100):0)+'%';
 
-  // by track
+  /* Question type labels — mirror the Teacher app */
+  const TYPE_LBL={card:'بطاقة',mcq:'خيارات',tf:'صح/خطأ',cloze:'فراغ',sa:'إجابة'};
+
+  /* Helper: count question types within a list of cards */
+  function typeBreakdown(list){
+    const counts={};
+    for(const c of list){
+      const t=c.qType||'card';
+      counts[t]=(counts[t]||0)+1;
+    }
+    return counts;
+  }
+  /* Helper: render type chips */
+  function typeChips(counts){
+    return Object.keys(counts).map(t=>
+      `<span class="type-chip">${esc(TYPE_LBL[t]||t)} <b>${counts[t]}</b></span>`
+    ).join('');
+  }
+
+  // ─── BY TRACK ──────────────────────────────────────────────────────
   const tBox=$('pg-tracks'); tBox.innerHTML='';
   Object.keys(TRACKS).forEach(k=>{
     if(k==='all') return;
     const list=cardsForTrack(k);
-    if(list.length===0) return;
+    if(list.length===0) return;          // hide tracks with zero cards
     let mat=0;
-    for(const card of list){ const p=prog[card.id]; if(p && p.reps>=3 && (p.ivl||0)>=21) mat++; }
+    for(const card of list){
+      const p=prog[card.id];
+      if(p && p.reps>=3 && (p.ivl||0)>=21) mat++;
+    }
     const pct=Math.round((mat/list.length)*100);
+    const counts=typeBreakdown(list);
     tBox.innerHTML+=`<div class="prog-row">
-      <div class="top"><div class="lbl">${esc(TRACKS[k].name)}</div><div class="pct">${pct}%</div></div>
+      <div class="top">
+        <div class="lbl">${esc(TRACKS[k].name)}</div>
+        <div class="pct">${pct}%</div>
+      </div>
       <div class="prog-track"><div class="prog-fill" style="width:${pct}%"></div></div>
-      <div class="sub">${mat} / ${list.length} ناضجة</div>
+      <div class="sub">
+        <span>${mat} / ${list.length} ناضجة</span>
+      </div>
+      <div class="type-chips">${typeChips(counts)}</div>
     </div>`;
   });
   if(!tBox.innerHTML) tBox.innerHTML='<div class="muted">لا بيانات بعد</div>';
 
-  // by category
+  // ─── BY CATEGORY ───────────────────────────────────────────────────
+  /* Only show categories that actually exist in current cards.
+     If a category was loaded earlier but no longer has any card
+     (e.g. after JSON replace), it's automatically excluded because
+     we rebuild byCat from scratch from State.cards each call. */
   const cBox=$('pg-cats'); cBox.innerHTML='';
   const byCat={};
   for(const card of cards){
     const cat=card.cat||'بدون فئة';
-    byCat[cat]=byCat[cat]||{total:0, mature:0};
+    byCat[cat]=byCat[cat]||{total:0, mature:0, types:{}, track:card.track||'en'};
     byCat[cat].total++;
     const p=prog[card.id];
     if(p && p.reps>=3 && (p.ivl||0)>=21) byCat[cat].mature++;
+    const t=card.qType||'card';
+    byCat[cat].types[t]=(byCat[cat].types[t]||0)+1;
   }
-  const cats=Object.keys(byCat).sort();
-  if(cats.length===0) cBox.innerHTML='<div class="muted">لا بيانات بعد</div>';
-  for(const cat of cats){
-    const x=byCat[cat]; const pct=Math.round((x.mature/x.total)*100);
-    cBox.innerHTML+=`<div class="prog-row">
-      <div class="top"><div class="lbl">${esc(cat)}</div><div class="pct">${pct}%</div></div>
-      <div class="prog-track"><div class="prog-fill" style="width:${pct}%"></div></div>
-      <div class="sub">${x.mature} / ${x.total}</div>
-    </div>`;
+  const catKeys=Object.keys(byCat).sort();
+  if(catKeys.length===0){
+    cBox.innerHTML='<div class="muted">لا فئات في الحزمة الحالية</div>';
+  } else {
+    for(const cat of catKeys){
+      const x=byCat[cat];
+      const pct=Math.round((x.mature/x.total)*100);
+      const trackLbl=(TRACKS[x.track]||{}).name||'';
+      cBox.innerHTML+=`<div class="prog-row">
+        <div class="top">
+          <div class="lbl">
+            ${esc(cat)}
+            ${trackLbl?`<span class="track-pill">${esc(trackLbl)}</span>`:''}
+          </div>
+          <div class="pct">${pct}%</div>
+        </div>
+        <div class="prog-track"><div class="prog-fill" style="width:${pct}%"></div></div>
+        <div class="sub">
+          <span>${x.mature} / ${x.total}</span>
+        </div>
+        <div class="type-chips">${typeChips(x.types)}</div>
+      </div>`;
+    }
   }
 
   renderCalendar();
@@ -3018,8 +3101,14 @@ async function cloudSync(silent=false){
     showSync(`تمت المزامنة: ${added} جديدة، ${updated} محدّثة`, 'success');
     renderHome();
   }catch(e){
-    console.warn('cloudSync', e);
-    if(!silent) showSync('فشل المزامنة: '+(e.message||e),'error');
+    /* Silent path: network errors at boot are normal (offline, URL not yet
+       configured, etc). Don't pollute console. Only log unexpected errors. */
+    const msg = String(e && e.message || e);
+    const isNetworkErr = /Failed to fetch|NetworkError|Network request failed|abort/i.test(msg);
+    if(!silent || !isNetworkErr){
+      console.warn('cloudSync', e);
+    }
+    if(!silent) showSync('فشل المزامنة: '+msg,'error');
   }
 }
 function cloudSyncNow(){ cloudSync(false); }
