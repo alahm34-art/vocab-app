@@ -1531,6 +1531,10 @@ img,video,canvas,svg{max-width:100%;height:auto}
         <svg class="ico ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
         عرض شاشة الموافقة على الخصوصية
       </button>
+      <button class="btn block mb-8" onclick="App.testNotification()" type="button">
+        <svg class="ico ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        اختبار الإشعارات
+      </button>
       <div class="rule"></div>
       <button class="btn danger block mb-8" onclick="App.resetProgress()" type="button">إعادة تعيين التقدم</button>
       <button class="btn danger block" onclick="App.wipeAll()" type="button">حذف كل البيانات</button>
@@ -2381,6 +2385,55 @@ function stopQuizTimer(){
   const Q=State.quiz;
   if(Q && Q.timerInt){ clearInterval(Q.timerInt); Q.timerInt=null; }
 }
+/* ════════════════════════════════════════════════════════════════════
+   MCQ AUTO-DETECT — recovery for cards saved as 'card' qType but
+   actually formatted as multiple-choice in their answer or question text.
+   Patterns recognized (Arabic + English):
+     "أ ... ب ... ج ... د ..."     — Arabic letter prefix
+     "A) ... B) ... C) ..."         — English letter+paren
+     "1. ... 2. ... 3. ..."         — numbered list
+   Returns {options:[...], correct:'...'} if detected, null otherwise.
+   The "correct" is the FIRST option (matches answer field convention).
+   ════════════════════════════════════════════════════════════════════ */
+function detectMCQ(card){
+  /* Already-tagged MCQ → use as-is */
+  if(card.qType==='mcq' && Array.isArray(card.options) && card.options.length>=2){
+    return {options:card.options, correct:card.a};
+  }
+  /* Look for option markers in either question or answer */
+  const text = String(card.a || card.q || '').trim();
+  if(!text || text.length < 10) return null;
+
+  /* Pattern 1: Arabic letter prefix (أ ب ج د هـ و) at line start */
+  const arPattern = /(?:^|\n)\s*([أابتثجحخد]|هـ?|و)[\s\.\)،:-]+([^\n]+)/g;
+  let arMatches = [...text.matchAll(arPattern)];
+  if(arMatches.length >= 2){
+    const opts = arMatches.map(m=>m[2].trim()).filter(Boolean);
+    if(opts.length >= 2 && opts.length <= 6){
+      return {options:opts, correct:opts[0], detectedFrom:'ar-letter'};
+    }
+  }
+  /* Pattern 2: English letter prefix A/B/C/D */
+  const enPattern = /(?:^|\n)\s*([A-Fa-f])[\s\.\)\:-]+([^\n]+)/g;
+  let enMatches = [...text.matchAll(enPattern)];
+  if(enMatches.length >= 2){
+    const opts = enMatches.map(m=>m[2].trim()).filter(Boolean);
+    if(opts.length >= 2 && opts.length <= 6){
+      return {options:opts, correct:opts[0], detectedFrom:'en-letter'};
+    }
+  }
+  /* Pattern 3: numbered list */
+  const numPattern = /(?:^|\n)\s*(\d)[\s\.\)\-]+([^\n]+)/g;
+  let numMatches = [...text.matchAll(numPattern)];
+  if(numMatches.length >= 2){
+    const opts = numMatches.map(m=>m[2].trim()).filter(Boolean);
+    if(opts.length >= 2 && opts.length <= 6){
+      return {options:opts, correct:opts[0], detectedFrom:'numbered'};
+    }
+  }
+  return null;
+}
+
 function showQuizQ(){
   const Q=State.quiz; const c=Q.list[Q.idx]; if(!c) return;
   Q.answered=false;
@@ -2409,11 +2462,26 @@ function showQuizQ(){
   $('qr-next').classList.add('hidden');
 
   const t=c.qType||'card';
+  /* Smart detection: card saved as 'card' but contains option markers? Show as MCQ */
+  let mcqData = null;
   if(t==='mcq'){
-    const opts=shuffle(c.options||[]);
+    mcqData = {options: c.options||[], correct: c.a};
+  } else if(t==='card' || t==='sa'){
+    mcqData = detectMCQ(c);
+  }
+
+  if(mcqData && mcqData.options && mcqData.options.length>=2){
+    const opts=shuffle(mcqData.options.slice());
     const letters=['A','B','C','D','E','F'];
     body.innerHTML=opts.map((o,i)=>`<button class="quiz-opt" data-opt="${esc(o)}" type="button"><span class="lt">${letters[i]||'?'}</span><span>${esc(o)}</span></button>`).join('');
-    qsa('.quiz-opt', body).forEach(b=>b.onclick=()=>answerMCQ(b, c));
+    /* Update type badge if we auto-detected */
+    if(t!=='mcq'){
+      $('qr-type').textContent='MCQ (تلقائي)';
+      $('qr-type').title='تم اكتشاف خيارات في النص — يُعرض كأسئلة اختيار';
+    }
+    /* Pass synthetic card with proper a/options to answerMCQ */
+    const cMcq = {...c, qType:'mcq', options:mcqData.options, a:mcqData.correct};
+    qsa('.quiz-opt', body).forEach(b=>b.onclick=()=>answerMCQ(b, cMcq));
   } else if(t==='tf'){
     body.innerHTML=`<div class="tf-grid">
       <button class="tf-btn" data-v="true" type="button">صح<span class="en">TRUE</span></button>
@@ -3980,44 +4048,122 @@ function renderMotivation(){
    Asks for permission once after consent. Uses setTimeout for the
    in-tab session, and the Notification API for OS-level delivery.
    ════════════════════════════════════════════════════════════════════ */
-async function scheduleMotivation(){
-  /* Only ask permission once per session, after a small delay so it
-     doesn't shock the student right after consent */
-  if('Notification' in window && Notification.permission === 'default'){
-    setTimeout(async ()=>{
-      try{ await Notification.requestPermission(); }catch(_){}
-    }, 8000);
+/* ════════════════════════════════════════════════════════════════════
+   NOTIFICATION SYSTEM — diagnostics + reliable delivery.
+   Issues addressed:
+   1. file:// origins can't request permission (always 'denied')
+   2. iOS Safari requires PWA installation + service worker
+   3. Some browsers ignore notifications without an icon URL
+   4. No way to manually test → silent failure mode
+   ════════════════════════════════════════════════════════════════════ */
+function notifSupport(){
+  if(!('Notification' in window)){
+    return {ok:false, reason:'المتصفح لا يدعم الإشعارات'};
   }
-  /* In-tab reminder: if the tab stays open and student is idle 25min,
-     send an encouraging notification */
+  /* file:// origins — permission API works but new Notification() may fail */
+  if(location.protocol === 'file:'){
+    return {ok:false, reason:'الإشعارات تتطلب فتح التطبيق عبر https:// أو localhost'};
+  }
+  return {ok:true};
+}
+
+async function scheduleMotivation(){
+  const support = notifSupport();
+  if(!support.ok){
+    console.info('[notif] support check failed:', support.reason);
+    return;
+  }
+  /* Ask permission only after delay (don't shock the student) */
+  if(Notification.permission === 'default'){
+    setTimeout(async ()=>{
+      try{
+        const result = await Notification.requestPermission();
+        console.info('[notif] permission:', result);
+      }catch(e){ console.warn('[notif] permission request failed:', e); }
+    }, 8000);
+  } else {
+    console.info('[notif] permission already:', Notification.permission);
+  }
+  /* In-tab idle reminder */
   if(State._motivTimer) clearInterval(State._motivTimer);
   State._motivTimer = setInterval(()=>{
     const idleMin = (Date.now() - (State._lastActive||Date.now())) / 60000;
     if(idleMin > 25 && document.hidden){
       sendNotif();
     }
-  }, 5*60*1000);  /* check every 5 min */
-  /* Track last active time */
+  }, 5*60*1000);
   ['click','keydown','scroll','touchstart'].forEach(evt=>{
     document.addEventListener(evt, ()=>{ State._lastActive = Date.now(); }, {passive:true});
   });
   State._lastActive = Date.now();
 }
-function sendNotif(){
-  if(!('Notification' in window)) return;
-  if(Notification.permission !== 'granted') return;
+
+function sendNotif(customBody){
+  const support = notifSupport();
+  if(!support.ok){ console.warn('[notif]', support.reason); return false; }
+  if(Notification.permission !== 'granted'){
+    console.warn('[notif] permission not granted:', Notification.permission);
+    return false;
+  }
   const due = dueCount('all');
-  let body;
-  if(due > 0)  body = pickMotivation('due',  {n:due});
-  else         body = pickMotivation('ready');
+  let body = customBody;
+  if(!body){
+    if(due > 0) body = pickMotivation('due', {n:due});
+    else        body = pickMotivation('ready');
+  }
   try{
-    new Notification('إتقان · بطاقاتك تنتظر', {
+    /* Inline SVG icon as data URL — works without file hosting */
+    const iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192"><rect width="192" height="192" rx="40" fill="#6366f1"/><text x="96" y="135" text-anchor="middle" font-size="120" font-weight="900" fill="white" font-family="Arial">إ</text></svg>';
+    const iconUrl = 'data:image/svg+xml;base64,'+btoa(unescape(encodeURIComponent(iconSvg)));
+    new Notification('إتقان · مبادرة الجوفاء', {
       body,
-      icon: '',  /* no icon embedded — keep file size down */
-      tag: 'etqan-reminder',  /* coalesce duplicate notifs */
+      icon: iconUrl,
+      badge: iconUrl,
+      tag: 'etqan-reminder',
       silent: false,
+      lang: 'ar',
+      dir: 'rtl',
     });
-  }catch(_){}
+    console.info('[notif] sent:', body);
+    return true;
+  }catch(e){
+    console.error('[notif] send failed:', e);
+    return false;
+  }
+}
+
+/* Manual test — invoked from settings page */
+async function testNotification(){
+  const support = notifSupport();
+  if(!support.ok){
+    toast(support.reason, 'error');
+    return;
+  }
+  /* Request permission if not granted */
+  if(Notification.permission === 'default'){
+    toast('سيُطلب إذن الإشعارات الآن — اضغط "السماح"', 'warn');
+    try{
+      const result = await Notification.requestPermission();
+      if(result !== 'granted'){
+        toast('لم يُمنح الإذن — تحقق من إعدادات المتصفح', 'error');
+        return;
+      }
+    }catch(e){
+      toast('فشل طلب الإذن: '+(e.message||e), 'error');
+      return;
+    }
+  }
+  if(Notification.permission === 'denied'){
+    toast('الإذن مرفوض — افتح إعدادات الموقع وفعّل الإشعارات', 'error');
+    return;
+  }
+  /* Send test notification */
+  const ok = sendNotif('هذا اختبار — الإشعارات تعمل بنجاح. أهل الإتقان لا يفوّتون.');
+  if(ok){
+    toast('تم إرسال إشعار الاختبار — تحقق من شريط الإشعارات', 'success');
+  } else {
+    toast('فشل إرسال الإشعار — انظر console للتفاصيل', 'error');
+  }
 }
 
 async function saveStudentName(){
@@ -4038,7 +4184,7 @@ window.App = {
   resetProgress, wipeAll,
   saveStudentName, saveCloudConfig, cloudSyncNow,
   acceptConsent, declineConsent, showConsentAgain,
-  openNewCards,
+  openNewCards, testNotification,
 };
 
 /* boot */
