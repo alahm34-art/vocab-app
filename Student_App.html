@@ -7,10 +7,10 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Vocab">
-<meta name="description" content="Vocab — modern spaced repetition for Saudi students. Offline-first, private, local-only.">
+<meta name="apple-mobile-web-app-title" content="إتقان">
+<meta name="description" content="إتقان — مبادرة متوسطة وثانوية الجوفاء للمراجعة الذكية بدون انترنت.">
 <meta name="author" content="Eng. Ahmed Atyah Al-Zahrani">
-<title>Vocab — تطبيق الطالب</title>
+<title>إتقان — متوسطة وثانوية الجوفاء</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -500,29 +500,40 @@ textarea{resize:vertical;min-height:90px;line-height:1.6}
 }
 
 /* RATE BUTTONS */
-.rate-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:16px;animation:answerIn .4s var(--ease-out) .05s both}
-.rate-btn{
-  background:var(--surface);border:1px solid var(--line-2);border-radius:var(--r-md);
-  padding:11px 6px;cursor:pointer;
-  display:flex;flex-direction:column;align-items:center;gap:3px;min-height:78px;
-  font-family:var(--f-ar);
-  transition:transform var(--t-fast), background var(--t-fast), border-color var(--t-fast), box-shadow var(--t-fast);
-  position:relative;
+/* ════════════ NEW: 2-button rating (clean, mobile-first) ════════════ */
+.rate-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;
+  margin-top:18px;
+  animation:answerIn .4s var(--ease-out) .05s both;
 }
-.rate-btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-sm)}
-.rate-btn:active{transform:scale(.96)}
-.rate-btn .ar{font-weight:700;font-size:14px}
-.rate-btn .en{font-family:var(--f-en);font-size:10px;font-weight:600;color:var(--text-3)}
-.rate-btn .iv{font-family:var(--f-en);font-size:11px;font-weight:700;margin-top:2px}
-.rate-btn .k{font-family:var(--f-en);font-size:9px;color:var(--text-4);font-weight:700;margin-top:1px;opacity:.6}
-.rate-btn[data-r="1"]{background:var(--r-again-bg);border-color:var(--r-again);color:var(--r-again)}
-.rate-btn[data-r="1"] .iv{color:var(--r-again)}
-.rate-btn[data-r="2"]{background:var(--r-hard-bg);border-color:var(--r-hard);color:var(--r-hard)}
-.rate-btn[data-r="2"] .iv{color:var(--r-hard)}
-.rate-btn[data-r="3"]{background:var(--r-good-bg);border-color:var(--r-good);color:var(--r-good)}
-.rate-btn[data-r="3"] .iv{color:var(--r-good)}
-.rate-btn[data-r="4"]{background:var(--r-easy-bg);border-color:var(--r-easy);color:var(--r-easy)}
-.rate-btn[data-r="4"] .iv{color:var(--r-easy)}
+.rate-btn-v2{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:10px;min-height:96px;padding:18px 10px;
+  border:none;border-radius:var(--r-md);cursor:pointer;
+  font-family:var(--f-ar);font-weight:800;
+  transition:transform .12s ease, box-shadow .15s ease, filter .15s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.rate-btn-v2:active{transform:scale(.97)}
+.rate-btn-v2:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.rb-icon{
+  width:42px;height:42px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.22);
+}
+.rb-icon svg{width:24px;height:24px}
+.rb-text{font-size:16px;letter-spacing:0;line-height:1}
+/* Color treatment: red for "didn't know", green for "knew" */
+.rate-btn-v2.know-no{
+  background:linear-gradient(135deg, #ef4444, #dc2626);color:#fff;
+  box-shadow:0 4px 16px rgba(239,68,68,.3);
+}
+.rate-btn-v2.know-yes{
+  background:linear-gradient(135deg, #22c55e, #15803d);color:#fff;
+  box-shadow:0 4px 16px rgba(34,197,94,.3);
+}
+.rate-btn-v2.know-no:hover {filter:brightness(1.05)}
+.rate-btn-v2.know-yes:hover{filter:brightness(1.05)}
 
 /* Undo banner */
 .undo-bar{
@@ -763,6 +774,86 @@ textarea{resize:vertical;min-height:90px;line-height:1.6}
 .modal h3 .ico{color:var(--primary)}
 .modal .m-actions{display:flex;gap:8px;margin-top:18px;justify-content:flex-end;flex-wrap:wrap}
 
+/* ════════════ CONSENT GATE — non-dismissible, blocks app ════════════ */
+.consent-overlay{
+  position:fixed;inset:0;background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);
+  z-index:9999;align-items:center;justify-content:center;padding:16px;overflow-y:auto;
+}
+.consent-overlay[style*="flex"]{display:flex !important}
+.consent-card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:24px;max-width:560px;width:100%;max-height:92vh;overflow-y:auto;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+  animation:consentIn .45s var(--ease-back);
+}
+@keyframes consentIn{from{opacity:0;transform:translateY(30px) scale(.94)}to{opacity:1;transform:translateY(0) scale(1)}}
+.consent-brand{
+  display:flex;align-items:center;gap:14px;margin-bottom:18px;
+  padding-bottom:18px;border-bottom:1px solid var(--line);
+}
+.consent-mark{
+  width:54px;height:54px;border-radius:14px;
+  background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--f-ar);font-weight:900;font-size:28px;
+  box-shadow:0 8px 24px rgba(99,102,241,.4);
+}
+.consent-name{
+  font-family:var(--f-ar);font-weight:900;font-size:22px;
+  color:var(--text);letter-spacing:-0.01em;
+}
+.consent-school{
+  font-family:var(--f-ar);font-size:12.5px;color:var(--text-3);
+  font-weight:600;margin-top:2px;
+}
+.consent-title{
+  font-family:var(--f-ar);font-weight:800;font-size:18px;
+  color:var(--text);margin-bottom:18px;line-height:1.5;
+}
+.consent-body{
+  margin-bottom:18px;
+}
+.consent-section{
+  margin-bottom:14px;padding:12px 14px;
+  background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r-md);
+}
+.consent-section-h{
+  display:flex;align-items:center;gap:8px;
+  font-family:var(--f-ar);font-weight:800;font-size:13.5px;
+  color:var(--primary);margin-bottom:8px;
+}
+.consent-section-h .ico{flex-shrink:0}
+.consent-list{
+  list-style:none;padding:0;margin:0;
+}
+.consent-list li{
+  font-family:var(--f-ar);font-size:13px;line-height:1.75;
+  color:var(--text-2);padding-inline-start:16px;position:relative;
+}
+.consent-list li::before{
+  content:'•';position:absolute;inset-inline-start:0;
+  color:var(--primary);font-weight:900;
+}
+.consent-actions{
+  display:flex;flex-direction:column;gap:8px;margin-bottom:14px;
+}
+.consent-accept{
+  font-size:15px !important;padding:14px !important;font-weight:800 !important;
+}
+.consent-decline{
+  font-size:13px !important;color:var(--text-3) !important;
+}
+.consent-footer{
+  text-align:center;font-family:var(--f-ar);font-size:11px;
+  color:var(--text-4);padding-top:12px;border-top:1px solid var(--line);
+  line-height:1.7;
+}
+@media (max-width:520px){
+  .consent-card{padding:18px;border-radius:var(--r-md)}
+  .consent-mark{width:46px;height:46px;font-size:24px;border-radius:12px}
+  .consent-name{font-size:19px}
+}
+
 /* Utility */
 .hidden{display:none!important}
 .row{display:flex;align-items:center;gap:10px}
@@ -802,6 +893,78 @@ textarea{resize:vertical;min-height:90px;line-height:1.6}
 .supervisor-banner .ico{color:var(--primary);flex-shrink:0}
 .supervisor-banner b{color:var(--text);font-weight:700}
 .supervisor-banner .meta{font-family:var(--f-en);font-size:11px;color:var(--text-3);font-weight:600;margin-inline-start:auto}
+
+/* ════════════ COPYRIGHT STRIP — bottom of settings ════════════ */
+.copyright-strip{
+  display:flex;align-items:center;gap:12px;
+  margin-top:16px;padding:12px 14px;
+  background:var(--surface-2);border:1px solid var(--line);
+  border-radius:var(--r-md);
+}
+.cs-logo{
+  width:36px;height:36px;border-radius:10px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--f-ar);font-weight:900;font-size:18px;
+}
+.cs-body{flex:1;min-width:0}
+.cs-line-1{
+  font-family:var(--f-ar);font-weight:700;font-size:12.5px;
+  color:var(--text);line-height:1.5;
+}
+.cs-line-2{
+  font-family:var(--f-ar);font-size:11px;
+  color:var(--text-3);line-height:1.6;margin-top:2px;
+}
+
+/* ════════════ NEW CARDS BADGE — celebratory pulse on home ════════════ */
+.new-cards-badge{
+  display:flex;align-items:center;gap:14px;
+  width:100%;background:linear-gradient(135deg, var(--good), #10b981);
+  border:none;color:#fff;cursor:pointer;
+  padding:14px 18px;border-radius:var(--r-md);
+  margin:0 0 14px;font-family:var(--f-ar);
+  box-shadow:0 6px 20px rgba(16,185,129,.35);
+  text-align:start;
+  animation:ncbPulse 2s ease-in-out infinite, slideUp .45s var(--ease-out);
+  transition:transform .15s ease;
+}
+.new-cards-badge:hover{transform:translateY(-1px)}
+.new-cards-badge:active{transform:translateY(0)}
+.ncb-icon{
+  width:38px;height:38px;border-radius:50%;flex-shrink:0;
+  background:rgba(255,255,255,.22);
+  display:flex;align-items:center;justify-content:center;
+}
+.ncb-icon .ico{width:22px;height:22px}
+.ncb-text{flex:1;display:flex;flex-direction:column;gap:2px;line-height:1.4}
+.ncb-text b{font-family:var(--f-en);font-weight:900;font-size:20px;letter-spacing:0}
+.ncb-text span{font-size:12.5px;opacity:.95;font-weight:600}
+.ncb-arrow{width:22px;height:22px;opacity:.85;flex-shrink:0;transform:scaleX(-1)}
+@keyframes ncbPulse{
+  0%,100%{box-shadow:0 6px 20px rgba(16,185,129,.35)}
+  50%   {box-shadow:0 6px 28px rgba(16,185,129,.6)}
+}
+
+/* ════════════ MOTIVATION BANNER ════════════ */
+.motiv-banner{
+  display:flex;align-items:center;gap:12px;
+  background:linear-gradient(135deg, var(--primary-soft), var(--accent-soft));
+  border:1px solid var(--primary);
+  border-inline-start:4px solid var(--primary);
+  padding:14px 16px;border-radius:var(--r-md);
+  margin:0 0 18px;
+  font-family:var(--f-ar);font-size:14px;font-weight:600;
+  color:var(--text);line-height:1.6;
+  animation:slideUp .45s var(--ease-out);
+}
+.motiv-banner .ico{
+  color:var(--primary);flex-shrink:0;width:24px;height:24px;
+}
+@media (max-width:520px){
+  .motiv-banner{font-size:13px;padding:12px 14px}
+  .motiv-banner .ico{width:20px;height:20px}
+}
 
 /* ─── STUDENT NAME chip in header ─── */
 .student-chip{
@@ -905,8 +1068,8 @@ img,video,canvas,svg{max-width:100%;height:auto}
 <!-- ════════════════════════════════ HEADER ════════════════════════════════ -->
 <header class="header">
   <div class="brand">
-    <div class="brand-mark">V</div>
-    <span>Vocab</span>
+    <div class="brand-mark">إ</div>
+    <span>إتقان</span>
   </div>
   <div class="h-spacer"></div>
   <span class="student-chip hidden" id="student-chip">
@@ -930,14 +1093,24 @@ img,video,canvas,svg{max-width:100%;height:auto}
 
   <section class="page active" id="page-home">
     <div class="hero">
-      <h1>أهلاً بك <span class="hero-grad">في Vocab</span></h1>
-      <div class="sub">نظام مراجعة متباعدة ذكي · يعمل بدون اتصال</div>
+      <h1>أهلاً بك في <span class="hero-grad">إتقان</span></h1>
+      <div class="sub">مبادرة متوسطة وثانوية الجوفاء — مراجعة ذكية بدون انترنت</div>
     </div>
 
-    <div class="supervisor-banner hidden" id="supervisor-banner">
-      <svg class="ico ico-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-      <div>المشرف: <b id="supervisor-name">—</b></div>
-      <span class="meta" id="supervisor-meta"></span>
+    <button class="new-cards-badge" id="new-cards-badge" type="button" style="display:none" onclick="App.openNewCards()">
+      <span class="ncb-icon">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6m0 0l-3-3m3 3l3-3M5 20h14a2 2 0 0 0 2-2v-7H3v7a2 2 0 0 0 2 2z"/></svg>
+      </span>
+      <span class="ncb-text">
+        <b id="ncb-count">0</b>
+        <span>بطاقة جديدة من معلمك — اضغط للعرض</span>
+      </span>
+      <svg class="ico ncb-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+
+    <div class="motiv-banner" id="motiv-banner" style="display:none">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      <span id="motiv-text"></span>
     </div>
 
     <div class="stat-grid stagger">
@@ -1035,27 +1208,22 @@ img,video,canvas,svg{max-width:100%;height:auto}
           <span class="reveal-hint">
             <svg class="ico ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
             اضغط للكشف عن الإجابة
-            <span class="kbd">SPACE</span>
           </span>
         </div>
       </article>
 
       <div class="rate-grid hidden" id="rate-grid">
-        <button class="rate-btn" data-r="1" onclick="App.rate(1)" type="button">
-          <span class="ar">مجدداً</span><span class="en">Again</span>
-          <span class="iv" data-iv="1">&lt;1d</span><span class="k">[1]</span>
+        <button class="rate-btn-v2 know-no" onclick="App.smartRate(false)" type="button" aria-label="لم أعرفها">
+          <span class="rb-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </span>
+          <span class="rb-text">لم أعرفها</span>
         </button>
-        <button class="rate-btn" data-r="2" onclick="App.rate(2)" type="button">
-          <span class="ar">صعبة</span><span class="en">Hard</span>
-          <span class="iv" data-iv="2">—</span><span class="k">[2]</span>
-        </button>
-        <button class="rate-btn" data-r="3" onclick="App.rate(3)" type="button">
-          <span class="ar">جيدة</span><span class="en">Good</span>
-          <span class="iv" data-iv="3">—</span><span class="k">[3]</span>
-        </button>
-        <button class="rate-btn" data-r="4" onclick="App.rate(4)" type="button">
-          <span class="ar">سهلة</span><span class="en">Easy</span>
-          <span class="iv" data-iv="4">—</span><span class="k">[4]</span>
+        <button class="rate-btn-v2 know-yes" onclick="App.smartRate(true)" type="button" aria-label="عرفتها">
+          <span class="rb-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          <span class="rb-text">عرفتها</span>
         </button>
       </div>
 
@@ -1068,13 +1236,6 @@ img,video,canvas,svg{max-width:100%;height:auto}
           <svg class="ico ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-15-6.7L3 13"/></svg>
           تراجع
         </button>
-      </div>
-
-      <div class="kbd-bar">
-        <span><span class="kbd">SPACE</span> كشف</span>
-        <span><span class="kbd">1</span><span class="kbd">2</span><span class="kbd">3</span><span class="kbd">4</span> تقييم</span>
-        <span><span class="kbd">E</span> تعديل</span>
-        <span><span class="kbd">U</span> تراجع</span>
       </div>
     </div>
 
@@ -1269,11 +1430,13 @@ img,video,canvas,svg{max-width:100%;height:auto}
         </h2>
       </div>
       <div class="field">
-        <label class="field-lbl">اسم الطالب</label>
-        <input class="inp" id="student-name" placeholder="اكتب اسمك هنا">
-        <div class="field-help" style="font-family:var(--f-ar);font-size:11.5px;color:var(--text-3);margin-top:4px">يستخدم في التقارير والإرسال للمشرف.</div>
+        <label class="field-lbl">الرمز التعريفي</label>
+        <input class="inp" id="student-name" placeholder="مثال: A1، K7، B12" maxlength="10" style="font-family:var(--f-en);letter-spacing:0.04em">
+        <div class="field-help" style="font-family:var(--f-ar);font-size:11.5px;color:var(--text-3);margin-top:4px;line-height:1.6">
+          أدخل الرمز الذي أعطاك إياه المعلم — حروف وأرقام قصيرة. لن يُطلب منك اسمك الحقيقي.
+        </div>
       </div>
-      <button class="btn primary block" onclick="App.saveStudentName()" type="button">حفظ الاسم</button>
+      <button class="btn primary block" onclick="App.saveStudentName()" type="button">حفظ الرمز</button>
     </div>
 
     <div class="block">
@@ -1352,7 +1515,6 @@ img,video,canvas,svg{max-width:100%;height:auto}
           تصدير ونسخ احتياطي
         </h2>
       </div>
-      <button class="btn block mb-8" onclick="App.exportJSON()" type="button">تصدير كل البطاقات</button>
       <button class="btn block mb-8" onclick="App.exportProgressJSON()" type="button">تصدير التقدم</button>
       <div class="rule"></div>
       <label class="file-inp" for="imp-prog">
@@ -1364,8 +1526,12 @@ img,video,canvas,svg{max-width:100%;height:auto}
     </div>
 
     <div class="block">
-      <div class="block-hd"><h2>إدارة البيانات</h2></div>
-      <button class="btn block mb-8" onclick="App.addSampleDeck()" type="button">تحميل حزمة تجريبية</button>
+      <div class="block-hd"><h2>الخصوصية والبيانات</h2></div>
+      <button class="btn block mb-8" onclick="App.showConsentAgain()" type="button">
+        <svg class="ico ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        عرض شاشة الموافقة على الخصوصية
+      </button>
+      <div class="rule"></div>
       <button class="btn danger block mb-8" onclick="App.resetProgress()" type="button">إعادة تعيين التقدم</button>
       <button class="btn danger block" onclick="App.wipeAll()" type="button">حذف كل البيانات</button>
     </div>
@@ -1373,8 +1539,16 @@ img,video,canvas,svg{max-width:100%;height:auto}
     <div class="block">
       <div class="t-label mb-8">عن التطبيق</div>
       <div style="font-family:var(--f-ar);font-size:13.5px;line-height:1.85;color:var(--text-2)">
-        Vocab — نظام مراجعة متباعدة محلي. كل البيانات محفوظة في جهازك فقط (IndexedDB). لا خادم خارجي. لا تتبع. لا إعلانات.
-        <div class="t-label mt-8">v2.0.0 · Local-first · PWA</div>
+        تطبيق <b>إتقان</b> — مبادرة متوسطة وثانوية الجوفاء للمراجعة الذكية.
+        كل البيانات محفوظة في جهازك فقط. لا تتبع. لا إعلانات.
+      </div>
+    </div>
+
+    <div class="copyright-strip">
+      <div class="cs-logo">إ</div>
+      <div class="cs-body">
+        <div class="cs-line-1">مبادرة إتقان · متوسطة وثانوية الجوفاء</div>
+        <div class="cs-line-2">© 2026 جميع الحقوق محفوظة · أ.أحمد عطية حسن</div>
       </div>
     </div>
   </section>
@@ -1411,6 +1585,73 @@ img,video,canvas,svg{max-width:100%;height:auto}
     <h3 id="m-title">—</h3>
     <div id="m-body"></div>
     <div class="m-actions" id="m-actions"></div>
+  </div>
+</div>
+
+<!-- ════════════ CONSENT GATE — first run only ════════════ -->
+<div class="consent-overlay" id="consent-overlay" style="display:none">
+  <div class="consent-card">
+    <div class="consent-brand">
+      <div class="consent-mark">إ</div>
+      <div>
+        <div class="consent-name">إتقان</div>
+        <div class="consent-school">متوسطة وثانوية الجوفاء</div>
+      </div>
+    </div>
+
+    <h2 class="consent-title">قبل أن تبدأ — موافقة بسيطة</h2>
+
+    <div class="consent-body">
+      <div class="consent-section">
+        <div class="consent-section-h">
+          <svg class="ico ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+          ما الذي يحفظه التطبيق؟
+        </div>
+        <ul class="consent-list">
+          <li>الرمز التعريفي الذي يعطيك إياه المعلم (مثلاً A1)</li>
+          <li>تقدّمك في البطاقات والإجابات (محلياً في جهازك)</li>
+          <li>إحصائيات المراجعة (عدد البطاقات المراجَعة، الدقة، التتابع)</li>
+        </ul>
+      </div>
+
+      <div class="consent-section">
+        <div class="consent-section-h">
+          <svg class="ico ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+          ما الذي لا يُحفَظ؟
+        </div>
+        <ul class="consent-list">
+          <li>اسمك الحقيقي — لن يُطلب منك أبداً</li>
+          <li>صور أو تسجيلات صوتية</li>
+          <li>أرقام هواتف، عناوين، أو أي بيانات شخصية</li>
+        </ul>
+      </div>
+
+      <div class="consent-section">
+        <div class="consent-section-h">
+          <svg class="ico ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.22-8.56"/></svg>
+          أين تذهب البيانات؟
+        </div>
+        <ul class="consent-list">
+          <li>كل شيء يُحفَظ في جهازك أنت — لا خادم خارجي</li>
+          <li>تُرسَل إحصائيات مختصرة للمعلم (الرمز + النسبة) لمتابعة تقدمك</li>
+          <li>تستطيع حذف كل بياناتك وقتما تشاء من شاشة الإعدادات</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="consent-actions">
+      <button class="btn primary block consent-accept" type="button" onclick="App.acceptConsent()">
+        <svg class="ico ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        أوافق وأبدأ الاستخدام
+      </button>
+      <button class="btn ghost block consent-decline" type="button" onclick="App.declineConsent()">
+        لا أوافق — أغلق التطبيق
+      </button>
+    </div>
+
+    <div class="consent-footer">
+      مبادرة إتقان · متوسطة وثانوية الجوفاء · جميع الحقوق محفوظة
+    </div>
   </div>
 </div>
 
@@ -1699,14 +1940,31 @@ function renderHome(){
   $('st-today').textContent=(State.history[dayKey()]||{}).count||0;
   $('active-track-chip').textContent= TRACKS[State.activeTrack].name;
 
-  // supervisor banner
+  /* New cards badge — count cards still flagged isNew */
+  const newCount = State.cards.filter(c=>c.isNew).length;
+  const ncb = $('new-cards-badge');
+  if(ncb){
+    if(newCount > 0){
+      ncb.style.display='';
+      $('ncb-count').textContent = newCount;
+    } else {
+      ncb.style.display='none';
+    }
+  }
+
+  /* Motivational banner — context-aware encouragement */
+  renderMotivation();
+
+  // supervisor banner — removed from home, but keep guard for older sessions
   const sb=$('supervisor-banner');
-  if(State.deckSupervisor || State.deckName){
-    sb.classList.remove('hidden');
-    $('supervisor-name').textContent=displayName(State.deckSupervisor)||'—';
-    $('supervisor-meta').textContent=State.deckName||'';
-  } else {
-    sb.classList.add('hidden');
+  if(sb){
+    if(State.deckSupervisor || State.deckName){
+      sb.classList.remove('hidden');
+      const sn=$('supervisor-name'); if(sn) sn.textContent=displayName(State.deckSupervisor)||'—';
+      const sm=$('supervisor-meta'); if(sm) sm.textContent=State.deckName||'';
+    } else {
+      sb.classList.add('hidden');
+    }
   }
   // student name chip in header
   const sc=$('student-chip');
@@ -1868,6 +2126,8 @@ function reveal(){
   if(State.studyIdx >= State.studyQueue.length) return;
   const c=State.studyQueue[State.studyIdx];
   State.revealed=true;
+  /* Capture reveal moment — used by smartRate to map response time to SM-2 grade */
+  State.revealTime = Date.now();
   $('card').classList.add('revealed');
   $('reveal-bar').classList.add('hidden');
 
@@ -1889,6 +2149,41 @@ function reveal(){
   }
   ans.innerHTML=`<div class="a-label"><svg class="ico ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>الإجابة</div>${body}${c.explain?`<div class="card-explain">${esc(c.explain)}</div>`:''}`;
   $('rate-grid').classList.remove('hidden');
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   SMART RATING — 2-button UX, 4-level SM-2 internally.
+   Translates "knew it / didn't know" + response time into Again/Hard/Good/Easy.
+
+   Mapping rationale (calibrated for high-schoolers):
+     "didn't know"             → Again (1)        — restart the card
+     "knew it" + > 8s          → Hard  (2)        — slow recall = struggling
+     "knew it" + 3s..8s        → Good  (3)        — normal confident recall
+     "knew it" + < 3s          → Easy  (4)        — instant, mastered
+
+   Time threshold tuned to: typical Arabic word recall = 4-6s,
+   English vocab recall = 3-5s. Below 3s = recognition not recall.
+   Above 8s = effortful retrieval, needs more practice.
+
+   Why this is BETTER than the original 4-button:
+   1. Student can't game it — response time is honest
+   2. Simpler UI (mobile-friendly, less decision fatigue)
+   3. Same SM-2 precision retained
+   4. Slow-but-correct cards correctly classified as needing more work
+   ════════════════════════════════════════════════════════════════════ */
+function smartRate(knewIt){
+  if(!State.revealed) return;
+  let r;
+  if(!knewIt){
+    r = 1; /* Again */
+  } else {
+    const elapsedMs = Date.now() - (State.revealTime || Date.now());
+    const elapsedSec = elapsedMs / 1000;
+    if(elapsedSec < 3)      r = 4; /* Easy — instant */
+    else if(elapsedSec < 8) r = 3; /* Good — normal */
+    else                    r = 2; /* Hard — slow */
+  }
+  return rate(r);
 }
 async function rate(r){
   if(!State.revealed) return;
@@ -2424,10 +2719,6 @@ function importJSON(){
   };
   r.readAsText(f);
 }
-function exportJSON(){
-  const data={app:'vocab', version:2, exported:now(), cards:State.cards};
-  download('vocab_cards_'+dayKey()+'.json', JSON.stringify(data,null,2));
-}
 function exportProgressJSON(){
   const data={app:'vocab', version:2, exported:now(), progress:State.progress, history:State.history, settings:State.settings};
   download('vocab_progress_'+dayKey()+'.json', JSON.stringify(data,null,2));
@@ -2757,7 +3048,7 @@ function printReport(){
 
   <h2>بيانات الطالب والحزمة</h2>
   <div class="info-grid">
-    <div><span>اسم الطالب:</span><b>${esc(studentName)}</b></div>
+    <div><span>رمز الطالب:</span><b>${esc(studentName)}</b></div>
     <div><span>المشرف:</span><b>${esc(supervisor)}</b></div>
     <div><span>اسم الحزمة:</span><b>${esc(deckName)}</b></div>
     <div><span>تاريخ التقرير:</span><b>${dateStr}</b></div>
@@ -2868,7 +3159,7 @@ function openReportWindow(html, opts){
     '<button id="pb-print" style="background:#fff;color:#15445a;border:1.5px solid #fff;padding:8px 16px;border-radius:6px;font-weight:700;cursor:pointer;font-family:inherit;font-size:13px">طباعة / حفظ PDF</button>'+
     '<button id="pb-tab"   style="background:transparent;color:#fff;border:1.5px solid #fff;padding:7px 14px;border-radius:6px;font-weight:600;cursor:pointer;font-family:inherit;font-size:13px">فتح في تبويب</button>'+
     '<button id="pb-dl"    style="background:transparent;color:#fff;border:1.5px solid #fff;padding:7px 14px;border-radius:6px;font-weight:600;cursor:pointer;font-family:inherit;font-size:13px">تنزيل HTML</button>'+
-    '<button id="pb-close" style="background:transparent;color:#fff;border:1.5px solid #fff;padding:7px 14px;border-radius:6px;font-weight:600;cursor:pointer;font-family:inherit;font-size:13px">إغلاق ✕</button>';
+    '<button id="pb-close" style="background:transparent;color:#fff;border:1.5px solid #fff;padding:7px 14px;border-radius:6px;font-weight:600;cursor:pointer;font-family:inherit;font-size:13px">إغلاق ×</button>';
 
   /* The iframe — visible and full size. We use srcdoc instead of document.write
      because srcdoc preserves same-origin context properly across all browsers
@@ -2973,44 +3264,6 @@ function openReportWindow(html, opts){
   return true;
 }
 
-/* ════════════════════════════════════════════════════════════════════
-   SAMPLE DECK (cybersecurity included)
-   ════════════════════════════════════════════════════════════════════ */
-async function addSampleDeck(){
-  const sample=[
-    {id:'s_en_1', track:'en', cat:'TOEFL · Vocabulary', qType:'card', q:'ubiquitous', a:'منتشر · موجود في كل مكان', ctx:'Smartphones are ubiquitous today.', explain:'Used to describe something seemingly everywhere at once.'},
-    {id:'s_en_2', track:'en', cat:'TOEFL · Vocabulary', qType:'card', q:'meticulous', a:'دقيق · مُتقن', ctx:'She kept meticulous records of every expense.'},
-    {id:'s_en_3', track:'en', cat:'IELTS · Vocabulary', qType:'mcq', q:'Select the synonym of "ephemeral":', options:['permanent','short-lived','heavy','bright'], a:'short-lived', explain:'Ephemeral means lasting for a very short time.'},
-    {id:'s_en_4', track:'en', cat:'General', qType:'tf', q:'"Comprise" means the same as "consist of".', tf:true, explain:'Both mean "to be made up of".'},
-    {id:'s_en_5', track:'en', cat:'Grammar', qType:'cloze', cloze:'By the time we arrived, the movie {{had started}}.', a:'had started', explain:'Past perfect: action before another past action.'},
-
-    {id:'s_q_1', track:'qudurat', cat:'لفظي · تناظر', qType:'mcq', q:'الكتاب : المكتبة. ما نسبته كنسبة اللوحة إلى:', options:['المتحف','الجدار','الفرشاة','الرسام'], a:'المتحف', explain:'علاقة الجزء بمكان الحفظ/العرض.'},
-    {id:'s_q_2', track:'qudurat', cat:'لفظي · معاني', qType:'mcq', q:'ما معنى كلمة "الدأب"؟', options:['الكسل','المثابرة','الغضب','الصمت'], a:'المثابرة'},
-    {id:'s_q_3', track:'qudurat', cat:'كمي · جبر', qType:'sa', q:'إذا كان 3x + 5 = 20، فما قيمة x ؟', a:'5'},
-    {id:'s_q_4', track:'qudurat', cat:'كمي · هندسة', qType:'mcq', q:'مجموع زوايا المثلث الداخلية يساوي:', options:['90°','180°','270°','360°'], a:'180°'},
-
-    {id:'s_t_1', track:'tahseeli', cat:'أحياء', qType:'mcq', q:'الميتوكوندريا مسؤولة عن:', options:['البناء الضوئي','إنتاج الطاقة','التخزين','الحماية'], a:'إنتاج الطاقة', explain:'تنتج الـ ATP — مصدر الطاقة الخلوي.'},
-    {id:'s_t_2', track:'tahseeli', cat:'فيزياء', qType:'sa', q:'ما وحدة قياس القوة في النظام الدولي؟', a:'نيوتن'},
-    {id:'s_t_3', track:'tahseeli', cat:'كيمياء', qType:'tf', q:'الماء (H₂O) مركب أيوني.', tf:false, explain:'الماء مركب تساهمي قطبي.'},
-    {id:'s_t_4', track:'tahseeli', cat:'رياضيات', qType:'cloze', cloze:'قانون فيثاغورس: a² + b² = {{c²}}', a:'c²'},
-
-    /* Cybersecurity — matches user's M.Sc. specialty */
-    {id:'s_cy_1', track:'en', cat:'Cybersecurity · Terms', qType:'card', q:'EXFILTRATION\nتسرّب البيانات', a:'Unauthorized transfer of data from a compromised system to an external attacker-controlled location.\nنقل غير مصرَّح به للبيانات من نظام مخترق إلى وجهة خارجية.', ctx:'The attacker used DNS tunneling for data exfiltration.', explain:'Common in APT attacks. Detection relies on egress monitoring + DLP tools.'},
-    {id:'s_cy_2', track:'en', cat:'Cybersecurity · Terms', qType:'card', q:'PAYLOAD\nالحمولة الضارة', a:'The malicious component of an attack that performs the actual harmful action.', ctx:'The phishing email delivered a JavaScript payload.'},
-    {id:'s_cy_3', track:'en', cat:'Cybersecurity · PTES', qType:'mcq', q:'Which PTES phase comes BEFORE Vulnerability Analysis?', options:['Reporting','Intelligence Gathering','Post-Exploitation','Exploitation'], a:'Intelligence Gathering', explain:'PTES order: Pre-engagement → Intel Gathering → Threat Modeling → Vulnerability Analysis → Exploitation → Post-Exploitation → Reporting.'},
-    {id:'s_cy_4', track:'en', cat:'Cybersecurity · OSI', qType:'cloze', cloze:'TCP operates at OSI layer {{4}} (Transport).', a:'4', explain:'Layer 4 = Transport. TCP and UDP both live here.'},
-    {id:'s_cy_5', track:'en', cat:'Cybersecurity · Terms', qType:'tf', q:'A "zero-day" vulnerability has a public patch available.', tf:false, explain:'Zero-day = unknown to vendor and unpatched.'},
-  ];
-  const ts=now();
-  sample.forEach(c=>c.imported=ts);
-  await idbBulkPut('cards', sample);
-  sample.forEach(c=>{
-    const i=State.cards.findIndex(x=>x.id===c.id);
-    if(i>=0) State.cards[i]=c; else State.cards.push(c);
-  });
-  toast(`تم تحميل ${sample.length} بطاقة تجريبية`,'success');
-  renderHome();
-}
 async function resetProgress(){
   if(!confirm('سيتم حذف كل التقدم والتاريخ. متابعة؟')) return;
   await idbClear('progress'); await idbClear('history');
@@ -3048,7 +3301,6 @@ async function cloudSync(silent=false){
     try{ data=JSON.parse(text); }
     catch(e){ throw new Error('JSON غير صالح'); }
 
-    // accept either array or {cards:[...]} or {deck:..., cards:[...]}
     let incoming=[];
     if(Array.isArray(data)) incoming=data;
     else if(data && Array.isArray(data.cards)) incoming=data.cards;
@@ -3057,7 +3309,6 @@ async function cloudSync(silent=false){
     incoming=incoming.filter(c=>c && c.id && (c.q || c.cloze));
     if(incoming.length===0) throw new Error('الحزمة فارغة');
 
-    // Save deck metadata if present (does not touch progress)
     if(data && data.deck){
       const meta={k:'deck', v:{
         name: data.deck.name||'',
@@ -3071,9 +3322,14 @@ async function cloudSync(silent=false){
       await idbPut('meta', meta);
     }
 
-    // Merge: keep existing card if id matches but UPDATE content fields;
-    // progress untouched (it lives in a separate store).
-    let added=0, updated=0;
+    /* ════════════ SMART DIFF — option (B): merge with update, no delete
+       For each incoming card:
+         - new id              → ADD + mark as "new since last sync"
+         - same id + same hash → SKIP (fast, no DB write)
+         - same id + diff hash → UPDATE content, KEEP progress
+         - existing not in incoming → KEEP (no delete) */
+    let added=0, updated=0, unchanged=0;
+    const newIds=[]; /* track new card ids for badge */
     const existingMap=new Map(State.cards.map(c=>[c.id,c]));
     const ts=now();
     const toPersist=[];
@@ -3081,28 +3337,50 @@ async function cloudSync(silent=false){
       ic.synced=ts;
       if(!ic.qType) ic.qType='card';
       if(!ic.track) ic.track='en';
-      if(existingMap.has(ic.id)){
-        // preserve any fields the student app set; merge content
-        const merged={...existingMap.get(ic.id), ...ic};
+      const existing = existingMap.get(ic.id);
+      if(!existing){
+        /* NEW CARD */
+        ic.isNew=true; /* badge marker, cleared after student views it */
+        existingMap.set(ic.id, ic);
+        toPersist.push(ic);
+        newIds.push(ic.id);
+        added++;
+      } else {
+        /* Compare hashes — fast skip if unchanged */
+        const incomingHash = ic.hash || '';
+        const existingHash = existing.hash || '';
+        if(incomingHash && existingHash && incomingHash === existingHash){
+          /* Identical content — skip entirely, no DB write */
+          unchanged++;
+          continue;
+        }
+        /* Content changed — UPDATE but keep isNew flag if it was set */
+        const merged={...existing, ...ic, isNew: existing.isNew||false};
         existingMap.set(ic.id, merged);
         toPersist.push(merged);
         updated++;
-      } else {
-        existingMap.set(ic.id, ic);
-        toPersist.push(ic);
-        added++;
       }
     }
     State.cards=Array.from(existingMap.values());
-    await idbBulkPut('cards', toPersist);
+    if(toPersist.length) await idbBulkPut('cards', toPersist);
     State.lastSync=ts;
+    State.lastSyncNew=added; /* used by badge */
     await saveSetting('lastSync', ts);
+    if(added>0) await saveSetting('lastSyncNew', added);
 
-    showSync(`تمت المزامنة: ${added} جديدة، ${updated} محدّثة`, 'success');
+    /* Build status message */
+    let msg;
+    if(added===0 && updated===0){
+      msg='لا تحديثات جديدة';
+    } else {
+      const parts=[];
+      if(added>0)   parts.push(`${added} بطاقة جديدة`);
+      if(updated>0) parts.push(`${updated} محدّثة`);
+      msg='تم: '+parts.join(' · ');
+    }
+    showSync(msg, added>0?'success':'success');
     renderHome();
   }catch(e){
-    /* Silent path: network errors at boot are normal (offline, URL not yet
-       configured, etc). Don't pollute console. Only log unexpected errors. */
     const msg = String(e && e.message || e);
     const isNetworkErr = /Failed to fetch|NetworkError|Network request failed|abort/i.test(msg);
     if(!silent || !isNetworkErr){
@@ -3112,6 +3390,21 @@ async function cloudSync(silent=false){
   }
 }
 function cloudSyncNow(){ cloudSync(false); }
+/* Mark all "new" cards as seen — called when student visits the new badge */
+async function markNewCardsSeen(){
+  const newCards = State.cards.filter(c=>c.isNew);
+  if(newCards.length===0) return;
+  for(const c of newCards){ delete c.isNew; }
+  await idbBulkPut('cards', newCards);
+  State.lastSyncNew=0;
+  await saveSetting('lastSyncNew', 0);
+  renderHome();
+}
+/* Tap badge → enter study mode for new cards */
+async function openNewCards(){
+  await markNewCardsSeen();
+  goStudy();
+}
 function showSync(msg, kind=''){
   const el=$('sync-status');
   if(!el) return;
@@ -3338,6 +3631,15 @@ function onKey(e){
   if(/INPUT|TEXTAREA|SELECT/.test(tag)) return;
   if(!$('page-study').classList.contains('active')) return;
   if(e.key===' '){ e.preventDefault(); if(!State.revealed) reveal(); }
+  /* New 2-button shortcuts: Arrow Left = didn't know, Arrow Right = knew it
+     (RTL-friendly: in Arabic interface, the "yes" button is on the right) */
+  else if(e.key==='ArrowRight' || e.key==='Enter'){
+    if(State.revealed){ e.preventDefault(); smartRate(true); }
+  }
+  else if(e.key==='ArrowLeft' || e.key==='Backspace'){
+    if(State.revealed){ e.preventDefault(); smartRate(false); }
+  }
+  /* Legacy 1-4 keys retained for power users */
   else if(['1','2','3','4'].includes(e.key)){
     if(State.revealed){ e.preventDefault(); rate(parseInt(e.key)); }
   }
@@ -3440,6 +3742,7 @@ async function init(){
   State.cloudUrl    = State.settings.cloudUrl    || '';
   State.cloudToken  = State.settings.cloudToken  || '';
   State.lastSync    = State.settings.lastSync    || 0;
+  State.lastSyncNew = State.settings.lastSyncNew || 0;
   // deck metadata (supervisor/name) from meta store
   try{
     const deckMeta = await idbGet('meta','deck');
@@ -3493,11 +3796,228 @@ async function init(){
 
   // background: autosave + cloud sync (silent)
   startAutoSave();
-  if(State.cloudUrl) cloudSync(true);
+  /* ════════════ SMART AUTO-SYNC (twice daily) ════════════
+     Only sync if 12+ hours passed since last successful sync.
+     Otherwise the app loads instantly from local IndexedDB. */
+  if(State.cloudUrl){
+    const HOURS_12 = 12 * 60 * 60 * 1000;
+    const sinceLastSync = Date.now() - (State.lastSync || 0);
+    if(sinceLastSync > HOURS_12){
+      /* Defer 800ms to let UI paint first */
+      setTimeout(()=>cloudSync(true), 800);
+    }
+  }
 
   // first paint
   renderHome();
   go('home');
+
+  /* ════════════ CONSENT GATE ════════════
+     Check on every load — if not yet accepted, show the overlay.
+     Accepting writes a permanent flag to IndexedDB. */
+  if(!State.settings.consentAccepted){
+    showConsentGate();
+  } else {
+    /* Schedule motivational notifications for returning users */
+    scheduleMotivation();
+  }
+}
+
+/* ════════════ CONSENT GATE FUNCTIONS ════════════ */
+function showConsentGate(){
+  const ov = $('consent-overlay');
+  if(ov) ov.style.display = 'flex';
+}
+/* Re-show consent gate from settings (user-initiated review) */
+function showConsentAgain(){
+  const ov = $('consent-overlay');
+  if(!ov){ toast('شاشة الموافقة غير متاحة','error'); return; }
+  /* Restore original HTML in case it was replaced by declineConsent earlier */
+  const card = ov.querySelector('.consent-card');
+  if(card && !card.querySelector('.consent-accept')){
+    /* Page was in declined state — reload to restore */
+    location.reload(); return;
+  }
+  ov.style.display = 'flex';
+}
+async function acceptConsent(){
+  await saveSetting('consentAccepted', Date.now());
+  State.settings.consentAccepted = Date.now();
+  const ov = $('consent-overlay');
+  if(ov) ov.style.display = 'none';
+  toast('أهلاً بك في إتقان · ابدأ الآن','success');
+  /* Now ask for notification permission + schedule motivation */
+  scheduleMotivation();
+}
+function declineConsent(){
+  const ov = $('consent-overlay');
+  if(ov){
+    ov.innerHTML = `
+      <div class="consent-card" style="text-align:center;padding:36px">
+        <div class="consent-mark" style="margin:0 auto 18px">إ</div>
+        <h2 class="consent-title" style="margin-bottom:12px">شكراً لك</h2>
+        <p style="font-family:var(--f-ar);font-size:14px;color:var(--text-2);line-height:1.8;margin-bottom:16px">
+          تم إغلاق التطبيق. يمكنك العودة في أي وقت بإعادة فتح الصفحة.
+        </p>
+        <div class="consent-footer" style="border:0;padding-top:0">
+          مبادرة إتقان · متوسطة وثانوية الجوفاء
+        </div>
+      </div>`;
+  }
+  /* Best effort: try to close window (only works if opened by script) */
+  setTimeout(()=>{ try{ window.close(); }catch(_){} }, 800);
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   MOTIVATIONAL SYSTEM — context-aware encouraging messages.
+   Two delivery channels:
+   1) In-app banner (always shown on home, rotates)
+   2) Browser notifications (only after permission granted)
+   Messages are tuned for Saudi high-school students:
+   - Short, sharp, no clichés
+   - Reference Islamic work ethic + الإتقان value (program name)
+   - Mix of effort-praise + identity-praise + future-self framing
+   ════════════════════════════════════════════════════════════════════ */
+const MOTIVATION = {
+  /* Shown when student opens app fresh (no due cards) */
+  ready: [
+    'أهل الإتقان لا يؤجّلون. ابدأ بطاقة واحدة الآن.',
+    'كل مراجعة اليوم = درجة في اختبار الغد.',
+    'دقيقة من الآن أحسن من ساعة آخر يوم.',
+    'الذي يراجع يومياً، لا يخاف الاختبار.',
+    'العقل عضلة. كل بطاقة ترفعها.',
+    'الناجحون يبدؤون قبل أن يستعدّوا.',
+    'افتح بطاقة. ولو واحدة. ولو الآن.',
+  ],
+  /* Shown when there ARE due cards waiting */
+  due: [
+    '{n} بطاقة تنتظرك. ابدأ بواحدة فقط.',
+    'عندك {n} مراجعة. خمس دقائق وتنتهي.',
+    '{n} بطاقة مستحقة الآن — لا تتراكم.',
+    'المراجعة المستحقة الآن أنفع من جديدة بعد ساعة.',
+    'لا تجعل {n} يصبحون 100 بكرة.',
+  ],
+  /* Shown after a long absence (3+ days) */
+  comeback: [
+    'افتقدناك. بطاقاتك تنتظر.',
+    'يوم بدون مراجعة = أسبوع نسيان.',
+    'العودة الآن أسهل من البداية.',
+    'التراكم عدوّك. خمس دقائق فقط.',
+  ],
+  /* Shown after a streak (3+ consecutive days) */
+  streak: [
+    '{n} يوم متتالي — أنت بالفعل من أهل الإتقان.',
+    'تتابع {n} يوم. لا تكسر السلسلة.',
+    '{n} يوم بلا توقّف. هذا هو الفرق.',
+    'استمر — {n} يوم تصنع عادة، لا قرار.',
+  ],
+  /* Post-quiz feedback */
+  quiz_high: [
+    'إتقان حقيقي. استمر بنفس الوتيرة.',
+    'هذا مستوى الواثق من نفسه.',
+    'النتيجة تشبه استعدادك. أحسنت.',
+  ],
+  quiz_mid: [
+    'تقدّم جيد. بطاقتان أكثر يومياً وستلاحظ الفرق.',
+    'النتيجة تقول لك: راجع المخطئة الآن.',
+    'منتصف الطريق. لا تتوقف.',
+  ],
+  quiz_low: [
+    'الخطأ الآن أرخص من الخطأ في الاختبار.',
+    'كل خطأ كشفته اليوم = درجة وفّرتها.',
+    'الذي يخطئ في المراجعة يصحّ في الاختبار.',
+  ],
+};
+
+/* Pick a random message from a category, with placeholder substitution */
+function pickMotivation(category, vars){
+  const arr = MOTIVATION[category] || [];
+  if(!arr.length) return '';
+  let msg = arr[Math.floor(Math.random()*arr.length)];
+  if(vars){
+    Object.keys(vars).forEach(k=>{
+      msg = msg.replace('{'+k+'}', vars[k]);
+    });
+  }
+  return msg;
+}
+
+/* Get the motivation appropriate for current state */
+function currentMotivation(){
+  const dueAll = dueCount('all');
+  const today = State.history[dayKey()];
+  /* Streak calc */
+  let streak = 0;
+  for(let d=0; d<60; d++){
+    const k = dayKey(Date.now() - d*86400000);
+    if(State.history[k] && State.history[k].count > 0) streak++;
+    else if(d>0) break;
+  }
+  /* Last study day */
+  let lastDay = null;
+  for(let d=0; d<60; d++){
+    const k = dayKey(Date.now() - d*86400000);
+    if(State.history[k] && State.history[k].count > 0){ lastDay = d; break; }
+  }
+  if(streak >= 3) return pickMotivation('streak', {n:streak});
+  if(lastDay !== null && lastDay >= 3) return pickMotivation('comeback');
+  if(dueAll > 0) return pickMotivation('due', {n:dueAll});
+  return pickMotivation('ready');
+}
+
+/* Render motivation banner on home page */
+function renderMotivation(){
+  const el = $('motiv-banner');
+  if(!el) return;
+  const msg = currentMotivation();
+  if(!msg){ el.style.display='none'; return; }
+  el.style.display='';
+  $('motiv-text').textContent = msg;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   NOTIFICATIONS — daily reminder (browser only).
+   Asks for permission once after consent. Uses setTimeout for the
+   in-tab session, and the Notification API for OS-level delivery.
+   ════════════════════════════════════════════════════════════════════ */
+async function scheduleMotivation(){
+  /* Only ask permission once per session, after a small delay so it
+     doesn't shock the student right after consent */
+  if('Notification' in window && Notification.permission === 'default'){
+    setTimeout(async ()=>{
+      try{ await Notification.requestPermission(); }catch(_){}
+    }, 8000);
+  }
+  /* In-tab reminder: if the tab stays open and student is idle 25min,
+     send an encouraging notification */
+  if(State._motivTimer) clearInterval(State._motivTimer);
+  State._motivTimer = setInterval(()=>{
+    const idleMin = (Date.now() - (State._lastActive||Date.now())) / 60000;
+    if(idleMin > 25 && document.hidden){
+      sendNotif();
+    }
+  }, 5*60*1000);  /* check every 5 min */
+  /* Track last active time */
+  ['click','keydown','scroll','touchstart'].forEach(evt=>{
+    document.addEventListener(evt, ()=>{ State._lastActive = Date.now(); }, {passive:true});
+  });
+  State._lastActive = Date.now();
+}
+function sendNotif(){
+  if(!('Notification' in window)) return;
+  if(Notification.permission !== 'granted') return;
+  const due = dueCount('all');
+  let body;
+  if(due > 0)  body = pickMotivation('due',  {n:due});
+  else         body = pickMotivation('ready');
+  try{
+    new Notification('إتقان · بطاقاتك تنتظر', {
+      body,
+      icon: '',  /* no icon embedded — keep file size down */
+      tag: 'etqan-reminder',  /* coalesce duplicate notifs */
+      silent: false,
+    });
+  }catch(_){}
 }
 
 async function saveStudentName(){
@@ -3505,18 +4025,20 @@ async function saveStudentName(){
   await saveSetting('studentName', v);
   State.studentName=v;
   renderHome();
-  toast('تم حفظ الاسم','success');
+  toast('تم حفظ الرمز','success');
 }
 
 /* expose */
 window.App = {
-  go, goStudy, tapCard, reveal, rate, speakCurrent, editCurrent, undoRating,
+  go, goStudy, tapCard, reveal, rate, smartRate, speakCurrent, editCurrent, undoRating,
   startQuiz, nextQuizQ, quitQuiz,
   calShift, sendWhatsApp, printReport, setSupervisor,
   toggleTTS, toggleShuffle, toggleTheme,
-  importJSON, exportJSON, exportProgressJSON, importProgressJSON,
-  addSampleDeck, resetProgress, wipeAll,
+  importJSON, exportProgressJSON, importProgressJSON,
+  resetProgress, wipeAll,
   saveStudentName, saveCloudConfig, cloudSyncNow,
+  acceptConsent, declineConsent, showConsentAgain,
+  openNewCards,
 };
 
 /* boot */
