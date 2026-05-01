@@ -946,24 +946,107 @@ textarea{resize:vertical;min-height:90px;line-height:1.6}
   50%   {box-shadow:0 6px 28px rgba(16,185,129,.6)}
 }
 
-/* ════════════ MOTIVATION BANNER ════════════ */
-.motiv-banner{
-  display:flex;align-items:center;gap:12px;
-  background:linear-gradient(135deg, var(--primary-soft), var(--accent-soft));
-  border:1px solid var(--primary);
-  border-inline-start:4px solid var(--primary);
-  padding:14px 16px;border-radius:var(--r-md);
-  margin:0 0 18px;
-  font-family:var(--f-ar);font-size:14px;font-weight:600;
-  color:var(--text);line-height:1.6;
-  animation:slideUp .45s var(--ease-out);
+/* ════════════ INSTALL BANNER — captures attention without being annoying ════════════ */
+.install-banner{
+  display:flex;align-items:center;gap:12px;width:100%;
+  margin:0 0 12px;padding:12px 14px;
+  background:linear-gradient(135deg,#6366f1,#8b5cf6,#06b6d4);
+  background-size:200% 100%;
+  border:none;border-radius:var(--r-md);
+  color:#fff;cursor:pointer;text-align:start;
+  box-shadow:0 6px 20px rgba(99,102,241,.35);
+  animation:ibIn .45s var(--ease-back), ibShimmer 8s ease-in-out infinite;
+  font-family:var(--f-ar);
+  -webkit-tap-highlight-color:transparent;
 }
-.motiv-banner .ico{
-  color:var(--primary);flex-shrink:0;width:24px;height:24px;
+@keyframes ibIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes ibShimmer{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.install-banner:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(99,102,241,.45)}
+.install-banner:active{transform:translateY(0)}
+.ib-icon{
+  width:36px;height:36px;border-radius:10px;flex-shrink:0;
+  background:rgba(255,255,255,.22);
+  display:flex;align-items:center;justify-content:center;
 }
+.ib-icon svg{width:20px;height:20px}
+.ib-body{flex:1;min-width:0;line-height:1.35}
+.ib-title{font-size:13.5px;font-weight:800;letter-spacing:-0.005em}
+.ib-sub{font-size:11.5px;opacity:.92;font-weight:500;margin-top:1px}
+.ib-arrow{width:18px;height:18px;flex-shrink:0;opacity:.85;transform:scaleX(-1)}
 @media (max-width:520px){
-  .motiv-banner{font-size:13px;padding:12px 14px}
-  .motiv-banner .ico{width:20px;height:20px}
+  .install-banner{padding:10px 12px;gap:10px}
+  .ib-icon{width:32px;height:32px}
+  .ib-title{font-size:13px}
+  .ib-sub{font-size:11px}
+}
+
+/* ════════════ SMART WELCOME — compact contextual reminder ════════════
+   Apple HIG / Material 3 sizing: 56-64px tall, single line of context,
+   small inline action. Tinted background (not full color), subtle, professional. */
+.smart-welcome{
+  display:flex;align-items:center;gap:12px;
+  margin:0 0 16px;padding:12px 14px;
+  border-radius:var(--r-md);
+  border:1px solid transparent;
+  font-family:var(--f-ar);
+  animation:swIn .35s var(--ease-out);
+  min-height:56px;
+}
+@keyframes swIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+.sw-icon{
+  width:36px;height:36px;border-radius:10px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.sw-icon svg{width:20px;height:20px}
+.sw-body{flex:1;min-width:0;line-height:1.4}
+.sw-title{
+  font-size:13.5px;font-weight:700;color:var(--text);
+  letter-spacing:-0.005em;
+}
+.sw-sub{
+  font-size:12px;font-weight:500;color:var(--text-3);
+  margin-top:1px;
+}
+.sw-sub b{font-family:var(--f-en);font-weight:700;color:var(--text-2)}
+.sw-cta{
+  flex-shrink:0;display:inline-flex;align-items:center;gap:4px;
+  padding:8px 14px;border:none;border-radius:var(--r-pill);
+  font-family:var(--f-ar);font-size:12.5px;font-weight:700;
+  cursor:pointer;color:#fff;
+  transition:transform .12s ease, filter .12s ease;
+}
+.sw-cta:hover{filter:brightness(1.08)}
+.sw-cta:active{transform:scale(.96)}
+.sw-cta svg{width:14px;height:14px}
+
+/* Tinted variants — subtle background + colored icon, professional */
+.sw-due{background:var(--primary-soft);border-color:rgba(99,102,241,.18)}
+.sw-due .sw-icon{background:var(--primary);color:#fff}
+.sw-due .sw-cta{background:var(--primary)}
+
+.sw-risk{background:rgba(249,115,22,.10);border-color:rgba(249,115,22,.22)}
+.sw-risk .sw-icon{background:#f97316;color:#fff}
+.sw-risk .sw-cta{background:#f97316}
+
+.sw-comeback{background:rgba(124,58,237,.10);border-color:rgba(124,58,237,.22)}
+.sw-comeback .sw-icon{background:#7c3aed;color:#fff}
+.sw-comeback .sw-cta{background:#7c3aed}
+
+.sw-done{background:rgba(16,185,129,.10);border-color:rgba(16,185,129,.22)}
+.sw-done .sw-icon{background:#10b981;color:#fff}
+.sw-done .sw-cta{background:#10b981}
+
+.sw-onboard{background:rgba(14,165,233,.10);border-color:rgba(14,165,233,.22)}
+.sw-onboard .sw-icon{background:#0ea5e9;color:#fff}
+.sw-onboard .sw-cta{background:#0ea5e9}
+
+@media (max-width:520px){
+  .smart-welcome{padding:10px 12px;gap:10px;min-height:52px}
+  .sw-icon{width:32px;height:32px;border-radius:9px}
+  .sw-icon svg{width:18px;height:18px}
+  .sw-title{font-size:13px}
+  .sw-sub{font-size:11.5px}
+  .sw-cta{padding:7px 11px;font-size:11.5px}
 }
 
 /* ─── STUDENT NAME chip in header ─── */
@@ -1082,11 +1165,6 @@ img,video,canvas,svg{max-width:100%;height:auto}
       <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
     </svg>
   </button>
-  <button class="h-btn hidden" id="btn-install" type="button" title="Install app">
-    <svg class="ico ico-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
-    </svg>
-  </button>
 </header>
 
 <main class="shell" id="shell">
@@ -1108,10 +1186,18 @@ img,video,canvas,svg{max-width:100%;height:auto}
       <svg class="ico ncb-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
     </button>
 
-    <div class="motiv-banner" id="motiv-banner" style="display:none">
-      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-      <span id="motiv-text"></span>
-    </div>
+    <button class="install-banner" id="install-banner" type="button" style="display:none" onclick="App.triggerInstall()">
+      <div class="ib-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      </div>
+      <div class="ib-body">
+        <div class="ib-title">ثبّت إتقان على جهازك</div>
+        <div class="ib-sub">يفتح أسرع · يعمل بدون انترنت · أيقونة في الشاشة الرئيسية</div>
+      </div>
+      <svg class="ib-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+
+    <div class="smart-welcome" id="smart-welcome" style="display:none"></div>
 
     <div class="stat-grid stagger">
       <div class="stat">
@@ -1530,10 +1616,6 @@ img,video,canvas,svg{max-width:100%;height:auto}
       <button class="btn block mb-8" onclick="App.showConsentAgain()" type="button">
         <svg class="ico ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
         عرض شاشة الموافقة على الخصوصية
-      </button>
-      <button class="btn block mb-8" onclick="App.testNotification()" type="button">
-        <svg class="ico ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-        اختبار الإشعارات
       </button>
       <div class="rule"></div>
       <button class="btn danger block mb-8" onclick="App.resetProgress()" type="button">إعادة تعيين التقدم</button>
@@ -3720,31 +3802,84 @@ function onKey(e){
    PWA — Manifest (Blob) + Service Worker
    ════════════════════════════════════════════════════════════════════ */
 function setupPWA(){
-  // inject manifest as blob URL
-  const manifest={
-    name:'Vocab — تطبيق الطالب',
-    short_name:'Vocab',
-    start_url:'.',
-    display:'standalone',
-    background_color:'#f5f7fb',
-    theme_color:'#6366f1',
-    orientation:'portrait',
-    lang:'ar',
-    dir:'rtl',
-    icons:[{
-      src:'data:image/svg+xml;base64,'+btoa('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192"><rect width="192" height="192" rx="40" fill="#6366f1"/><text x="96" y="128" text-anchor="middle" font-size="110" font-weight="800" fill="white" font-family="Arial">V</text></svg>'),
-      sizes:'192x192', type:'image/svg+xml', purpose:'any maskable'
-    }]
-  };
-  const blob=new Blob([JSON.stringify(manifest)],{type:'application/json'});
-  let link=qs('link[rel="manifest"]');
-  if(!link){ link=document.createElement('link'); link.rel='manifest'; document.head.appendChild(link); }
-  link.href=URL.createObjectURL(blob);
+  /* ════════════ PROFESSIONAL ICON DESIGN ════════════
+     Multi-layer SVG: gradient bg + glossy highlight + soft shadow + bold إ letter.
+     Designed to: (1) catch a student's eye, (2) feel native on iOS + Android,
+     (3) work as both standard and maskable icon (safe zone respected). */
+  const buildIcon = (size) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}">
+    <defs>
+      <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#6366f1"/>
+        <stop offset="55%" stop-color="#8b5cf6"/>
+        <stop offset="100%" stop-color="#06b6d4"/>
+      </linearGradient>
+      <linearGradient id="gloss" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity=".25"/>
+        <stop offset="50%" stop-color="#ffffff" stop-opacity="0"/>
+      </linearGradient>
+      <filter id="letterShadow" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="${size*0.012}"/>
+        <feOffset dx="0" dy="${size*0.015}"/>
+        <feComponentTransfer><feFuncA type="linear" slope=".35"/></feComponentTransfer>
+        <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+    <rect width="${size}" height="${size}" rx="${size*0.22}" fill="url(#bg)"/>
+    <rect width="${size}" height="${size*0.5}" rx="${size*0.22}" fill="url(#gloss)"/>
+    <text x="50%" y="${size*0.71}" text-anchor="middle"
+          font-size="${size*0.62}" font-weight="900" fill="#ffffff"
+          font-family="'Tajawal','Cairo','Segoe UI',Arial,sans-serif"
+          filter="url(#letterShadow)">إ</text>
+  </svg>`;
 
-  // service worker (cache-first for app shell)
+  const icon192 = 'data:image/svg+xml;base64,'+btoa(unescape(encodeURIComponent(buildIcon(192))));
+  const icon512 = 'data:image/svg+xml;base64,'+btoa(unescape(encodeURIComponent(buildIcon(512))));
+
+  /* iOS-specific: apple-touch-icon link */
+  if(!qs('link[rel="apple-touch-icon"]')){
+    const appleLink = document.createElement('link');
+    appleLink.rel = 'apple-touch-icon';
+    appleLink.href = icon192;
+    document.head.appendChild(appleLink);
+  }
+  /* Android: standard icon link (helps install prompt UI) */
+  if(!qs('link[rel="icon"]')){
+    const iconLink = document.createElement('link');
+    iconLink.rel = 'icon';
+    iconLink.type = 'image/svg+xml';
+    iconLink.href = icon192;
+    document.head.appendChild(iconLink);
+  }
+
+  /* Manifest — proper Arabic name + multi-size icons + install metadata */
+  const manifest = {
+    name: 'إتقان — مبادرة الجوفاء',
+    short_name: 'إتقان',
+    description: 'مراجعة ذكية بدون انترنت — مبادرة متوسطة وثانوية الجوفاء',
+    start_url: '.',
+    scope: '.',
+    display: 'standalone',
+    background_color: '#0f1117',
+    theme_color: '#6366f1',
+    orientation: 'portrait',
+    lang: 'ar',
+    dir: 'rtl',
+    categories: ['education', 'productivity'],
+    icons: [
+      { src: icon192, sizes: '192x192', type: 'image/svg+xml', purpose: 'any' },
+      { src: icon512, sizes: '512x512', type: 'image/svg+xml', purpose: 'any' },
+      { src: icon512, sizes: '512x512', type: 'image/svg+xml', purpose: 'maskable' },
+    ],
+  };
+  const blob = new Blob([JSON.stringify(manifest)], {type:'application/json'});
+  let link = qs('link[rel="manifest"]');
+  if(!link){ link = document.createElement('link'); link.rel = 'manifest'; document.head.appendChild(link); }
+  link.href = URL.createObjectURL(blob);
+
+  /* Service Worker — cache-first for offline operation */
   if('serviceWorker' in navigator){
-    const swCode=`
-      const CACHE='vocab-v2';
+    const swCode = `
+      const CACHE='etqan-v2';
       self.addEventListener('install',e=>{ self.skipWaiting(); });
       self.addEventListener('activate',e=>{ e.waitUntil(self.clients.claim()); });
       self.addEventListener('fetch',e=>{
@@ -3761,24 +3896,62 @@ function setupPWA(){
         })());
       });
     `;
-    const swBlob=new Blob([swCode],{type:'application/javascript'});
-    const swUrl=URL.createObjectURL(swBlob);
-    navigator.serviceWorker.register(swUrl).catch(()=>{});
+    const swBlob = new Blob([swCode], {type:'application/javascript'});
+    navigator.serviceWorker.register(URL.createObjectURL(swBlob)).catch(()=>{});
   }
 
-  // install prompt
-  window.addEventListener('beforeinstallprompt', e=>{
+  /* ════════════ INSTALL PROMPT — captures user gesture, shows custom UI ════════════
+     Browser fires 'beforeinstallprompt' when site meets PWA criteria.
+     We capture it, show our own attractive prompt in the home page, then
+     trigger native install when student taps "ثبّت التطبيق". */
+  window.addEventListener('beforeinstallprompt', e => {
     e.preventDefault();
-    State.installPrompt=e;
-    $('btn-install').classList.remove('hidden');
+    State._installPrompt = e;
+    showInstallBanner();
   });
-  $('btn-install').addEventListener('click', async ()=>{
-    if(!State.installPrompt) return;
-    State.installPrompt.prompt();
-    await State.installPrompt.userChoice;
-    State.installPrompt=null;
-    $('btn-install').classList.add('hidden');
+  window.addEventListener('appinstalled', () => {
+    State._installPrompt = null;
+    hideInstallBanner();
+    toast('تم تثبيت إتقان على جهازك', 'success');
   });
+}
+
+/* Install banner (rendered into #install-banner if present) */
+function showInstallBanner(){
+  const el = $('install-banner');
+  if(!el) return;
+  /* Don't show if already standalone (app installed) */
+  if(window.matchMedia('(display-mode: standalone)').matches) return;
+  if(window.navigator.standalone === true) return; /* iOS */
+  el.style.display = '';
+}
+function hideInstallBanner(){
+  const el = $('install-banner');
+  if(el) el.style.display = 'none';
+}
+async function triggerInstall(){
+  const p = State._installPrompt;
+  if(!p){
+    /* iOS doesn't fire beforeinstallprompt — show manual instructions */
+    const ua = navigator.userAgent;
+    const isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+    if(isIOS){
+      toast('للتثبيت في iOS: اضغط زر المشاركة ثم "إضافة إلى الشاشة الرئيسية"', 'warn');
+    } else {
+      toast('استخدم قائمة المتصفح: ثبّت التطبيق / Add to Home screen', 'warn');
+    }
+    return;
+  }
+  try{
+    p.prompt();
+    const choice = await p.userChoice;
+    if(choice.outcome === 'accepted'){
+      hideInstallBanner();
+    }
+    State._installPrompt = null;
+  }catch(e){
+    console.warn('install prompt failed:', e);
+  }
 }
 
 /* ════════════════════════════════════════════════════════════════════
@@ -4011,160 +4184,173 @@ function pickMotivation(category, vars){
 }
 
 /* Get the motivation appropriate for current state */
-function currentMotivation(){
+/* ════════════════════════════════════════════════════════════════════
+   SMART WELCOME HERO — what the student sees first on home page.
+   Picks 1 of 5 variants based on study state. Replaces broken OS notifications
+   with an impossible-to-miss in-app reminder, in the spirit of Duolingo/Headspace.
+   ════════════════════════════════════════════════════════════════════ */
+
+/* Compute student state — single pass over history */
+function getStudentState(){
+  const DAY = 86400000;
+  const tk = dayKey();
+  const todayCount = (State.history[tk] || {}).count || 0;
   const dueAll = dueCount('all');
-  const today = State.history[dayKey()];
-  /* Streak calc */
+  const totalCards = State.cards.length;
+
+  /* Streak: count back from today (or yesterday if today not done) */
   let streak = 0;
-  for(let d=0; d<60; d++){
-    const k = dayKey(Date.now() - d*86400000);
+  for(let d=0; d<400; d++){
+    const k = dayKey(Date.now() - d*DAY);
     if(State.history[k] && State.history[k].count > 0) streak++;
-    else if(d>0) break;
+    else if(d > 0) break;  /* allow today to be empty without breaking */
   }
-  /* Last study day */
-  let lastDay = null;
-  for(let d=0; d<60; d++){
-    const k = dayKey(Date.now() - d*86400000);
-    if(State.history[k] && State.history[k].count > 0){ lastDay = d; break; }
+
+  /* Last study day (in days ago, 0 = today) */
+  let lastDayAgo = null;
+  for(let d=0; d<400; d++){
+    const k = dayKey(Date.now() - d*DAY);
+    if(State.history[k] && State.history[k].count > 0){ lastDayAgo = d; break; }
   }
-  if(streak >= 3) return pickMotivation('streak', {n:streak});
-  if(lastDay !== null && lastDay >= 3) return pickMotivation('comeback');
-  if(dueAll > 0) return pickMotivation('due', {n:dueAll});
-  return pickMotivation('ready');
+
+  /* Hours since midnight — used for "streak risk" detection */
+  const now = new Date();
+  const midnight = new Date(now); midnight.setHours(0,0,0,0);
+  const hoursIntoDay = (now - midnight) / 3600000;
+
+  return {
+    todayCount,
+    dueAll,
+    totalCards,
+    streak,
+    lastDayAgo,
+    hoursIntoDay,
+    studiedToday: todayCount > 0,
+  };
 }
 
-/* Render motivation banner on home page */
-function renderMotivation(){
-  const el = $('motiv-banner');
+/* Pick the variant + content for the welcome hero */
+function pickWelcomeVariant(s){
+  /* Variant 1: ONBOARDING — no cards yet OR brand new student */
+  if(s.totalCards === 0){
+    return {
+      kind:'onboard',
+      icon:'<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>',
+      title:'لا توجد بطاقات بعد',
+      sub:'اطلب من معلمك رابط الحزمة',
+      cta:null,
+    };
+  }
+  if(s.lastDayAgo === null){
+    return {
+      kind:'onboard',
+      icon:'<polyline points="9 18 15 12 9 6"/>',
+      title:'كل شيء جاهز',
+      sub:`<b>${s.totalCards}</b> بطاقة في انتظارك`,
+      cta:{label:'ابدأ', action:'goStudy'},
+    };
+  }
+
+  /* Variant 2: COMEBACK — gone for 3+ days */
+  if(s.lastDayAgo >= 3){
+    return {
+      kind:'comeback',
+      icon:'<path d="M3 12a9 9 0 1 0 9-9 9.74 9.74 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>',
+      title:`غبتَ ${s.lastDayAgo} أيام`,
+      sub: s.dueAll > 0 ? `<b>${s.dueAll}</b> بطاقة تراكمت` : 'استرجع وتيرتك الآن',
+      cta:{label:'العودة', action:'goStudy'},
+    };
+  }
+
+  /* Variant 3: STREAK RISK — yesterday + today late + has streak */
+  if(!s.studiedToday && s.streak >= 2 && s.hoursIntoDay >= 14){
+    return {
+      kind:'risk',
+      icon:'<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>',
+      title:`سلسلة ${s.streak} يوم في خطر`,
+      sub: 'مراجعة واحدة تكفي لاستمرارها',
+      cta:{label:'حافظ عليها', action:'goStudy'},
+    };
+  }
+
+  /* Variant 4: DUE CARDS waiting */
+  if(!s.studiedToday && s.dueAll > 0){
+    return {
+      kind:'due',
+      icon:'<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
+      title:`${s.dueAll} بطاقة تنتظرك`,
+      sub: s.streak > 0 ? `<b>${s.streak}</b> يوم متتالي · لا تكسرها` : 'خمس دقائق وتنتهي',
+      cta:{label:'ابدأ', action:'goStudy'},
+    };
+  }
+
+  /* Variant 5: DONE TODAY — celebrate */
+  if(s.studiedToday){
+    if(s.dueAll > 0){
+      return {
+        kind:'done',
+        icon:'<polyline points="20 6 9 17 4 12"/>',
+        title:`أحسنت — ${s.todayCount} اليوم`,
+        sub:`<b>${s.dueAll}</b> بطاقة متبقية`,
+        cta:{label:'أكمل', action:'goStudy'},
+      };
+    }
+    return {
+      kind:'done',
+      icon:'<path d="M12 2L9.91 8.26L3 9.27L8 14.14L6.82 21L12 17.77L17.18 21L16 14.14L21 9.27L14.09 8.26L12 2z"/>',
+      title:'أكملت واجبك اليوم',
+      sub: s.streak >= 7
+        ? `سلسلة <b>${s.streak}</b> يوم — رائع`
+        : s.streak >= 3
+          ? `<b>${s.streak}</b> يوم متتالي`
+          : `${s.todayCount} بطاقة · عُد غداً`,
+      cta:{label:'إضافي', action:'goStudy'},
+    };
+  }
+
+  /* Fallback: quiet success */
+  return {
+    kind:'done',
+    icon:'<polyline points="20 6 9 17 4 12"/>',
+    title:'كل شيء على ما يرام',
+    sub:'لا بطاقات مستحقة الآن',
+    cta:null,
+  };
+}
+
+/* Render the Smart Welcome Hero into the home page */
+function renderSmartWelcome(){
+  const el = $('smart-welcome');
   if(!el) return;
-  const msg = currentMotivation();
-  if(!msg){ el.style.display='none'; return; }
-  el.style.display='';
-  $('motiv-text').textContent = msg;
+  const state = getStudentState();
+  const v = pickWelcomeVariant(state);
+  el.style.display = '';
+  el.className = 'smart-welcome sw-' + v.kind;
+  el.innerHTML = `
+    <div class="sw-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">${v.icon}</svg>
+    </div>
+    <div class="sw-body">
+      <div class="sw-title">${v.title}</div>
+      <div class="sw-sub">${v.sub}</div>
+    </div>
+    ${v.cta ? `<button class="sw-cta" type="button" onclick="App.${v.cta.action}()">
+      ${v.cta.label}
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+    </button>` : ''}
+  `;
 }
+
+/* Backwards compat — old code still calls renderMotivation */
+function renderMotivation(){ renderSmartWelcome(); }
 
 /* ════════════════════════════════════════════════════════════════════
-   NOTIFICATIONS — daily reminder (browser only).
-   Asks for permission once after consent. Uses setTimeout for the
-   in-tab session, and the Notification API for OS-level delivery.
+   REMINDER SYSTEM — in-app smart welcome (replaces broken OS notifications).
+   OS-level Notification API doesn't work reliably on mobile without HTTPS +
+   service worker, so we deliver reminders via a hero banner on home page.
+   Stub kept for backwards compatibility.
    ════════════════════════════════════════════════════════════════════ */
-/* ════════════════════════════════════════════════════════════════════
-   NOTIFICATION SYSTEM — diagnostics + reliable delivery.
-   Issues addressed:
-   1. file:// origins can't request permission (always 'denied')
-   2. iOS Safari requires PWA installation + service worker
-   3. Some browsers ignore notifications without an icon URL
-   4. No way to manually test → silent failure mode
-   ════════════════════════════════════════════════════════════════════ */
-function notifSupport(){
-  if(!('Notification' in window)){
-    return {ok:false, reason:'المتصفح لا يدعم الإشعارات'};
-  }
-  /* file:// origins — permission API works but new Notification() may fail */
-  if(location.protocol === 'file:'){
-    return {ok:false, reason:'الإشعارات تتطلب فتح التطبيق عبر https:// أو localhost'};
-  }
-  return {ok:true};
-}
-
-async function scheduleMotivation(){
-  const support = notifSupport();
-  if(!support.ok){
-    console.info('[notif] support check failed:', support.reason);
-    return;
-  }
-  /* Ask permission only after delay (don't shock the student) */
-  if(Notification.permission === 'default'){
-    setTimeout(async ()=>{
-      try{
-        const result = await Notification.requestPermission();
-        console.info('[notif] permission:', result);
-      }catch(e){ console.warn('[notif] permission request failed:', e); }
-    }, 8000);
-  } else {
-    console.info('[notif] permission already:', Notification.permission);
-  }
-  /* In-tab idle reminder */
-  if(State._motivTimer) clearInterval(State._motivTimer);
-  State._motivTimer = setInterval(()=>{
-    const idleMin = (Date.now() - (State._lastActive||Date.now())) / 60000;
-    if(idleMin > 25 && document.hidden){
-      sendNotif();
-    }
-  }, 5*60*1000);
-  ['click','keydown','scroll','touchstart'].forEach(evt=>{
-    document.addEventListener(evt, ()=>{ State._lastActive = Date.now(); }, {passive:true});
-  });
-  State._lastActive = Date.now();
-}
-
-function sendNotif(customBody){
-  const support = notifSupport();
-  if(!support.ok){ console.warn('[notif]', support.reason); return false; }
-  if(Notification.permission !== 'granted'){
-    console.warn('[notif] permission not granted:', Notification.permission);
-    return false;
-  }
-  const due = dueCount('all');
-  let body = customBody;
-  if(!body){
-    if(due > 0) body = pickMotivation('due', {n:due});
-    else        body = pickMotivation('ready');
-  }
-  try{
-    /* Inline SVG icon as data URL — works without file hosting */
-    const iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192"><rect width="192" height="192" rx="40" fill="#6366f1"/><text x="96" y="135" text-anchor="middle" font-size="120" font-weight="900" fill="white" font-family="Arial">إ</text></svg>';
-    const iconUrl = 'data:image/svg+xml;base64,'+btoa(unescape(encodeURIComponent(iconSvg)));
-    new Notification('إتقان · مبادرة الجوفاء', {
-      body,
-      icon: iconUrl,
-      badge: iconUrl,
-      tag: 'etqan-reminder',
-      silent: false,
-      lang: 'ar',
-      dir: 'rtl',
-    });
-    console.info('[notif] sent:', body);
-    return true;
-  }catch(e){
-    console.error('[notif] send failed:', e);
-    return false;
-  }
-}
-
-/* Manual test — invoked from settings page */
-async function testNotification(){
-  const support = notifSupport();
-  if(!support.ok){
-    toast(support.reason, 'error');
-    return;
-  }
-  /* Request permission if not granted */
-  if(Notification.permission === 'default'){
-    toast('سيُطلب إذن الإشعارات الآن — اضغط "السماح"', 'warn');
-    try{
-      const result = await Notification.requestPermission();
-      if(result !== 'granted'){
-        toast('لم يُمنح الإذن — تحقق من إعدادات المتصفح', 'error');
-        return;
-      }
-    }catch(e){
-      toast('فشل طلب الإذن: '+(e.message||e), 'error');
-      return;
-    }
-  }
-  if(Notification.permission === 'denied'){
-    toast('الإذن مرفوض — افتح إعدادات الموقع وفعّل الإشعارات', 'error');
-    return;
-  }
-  /* Send test notification */
-  const ok = sendNotif('هذا اختبار — الإشعارات تعمل بنجاح. أهل الإتقان لا يفوّتون.');
-  if(ok){
-    toast('تم إرسال إشعار الاختبار — تحقق من شريط الإشعارات', 'success');
-  } else {
-    toast('فشل إرسال الإشعار — انظر console للتفاصيل', 'error');
-  }
-}
+function scheduleMotivation(){ /* deprecated — replaced by renderSmartWelcome */ }
 
 async function saveStudentName(){
   const v=String($('student-name').value||'').trim();
@@ -4184,7 +4370,7 @@ window.App = {
   resetProgress, wipeAll,
   saveStudentName, saveCloudConfig, cloudSyncNow,
   acceptConsent, declineConsent, showConsentAgain,
-  openNewCards, testNotification,
+  openNewCards, triggerInstall,
 };
 
 /* boot */
