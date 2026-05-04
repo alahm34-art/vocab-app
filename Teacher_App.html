@@ -133,10 +133,15 @@ body{
 .shell{
   max-width:1400px;margin:0 auto;
   padding:24px 22px;
-  display:grid;grid-template-columns:1fr 1fr;gap:22px;
+  display:grid;
+  grid-template-columns:minmax(0, 1.05fr) minmax(0, 1fr);
+  gap:22px;
   align-items:start;
 }
 @media(max-width:980px){.shell{grid-template-columns:1fr}}
+
+/* Pin form column to a max width for readability */
+.shell > div:first-child{max-width:680px}
 
 /* ─── BLOCK ─── */
 .block{
@@ -295,7 +300,14 @@ textarea{resize:vertical;min-height:80px;line-height:1.6}
 .img-preview .meta .size b{color:var(--good)}
 
 /* ─── CARD LIST ─── */
-.search-row{display:flex;align-items:center;gap:8px;margin-bottom:14px;position:relative}
+.search-row{display:flex;align-items:center;gap:8px;margin-bottom:10px;position:relative}
+.filter-row{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:14px;
+}
+.filter-row .inp-sm{
+  padding:7px 10px;font-size:12px;font-family:var(--f-ar);
+}
+@media(max-width:520px){.filter-row{grid-template-columns:1fr}}
 .search-row .inp{padding-inline-start:38px}
 .search-row .ico-search{
   position:absolute;inset-inline-start:14px;top:50%;transform:translateY(-50%);
@@ -319,6 +331,18 @@ textarea{resize:vertical;min-height:80px;line-height:1.6}
   transition:var(--t-fast);
 }
 .card-item:hover{border-color:var(--line-2);background:var(--surface-3)}
+.card-item.editing{
+  border-color:var(--primary);background:var(--primary-soft);
+  box-shadow:0 0 0 2px var(--primary-soft);
+}
+.card-item.editing .body .q{color:var(--primary)}
+.edit-pill{
+  display:inline-block;margin-inline-start:8px;
+  font-family:var(--f-ar);font-size:10.5px;font-weight:700;
+  background:var(--primary);color:#fff;
+  padding:2px 8px;border-radius:var(--r-pill);
+  vertical-align:middle;letter-spacing:0;
+}
 .card-item .badge{
   font-family:var(--f-en);font-size:10px;font-weight:700;
   padding:3px 8px;border-radius:var(--r-pill);letter-spacing:.04em;
@@ -646,8 +670,8 @@ img,video,canvas,svg{max-width:100%;height:auto}
       </div>
 
       <div class="field">
-        <label class="field-lbl">السياق (اختياري)</label>
-        <textarea id="f-ctx" rows="2" placeholder="The attacker used DNS tunneling for data exfiltration."></textarea>
+        <label class="field-lbl">الخبرات المكتسبة (اختياري)</label>
+        <textarea id="f-ctx" rows="2" placeholder="ما يكتسبه الطالب من هذه البطاقة: مفاهيم، مهارات، أو روابط معرفية."></textarea>
       </div>
 
       <div class="field">
@@ -773,6 +797,51 @@ img,video,canvas,svg{max-width:100%;height:auto}
     </div>
   </div>
 
+  <!-- ═══════════ CLOUD PUBLISH — auto-distribute deck to students ═══════════ -->
+  <div class="block" style="margin-top:12px">
+    <div class="block-hd">
+      <h2>
+        <svg class="ico ico-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/></svg>
+        النشر للسحاب
+      </h2>
+      <span class="cards-stat"><span class="b" id="cloud-stat">غير منشور</span></span>
+    </div>
+
+    <div class="field">
+      <label class="field-lbl">
+        <svg class="ico ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        رابط النشر (Webhook / GAS / GitHub Gist)
+      </label>
+      <input class="inp" id="publish-url" placeholder="https://script.google.com/macros/s/AKfy.../exec">
+      <div class="field-help">رابط Web App يقبل POST. يستقبل JSON الحزمة كاملاً ويحفظه. يصله الطلاب عبر تطبيق الطالب.</div>
+    </div>
+    <div class="field">
+      <label class="field-lbl">
+        <svg class="ico ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        رمز السرّ (اختياري)
+      </label>
+      <input class="inp" id="publish-token" placeholder="رمز يُمرَّر في الطلب لمنع النشر العام">
+      <div class="field-help">يضاف للحقل <code style="font-family:var(--f-en);background:var(--surface-2);padding:1px 6px;border-radius:3px">token</code> في الـ POST.</div>
+    </div>
+    <div class="row gap-8 mt-8">
+      <button class="btn primary flex-1" onclick="App.publishAllClean()" type="button" id="btn-publish-all" title="ينظّف البطاقات الفارغة والمكررة ثم ينشر الكل">
+        <svg class="ico ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/><polyline points="20 12 9 23 4 18"/></svg>
+        نشر كل البطاقات (تنظيف + نشر)
+      </button>
+      <button class="btn flex-1" onclick="App.publishToCloud()" type="button" id="btn-publish">
+        <svg class="ico ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>
+        نشر فقط
+      </button>
+    </div>
+    <div class="row gap-8 mt-8">
+      <button class="btn flex-1" onclick="App.copyPublishLink()" type="button" title="انسخ الرابط الذي يُلصق في تطبيق الطالب">
+        <svg class="ico ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        نسخ الرابط للطلاب
+      </button>
+    </div>
+    <div id="publish-log" style="margin-top:8px;font-family:var(--f-en);font-size:11px;color:var(--text-3);min-height:18px"></div>
+  </div>
+
   <!-- ═══════════ RIGHT COLUMN — LIST + JSON ═══════════ -->
   <div>
     <div class="block">
@@ -786,7 +855,28 @@ img,video,canvas,svg{max-width:100%;height:auto}
 
       <div class="search-row">
         <svg class="ico ico-md ico-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <input class="inp" id="search" placeholder="بحث بالكلمة أو الفئة...">
+        <input class="inp" id="search" placeholder="بحث بالسؤال، الإجابة، المنشئ، الفئة...">
+      </div>
+
+      <div class="filter-row">
+        <select class="inp inp-sm" id="filter-track" title="تصفية حسب المسار">
+          <option value="">كل المسارات</option>
+          <option value="en">الإنجليزي</option>
+          <option value="qudurat">القدرات</option>
+          <option value="tahseeli">التحصيلي</option>
+        </select>
+        <select class="inp inp-sm" id="filter-creator" title="تصفية حسب المنشئ">
+          <option value="">كل المنشئين</option>
+        </select>
+        <select class="inp inp-sm" id="sort-by" title="فرز">
+          <option value="created-desc">الأحدث أولاً</option>
+          <option value="created-asc">الأقدم أولاً</option>
+          <option value="q-asc">السؤال أ→ي</option>
+          <option value="q-desc">السؤال ي→أ</option>
+          <option value="creator-asc">المنشئ أ→ي</option>
+          <option value="track-asc">المسار</option>
+          <option value="cat-asc">الفئة</option>
+        </select>
       </div>
 
       <div class="cards-list" id="cards-list"></div>
@@ -822,13 +912,23 @@ img,video,canvas,svg{max-width:100%;height:auto}
       </div>
 
       <div class="row gap-8 mt-12">
-        <label class="file-inp flex-1" for="load-json">
+        <label class="file-inp flex-1" for="load-json" title="استيراد ملف JSON من جهازك">
           <svg class="ico ico-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-          <span class="name" id="load-json-name">تحميل حزمة موجودة للتعديل</span>
-          <input type="file" id="load-json" accept=".json,application/json">
+          <span class="name" id="load-json-name">تحميل ملف JSON</span>
+          <input type="file" id="load-json" accept=".json,application/json,text/plain">
         </label>
         <button class="btn ghost danger" onclick="App.clearAll()" type="button" title="حذف الكل">
           <svg class="ico ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+        </button>
+      </div>
+      <div class="row gap-8 mt-8">
+        <button class="btn flex-1" onclick="App.importFromClipboard()" type="button" title="استيراد من الحافظة (إذا نسختَ JSON من مكان آخر)">
+          <svg class="ico ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg>
+          لصق من الحافظة
+        </button>
+        <button class="btn flex-1" onclick="App.openPasteImport()" type="button" title="لصق النص يدوياً في صندوق نصي كبير">
+          <svg class="ico ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
+          لصق نص يدوي
         </button>
       </div>
 
@@ -920,6 +1020,9 @@ const State={
     editingId:null,
   },
   searchQ:'',
+  filterTrack:'',
+  filterCreator:'',
+  sortBy:'created-desc',
   reportOrientation:'landscape',  // 'landscape' | 'portrait'
 };
 
@@ -1263,13 +1366,57 @@ function gatherCard(){
   }
   return c;
 }
+/* ════════════════════════════════════════════════════════════════════
+   CONTENT HASH — fingerprint of card's meaningful content.
+   Used to: (1) detect duplicates on add, (2) signal updates on student sync.
+   Synchronous FNV-1a hash → returns 8-char hex. No async crypto needed
+   (we don't need cryptographic strength, just fast collision-resistance).
+   ════════════════════════════════════════════════════════════════════ */
+function contentHash(card){
+  const parts = [
+    card.q || '',
+    card.a || '',
+    card.cloze || '',
+    card.qType || '',
+    card.track || '',
+    card.cat || '',
+    (card.options || []).join('|'),
+    card.tf===true ? 'T' : card.tf===false ? 'F' : '',
+  ];
+  const text = parts.join('\u241F').trim().toLowerCase();
+  /* FNV-1a 32-bit */
+  let hash = 0x811c9dc5;
+  for(let i=0; i<text.length; i++){
+    hash ^= text.charCodeAt(i);
+    hash = Math.imul(hash, 0x01000193);
+  }
+  return ('00000000' + (hash >>> 0).toString(16)).slice(-8);
+}
+
 function saveCard(){
   let c;
   try{ c=gatherCard(); }
   catch(e){ toast(e.message,'error'); return; }
+  /* Compute content fingerprint */
+  c.hash = contentHash(c);
+  /* Duplicate detection — only when ADDING (not editing) */
+  if(!State.form.editingId){
+    const dup = State.cards.find(x=>x.hash===c.hash);
+    if(dup){
+      const where = dup.cat ? `الفئة: ${dup.cat}` : 'الحزمة';
+      toast('بطاقة بنفس المحتوى موجودة في '+where,'error');
+      return;
+    }
+  }
   const i=State.cards.findIndex(x=>x.id===c.id);
-  if(i>=0) State.cards[i]=c;
-  else State.cards.unshift(c);
+  if(i>=0){
+    /* Editing: preserve created date, update modified */
+    c.created = State.cards[i].created || c.created;
+    c.modified = now();
+    State.cards[i]=c;
+  } else {
+    State.cards.unshift(c);
+  }
   persist();
   renderList();
   renderJSON();
@@ -1277,6 +1424,7 @@ function saveCard(){
   clearForm();
 }
 function clearForm(){
+  const wasEditing = State.form.editingId;
   State.form.editingId=null;
   $('f-q').value=''; $('f-a').value=''; $('f-cloze').value='';
   $('f-ctx').value=''; $('f-explain').value='';
@@ -1291,6 +1439,8 @@ function clearForm(){
   clearImage();
   renderOptions();
   $('btn-save').innerHTML=`<svg class="ico ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg> حفظ البطاقة`;
+  /* If we were editing, re-render the list so the pill goes away */
+  if(wasEditing) renderList();
 }
 function editCard(id){
   const c=State.cards.find(x=>x.id===id); if(!c) return;
@@ -1339,7 +1489,22 @@ function editCard(id){
     renderImgPreview();
   }
   $('btn-save').innerHTML=`<svg class="ico ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> تحديث البطاقة`;
-  window.scrollTo({top:0, behavior:'smooth'});
+  /* Close any open modal (preview, picker, etc.) */
+  const mb=$('modal-bg'); if(mb) mb.classList.remove('show');
+  /* Re-render list so the editing-pill highlights the active card */
+  renderList();
+  /* Smooth scroll to the form (not top of page) */
+  const formBlock = $('f-q')?.closest('.block') || document.querySelector('.shell .block');
+  if(formBlock){
+    formBlock.scrollIntoView({behavior:'smooth', block:'start'});
+  } else {
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  /* Focus the first relevant input */
+  setTimeout(()=>{
+    const target = State.form.type==='cloze' ? $('f-cloze') : $('f-q');
+    if(target && target.offsetParent !== null) target.focus({preventScroll:true});
+  }, 600);
 }
 function deleteCard(id){
   if(!confirm('حذف هذه البطاقة؟')) return;
@@ -1361,11 +1526,54 @@ function clearAll(){
 function renderList(){
   $('stat-total').textContent=State.cards.length;
   const list=$('cards-list');
+
+  /* Auto-populate creators dropdown from existing cards */
+  const creatorSel = $('filter-creator');
+  if(creatorSel){
+    const currentVal = creatorSel.value || State.filterCreator;
+    const creators = [...new Set(State.cards.map(c=>(c.creator||'').trim()).filter(Boolean))].sort();
+    const opts = ['<option value="">كل المنشئين</option>']
+      .concat(creators.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`));
+    creatorSel.innerHTML = opts.join('');
+    if(currentVal && creators.includes(currentVal)) creatorSel.value=currentVal;
+  }
+
   const q=State.searchQ.trim().toLowerCase();
-  const filtered = q ? State.cards.filter(c=>{
-    const hay=[c.q,c.a,c.cat,c.cloze,c.ctx,(c.options||[]).join(' ')].join(' ').toLowerCase();
-    return hay.includes(q);
-  }) : State.cards;
+  const filtTrack = State.filterTrack;
+  const filtCreator = State.filterCreator;
+
+  /* Multi-stage filter: search → track → creator */
+  let filtered = State.cards.slice();
+  if(q){
+    filtered = filtered.filter(c=>{
+      const hay=[c.q,c.a,c.cat,c.cloze,c.ctx,c.explain,c.creator,
+                 (c.options||[]).join(' ')].join(' ').toLowerCase();
+      return hay.includes(q);
+    });
+  }
+  if(filtTrack){
+    filtered = filtered.filter(c=>(c.track||'en')===filtTrack);
+  }
+  if(filtCreator){
+    filtered = filtered.filter(c=>(c.creator||'').trim()===filtCreator);
+  }
+
+  /* Sort */
+  const sortKey = State.sortBy || 'created-desc';
+  const arCmp = (a,b)=>String(a||'').localeCompare(String(b||''), 'ar');
+  const TRACK_ORDER = {en:1, qudurat:2, tahseeli:3};
+  filtered.sort((a,b)=>{
+    switch(sortKey){
+      case 'created-asc':  return (a.created||0) - (b.created||0);
+      case 'created-desc': return (b.created||0) - (a.created||0);
+      case 'q-asc':        return arCmp(a.q||a.cloze, b.q||b.cloze);
+      case 'q-desc':       return arCmp(b.q||b.cloze, a.q||a.cloze);
+      case 'creator-asc':  return arCmp(a.creator, b.creator) || (b.created||0)-(a.created||0);
+      case 'track-asc':    return (TRACK_ORDER[a.track]||9) - (TRACK_ORDER[b.track]||9) || arCmp(a.cat, b.cat);
+      case 'cat-asc':      return arCmp(a.cat, b.cat) || (b.created||0)-(a.created||0);
+      default:             return (b.created||0) - (a.created||0);
+    }
+  });
 
   if(filtered.length===0){
     list.innerHTML=`<div class="empty-list">
@@ -1380,11 +1588,11 @@ function renderList(){
     const qPreview=(c.q||c.cloze||'').split(/\\n|\n/)[0].slice(0,80);
     const hasImg=c.img?'<svg class="ico ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-inline-start:6px;color:var(--text-3);vertical-align:middle"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>':'';
     return `
-      <div class="card-item">
+      <div class="card-item${State.form.editingId===c.id?' editing':''}">
         <span class="badge">${TYPE_LBL[c.qType]||'?'}</span>
-        <div class="body">
-          <div class="q">${esc(qPreview)}${hasImg}</div>
-          <div class="meta">${esc(c.cat||'—')} · ${trackLbl}</div>
+        <div class="body" onclick="App.editCard('${c.id}')" style="cursor:pointer">
+          <div class="q">${esc(qPreview)}${hasImg}${State.form.editingId===c.id?'<span class="edit-pill">قيد التعديل</span>':''}</div>
+          <div class="meta">${esc(c.cat||'—')} · ${trackLbl}${c.creator?' · '+esc(c.creator):''}</div>
         </div>
         <div class="acts">
           <button onclick="App.editCard('${c.id}')" type="button" title="تعديل">
@@ -1447,16 +1655,45 @@ function renderJSON(){
 async function copyJSON(){
   if(State.cards.length===0){ toast('لا بطاقات للنسخ','error'); return; }
   const txt=JSON.stringify(buildJSON(), null, 2);
+
+  /* Path 1: Modern Clipboard API (HTTPS or localhost) */
+  if(navigator.clipboard && window.isSecureContext){
+    try{
+      await navigator.clipboard.writeText(txt);
+      toast('تم النسخ ('+fmtSize(new Blob([txt]).size)+')','success');
+      return;
+    }catch(_){ /* fall through */ }
+  }
+
+  /* Path 2: textarea + execCommand (works in file:// and http://) */
   try{
-    await navigator.clipboard.writeText(txt);
-    toast('تم النسخ','success');
-  }catch(e){
-    // fallback
-    const ta=document.createElement('textarea'); ta.value=txt;
-    document.body.appendChild(ta); ta.select();
-    try{ document.execCommand('copy'); toast('تم النسخ','success'); }
-    catch(_){ toast('فشل النسخ','error'); }
+    const ta=document.createElement('textarea');
+    ta.value=txt;
+    ta.setAttribute('readonly','');
+    ta.style.cssText='position:fixed;left:-9999px;top:0;opacity:0';
+    document.body.appendChild(ta);
+    /* iOS: needs contenteditable + special selection */
+    ta.contentEditable='true'; ta.readOnly=false;
+    const range=document.createRange();
+    range.selectNodeContents(ta);
+    const sel=window.getSelection();
+    sel.removeAllRanges(); sel.addRange(range);
+    ta.setSelectionRange(0, txt.length);
+    const ok=document.execCommand('copy');
     ta.remove();
+    if(ok){ toast('تم النسخ ('+fmtSize(new Blob([txt]).size)+')','success'); return; }
+  }catch(e){ console.warn('execCommand copy failed', e); }
+
+  /* Path 3: open the JSON in JSON box in highlight mode + tell user to copy manually */
+  const out=$('json-out');
+  if(out){
+    const range=document.createRange();
+    range.selectNodeContents(out);
+    const sel=window.getSelection();
+    sel.removeAllRanges(); sel.addRange(range);
+    toast('انسخ يدوياً (Ctrl+C / Cmd+C) — تم تحديد النص','warn');
+  } else {
+    toast('فشل النسخ. استخدم زر التنزيل بدلاً','error');
   }
 }
 function downloadJSON(){
@@ -1473,25 +1710,257 @@ function downloadJSON(){
 }
 function loadJSON(file){
   const r=new FileReader();
-  r.onload=()=>{
-    try{
-      const d=JSON.parse(r.result);
-      let cards=Array.isArray(d)?d:(d.cards||[]);
-      cards=cards.filter(c=>c && c.id && (c.q || c.cloze));
-      if(!confirm(`سيتم استبدال البطاقات الحالية بـ ${cards.length} بطاقة. متابعة؟`)) return;
-      State.cards=cards;
-      if(d.deck){
-        if(d.deck.name) $('deck-name').value=d.deck.name;
-        if(d.deck.track) $('deck-track').value=d.deck.track;
-        if(d.deck.supervisor) $('deck-supervisor').value=d.deck.supervisor;
-        if(d.deck.reviewers) $('deck-reviewers').value=d.deck.reviewers;
-        if(d.deck.principal) $('deck-principal').value=d.deck.principal;
-      }
-      persist(); renderList(); renderJSON();
-      toast(`تم تحميل ${cards.length} بطاقة`,'success');
-    }catch(e){ toast('ملف غير صالح','error'); }
-  };
+  r.onload=()=>processImportText(r.result, file.name);
   r.readAsText(file);
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   IMPORT FROM TEXT — shared parser used by file/clipboard/manual paste.
+   Tries strict JSON first, then attempts to repair common issues
+   (UTF-8 BOM, trailing commas, single-quoted strings, smart quotes).
+   ════════════════════════════════════════════════════════════════════ */
+function processImportText(rawText, sourceLabel){
+  const text = String(rawText||'').trim();
+  if(!text){ toast('النص فارغ','error'); return; }
+
+  let parsed = null;
+  let lastErr = null;
+
+  /* Attempt 1: strict JSON */
+  try{ parsed = JSON.parse(text); }
+  catch(e){ lastErr = e; }
+
+  /* Attempt 2: strip BOM + try again */
+  if(!parsed){
+    try{
+      const noBom = text.replace(/^\uFEFF/, '');
+      parsed = JSON.parse(noBom);
+    }catch(e){ lastErr = e; }
+  }
+
+  /* Attempt 3: gentle repair — remove trailing commas, normalize smart quotes */
+  if(!parsed){
+    try{
+      let repaired = text
+        .replace(/^\uFEFF/, '')                /* BOM */
+        .replace(/[\u201C\u201D]/g, '"')       /* smart double quotes */
+        .replace(/[\u2018\u2019]/g, "'")       /* smart single quotes */
+        .replace(/,(\s*[}\]])/g, '$1');        /* trailing commas */
+      parsed = JSON.parse(repaired);
+    }catch(e){ lastErr = e; }
+  }
+
+  /* Attempt 4: if text looks like just an array body or just cards array */
+  if(!parsed){
+    try{
+      /* Wrap in [] if it starts with { but doesn't form a complete object */
+      if(text.startsWith('{') && !text.startsWith('{"')){
+        parsed = JSON.parse('['+text+']');
+      }
+    }catch(e){ lastErr = e; }
+  }
+
+  if(!parsed){
+    const msg = lastErr ? lastErr.message : 'تنسيق غير صالح';
+    toast('فشل القراءة: '+msg.slice(0,80),'error');
+    console.warn('Import parse failed:', lastErr, 'text head:', text.slice(0,200));
+    return;
+  }
+
+  /* Extract cards array from various shapes */
+  let incoming;
+  if(Array.isArray(parsed)) incoming = parsed;
+  else if(Array.isArray(parsed.cards)) incoming = parsed.cards;
+  else if(parsed.id && (parsed.q||parsed.cloze)) incoming = [parsed];  /* single card object */
+  else { toast('لا توجد بطاقات في النص','error'); return; }
+
+  incoming = incoming.filter(c=>c && c.id && (c.q || c.cloze));
+  if(incoming.length===0){
+    toast('لا توجد بطاقات صالحة (كل بطاقة تحتاج id + q/cloze)','error');
+    return;
+  }
+
+  /* Wrap as deck object for downstream consistency */
+  const deckObj = Array.isArray(parsed) ? {cards:parsed} : parsed;
+
+  if(State.cards.length > 0){
+    return showImportPicker(deckObj, incoming);
+  }
+  applyImport(deckObj, incoming, 'replace');
+}
+
+/* Import directly from system clipboard (one-click) */
+async function importFromClipboard(){
+  /* Path 1: modern Clipboard API (HTTPS / localhost only) */
+  if(navigator.clipboard && navigator.clipboard.readText && window.isSecureContext){
+    try{
+      const text = await navigator.clipboard.readText();
+      if(!text || !text.trim()){
+        toast('الحافظة فارغة','warn');
+        return;
+      }
+      processImportText(text, 'clipboard');
+      return;
+    }catch(e){
+      /* Permission denied or not allowed → fall through to manual paste */
+      console.debug('clipboard.readText failed:', e.message);
+    }
+  }
+  /* Path 2: open the manual paste modal as fallback */
+  toast('تعذّر القراءة المباشرة — افتح الصندوق وألصق يدوياً','warn');
+  openPasteImport();
+}
+
+/* Open a modal with a big textarea where the user pastes JSON manually */
+function openPasteImport(){
+  $('m-title').innerHTML='<svg class="ico ico-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/></svg> لصق نص JSON';
+  $('m-body').innerHTML = `
+    <div style="font-family:var(--f-ar);font-size:13px;color:var(--text-2);margin-bottom:10px;line-height:1.7">
+      الصق هنا محتوى ملف JSON كاملاً — الصق الكل ثم اضغط "استيراد".
+      <br><span style="color:var(--text-3);font-size:11.5px">يقبل: ملف JSON كامل، مصفوفة بطاقات، أو بطاقة واحدة كـ object</span>
+    </div>
+    <textarea id="paste-area" rows="14" dir="ltr" spellcheck="false"
+      placeholder='{"app":"vocab","version":2,"deck":{...},"cards":[{"id":"c1","q":"...","a":"..."},...]}'
+      style="width:100%;font-family:var(--f-en);font-size:12px;line-height:1.55;padding:12px;background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r-md);color:var(--text);resize:vertical;min-height:240px;direction:ltr;text-align:left"></textarea>
+    <div id="paste-info" style="font-family:var(--f-en);font-size:11px;color:var(--text-3);margin-top:6px;min-height:16px"></div>
+  `;
+  const ac=$('m-actions'); ac.innerHTML='';
+  const cancel=document.createElement('button');
+  cancel.className='btn ghost'; cancel.type='button'; cancel.textContent='إلغاء';
+  cancel.onclick=()=>$('modal-bg').classList.remove('show');
+  const submit=document.createElement('button');
+  submit.className='btn primary'; submit.type='button'; submit.textContent='استيراد';
+  submit.onclick=()=>{
+    const txt = $('paste-area').value;
+    if(!txt.trim()){ toast('الصق نصاً أولاً','error'); return; }
+    $('modal-bg').classList.remove('show');
+    setTimeout(()=>processImportText(txt, 'paste'), 120);
+  };
+  ac.appendChild(cancel);
+  ac.appendChild(submit);
+  $('modal-bg').classList.add('show');
+
+  /* Live byte-counter */
+  setTimeout(()=>{
+    const ta = $('paste-area');
+    const info = $('paste-info');
+    if(ta){
+      ta.focus();
+      const update = ()=>{
+        const len = ta.value.length;
+        const bytes = new Blob([ta.value]).size;
+        info.textContent = len ? len+' chars · '+fmtSize(bytes) : '';
+      };
+      ta.addEventListener('input', update);
+      update();
+    }
+  }, 100);
+}
+
+/* Show modal asking the user how to handle incoming cards */
+function showImportPicker(d, incoming){
+  const existing = State.cards.length;
+  /* Compute conflict count: incoming cards with same ID as existing */
+  const existingIds = new Set(State.cards.map(c=>c.id));
+  const conflicts = incoming.filter(c=>existingIds.has(c.id)).length;
+  const fresh = incoming.length - conflicts;
+
+  $('m-title').innerHTML='<svg class="ico ico-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> استيراد JSON';
+  $('m-body').innerHTML = `
+    <div style="font-family:var(--f-ar);font-size:13px;line-height:1.7;color:var(--text-2);margin-bottom:14px">
+      الملف يحتوي على <b style="color:var(--primary);font-family:var(--f-en)">${incoming.length}</b> بطاقة.
+      <br>لديك حالياً <b style="color:var(--primary);font-family:var(--f-en)">${existing}</b> بطاقة في الحزمة.
+      ${conflicts>0 ? `<br><span style="color:var(--warn)">يوجد <b>${conflicts}</b> بطاقة بنفس المعرّف (تكرار)</span>` : ''}
+    </div>
+    <style>
+      .imp-opt{
+        display:flex;gap:12px;align-items:flex-start;width:100%;
+        background:var(--surface-2);border:1.5px solid var(--line);border-radius:var(--r-md);
+        padding:14px;cursor:pointer;font-family:var(--f-ar);text-align:start;color:var(--text);
+        transition:var(--t-fast);margin-bottom:10px;
+      }
+      .imp-opt:hover{border-color:var(--primary);background:var(--primary-soft);transform:translateY(-1px)}
+      .imp-opt .ico-wrap{
+        width:40px;height:40px;flex-shrink:0;border-radius:50%;
+        background:var(--primary-soft);color:var(--primary);
+        display:flex;align-items:center;justify-content:center;
+      }
+      .imp-opt .body{flex:1}
+      .imp-opt b{font-size:14px;font-weight:800;display:block;margin-bottom:3px}
+      .imp-opt small{font-size:11.5px;color:var(--text-3);font-weight:600;line-height:1.55;display:block}
+      .imp-opt.danger:hover{border-color:var(--bad);background:var(--bad-soft)}
+      .imp-opt.danger .ico-wrap{background:var(--bad-soft);color:var(--bad)}
+    </style>
+    <button class="imp-opt" data-mode="merge-skip" type="button">
+      <span class="ico-wrap"><svg class="ico ico-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></span>
+      <span class="body">
+        <b>دمج — إضافة الجديد فقط (مستحسن)</b>
+        <small>تُضاف ${fresh} بطاقة جديدة. البطاقات المتطابقة (${conflicts}) تُتجاهل ويبقى الموجود كما هو.</small>
+      </span>
+    </button>
+    <button class="imp-opt" data-mode="merge-update" type="button">
+      <span class="ico-wrap"><svg class="ico ico-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></span>
+      <span class="body">
+        <b>دمج — تحديث المتكرّر</b>
+        <small>تُضاف ${fresh} جديدة، وتُحدَّث ${conflicts} بطاقة موجودة بالنسخة الجديدة من الملف.</small>
+      </span>
+    </button>
+    <button class="imp-opt danger" data-mode="replace" type="button">
+      <span class="ico-wrap"><svg class="ico ico-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></span>
+      <span class="body">
+        <b>استبدال كامل — حذف الموجود</b>
+        <small>تُمحى ${existing} بطاقة الحالية بالكامل وتُستبدل بـ ${incoming.length} من الملف. لا يمكن التراجع.</small>
+      </span>
+    </button>
+  `;
+  const ac=$('m-actions'); ac.innerHTML='';
+  const cancel=document.createElement('button');
+  cancel.className='btn ghost'; cancel.type='button'; cancel.textContent='إلغاء';
+  cancel.onclick=()=>$('modal-bg').classList.remove('show');
+  ac.appendChild(cancel);
+  $('modal-bg').classList.add('show');
+
+  qsa('.imp-opt', $('m-body')).forEach(b=>{
+    b.onclick=()=>{
+      const mode=b.dataset.mode;
+      $('modal-bg').classList.remove('show');
+      setTimeout(()=>applyImport(d, incoming, mode), 200);
+    };
+  });
+}
+
+/* Execute the import with the chosen mode */
+function applyImport(d, incoming, mode){
+  let added=0, updated=0, skipped=0;
+  if(mode==='replace'){
+    State.cards = incoming.slice();
+    added = incoming.length;
+  } else {
+    /* merge */
+    const map = new Map(State.cards.map(c=>[c.id, c]));
+    for(const c of incoming){
+      if(map.has(c.id)){
+        if(mode==='merge-update'){ map.set(c.id, c); updated++; }
+        else { skipped++; }
+      } else {
+        map.set(c.id, c); added++;
+      }
+    }
+    State.cards = Array.from(map.values());
+  }
+  /* Apply deck metadata only on REPLACE — merge keeps current settings */
+  if(mode==='replace' && d.deck){
+    if(d.deck.name) $('deck-name').value=d.deck.name;
+    if(d.deck.track) $('deck-track').value=d.deck.track;
+    if(d.deck.supervisor) $('deck-supervisor').value=d.deck.supervisor;
+    if(d.deck.reviewers) $('deck-reviewers').value=d.deck.reviewers;
+    if(d.deck.principal) $('deck-principal').value=d.deck.principal;
+  }
+  persist(); renderList(); renderJSON();
+  const summary = mode==='replace'
+    ? `تم الاستبدال: ${added} بطاقة`
+    : `أُضيفت ${added} · حُدِّثت ${updated} · تُجوهلت ${skipped}`;
+  toast(summary,'success');
 }
 
 /* ════════════════════════════════════════════════════════════════════
@@ -1578,6 +2047,9 @@ function init(){
 
   // search
   $('search').addEventListener('input', e=>{ State.searchQ=e.target.value; renderList(); });
+  $('filter-track').addEventListener('change', e=>{ State.filterTrack=e.target.value; renderList(); });
+  $('filter-creator').addEventListener('change', e=>{ State.filterCreator=e.target.value; renderList(); });
+  $('sort-by').addEventListener('change', e=>{ State.sortBy=e.target.value; renderList(); });
 
   // deck name/track persist on change
   $('deck-name').addEventListener('input', persist);
@@ -1585,12 +2057,16 @@ function init(){
   $('deck-supervisor').addEventListener('input', persist);
   $('deck-reviewers').addEventListener('input', persist);
   $('deck-principal').addEventListener('input', persist);
+  // publish config persist
+  $('publish-url').addEventListener('input', persistPublishConfig);
+  $('publish-token').addEventListener('input', persistPublishConfig);
 
   // modal close
   $('modal-bg').addEventListener('click', e=>{ if(e.target===$('modal-bg')) $('modal-bg').classList.remove('show'); });
 
   // restore + initial paint
   restore();
+  restorePublishConfig();
   /* Populate category list for the default track BEFORE setType is called */
   renderCatOptions($('f-track').value);
   setType('card');
@@ -1780,12 +2256,12 @@ function reportShellHTML(title, headMeta, bodyHtml, opts){
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   /* Bilingual stack matching official MoE identity (Helvetica Neue W23 for SKY).
      Cairo is the closest free Arabic equivalent; Inter handles Latin script. */
-  html,body{background:#fff;color:#15445a;font-family:'Cairo','Inter','Helvetica Neue','Tahoma','Segoe UI',sans-serif;font-size:12px;line-height:1.55;font-feature-settings:'kern','liga'}
+  html,body{background:#fff;color:#15445a;font-family:'Cairo','Inter','Helvetica Neue','Tahoma','Segoe UI',sans-serif;font-size:11.5px;line-height:1.55;font-feature-settings:'kern','liga'}
   body{padding:14mm 12mm;max-width:297mm;margin:0 auto}
   ${moeHeaderCSS()}
   .report-title{
-    text-align:center;font-size:18px;font-weight:800;
-    margin:14px 0 14px;padding:10px;
+    text-align:center;font-size:17px;font-weight:800;
+    margin:14px 0 14px;padding:9px 14px;
     background:#15445a;color:#fff;border-radius:4px;letter-spacing:-0.01em;
   }
   .report-title .sub{display:block;font-size:11px;font-weight:500;color:#c1b489;margin-top:3px}
@@ -1795,44 +2271,71 @@ function reportShellHTML(title, headMeta, bodyHtml, opts){
   }
   .head-meta > div{
     padding:9px 12px;border:1px solid #15445a;
-    display:flex;justify-content:center;align-items:center;gap:8px;font-size:11.5px;
+    display:flex;justify-content:center;align-items:center;gap:8px;font-size:11px;
     text-align:center;
   }
   .head-meta > div span{color:#444;font-weight:600}
-  .head-meta b{font-weight:800;color:#15445a;font-size:12.5px}
+  .head-meta b{font-weight:800;color:#15445a;font-size:12px}
   h2{
     font-size:13px;font-weight:800;margin:14px 0 8px;
     padding-right:9px;border-right:4px solid #0da9a6;color:#15445a;
     page-break-after:avoid;break-after:avoid;
   }
-  h3{font-size:12.5px;margin:12px 0 6px;font-weight:700;color:#15445a;page-break-after:avoid;break-after:avoid}
+  h3{font-size:12px;margin:12px 0 6px;font-weight:700;color:#15445a;page-break-after:avoid;break-after:avoid}
+  /* === TABLE: PROFESSIONAL LAYOUT === */
   table{width:100%;border-collapse:collapse;margin-bottom:8px;table-layout:fixed}
   thead{display:table-header-group}
   /* Each card row stays whole — never split across pages */
   tr{page-break-inside:avoid;break-inside:avoid}
-  th,td{border:1px solid #15445a;padding:6px 8px;vertical-align:top;text-align:start;color:#15445a;word-wrap:break-word;overflow-wrap:break-word}
-  th{background:#15445a;color:#fff;font-weight:700;font-size:11px;letter-spacing:.02em;text-align:center}
-  td.num{width:24px;text-align:center;font-weight:700;font-family:monospace;font-size:10.5px}
-  td.type{width:50px;font-size:10px;font-weight:700;text-align:center}
-  td.q{width:26%;font-weight:600}
-  td.a{width:26%}
-  td.img-col, th.img-col{width:120px;text-align:center;vertical-align:middle}
-  td.notes-col, th.notes-col{width:18%;background:#fff8e1;border-color:#c1b489}
+  th,td{
+    border:1px solid #15445a;
+    padding:8px 10px;
+    vertical-align:top;
+    text-align:start;
+    color:#15445a;
+    word-wrap:break-word;
+    overflow-wrap:break-word;
+    word-break:break-word;
+    line-height:1.65;
+  }
+  th{
+    background:#15445a;color:#fff;font-weight:700;font-size:10.5px;
+    letter-spacing:.02em;text-align:center;padding:7px 6px;
+    white-space:nowrap;
+  }
+  td.num{width:24px;text-align:center;font-weight:700;font-family:monospace;font-size:11px;vertical-align:middle}
+  td.type{width:54px;font-size:10px;font-weight:700;text-align:center;vertical-align:middle;line-height:1.4}
+  td.q{width:21%;font-weight:600;font-size:11px}
+  td.a{width:18%;font-size:11px}
+  td.img-col{width:108px;text-align:center;vertical-align:middle;padding:6px}
+  td.xp-col{width:18%;font-size:10.5px;color:#15445a;line-height:1.55;background:#fafdfb}
+  td.notes-col{width:14%;font-size:11px}
   th.num{width:24px}
-  th.type{width:50px}
-  /* Image cell — keep image small, centered, with a subtle border */
+  th.type{width:54px}
+  th.img-col{width:108px;padding:7px 4px}
+  th.xp-col{width:18%}
+  th.notes-col{width:14%}
+  /* Image cell — keep image small, centered */
   .card-img{
-    max-width:110px;max-height:110px;width:auto;height:auto;
+    max-width:108px;max-height:108px;width:auto;height:auto;
     object-fit:contain;display:block;margin:0 auto;
     border:1px solid #c2c1c1;border-radius:3px;background:#fff;
   }
-  .extra{font-size:10.5px;color:#444;margin-top:4px;line-height:1.6}
-  .extra i{font-style:normal;font-weight:700;color:#15445a}
-  .muted{color:#aaa;font-weight:500;font-size:11px}
-  u{text-decoration:underline;font-weight:700}
+  /* === EXTRA LINE BLOCK (سياق/شرح/المنشئ) — clean stacked layout === */
+  .extra{
+    font-size:10px;color:#5a6c78;margin-top:6px;line-height:1.7;
+    padding-top:5px;border-top:1px dashed #c2c1c1;
+    display:block;
+  }
+  .extra .pair{display:block;margin-top:2px}
+  .extra i{font-style:normal;font-weight:700;color:#15445a;margin-inline-end:3px}
+  .extra i::after{content:''}
+  .muted{color:#aaa;font-weight:500;font-size:10.5px}
+  u{text-decoration:underline;font-weight:700;text-underline-offset:2px}
   .summary-table th{background:#0da9a6}
   .summary-table td.q, .summary-table td.a{width:auto}
-  /* Footer is REPEATED on every page using fixed-positioned print footer */
+
+  /* === FOOTER (signatures) === */
   .footer{
     margin-top:22px;border-top:2px solid #15445a;padding-top:10px;
     display:flex;justify-content:space-between;align-items:flex-end;gap:18px;
@@ -1848,9 +2351,12 @@ function reportShellHTML(title, headMeta, bodyHtml, opts){
     page-break-inside:avoid;break-inside:avoid;
   }
   .rs-meta{
-    display:flex;justify-content:space-between;
-    font-size:10px;color:#15445a;margin-bottom:14px;
+    display:flex;justify-content:space-between;align-items:center;
+    font-size:9.5px;color:#5a6c78;margin-bottom:14px;
+    padding-bottom:8px;border-bottom:1px dashed #c2c1c1;
+    font-weight:600;
   }
+  .rs-meta b{color:#15445a;font-weight:800}
   .rs-section{margin-bottom:14px;page-break-inside:avoid;break-inside:avoid}
   .rs-section.principal-section{
     margin-top:18px;padding-top:14px;border-top:1px dashed #c1b489;
@@ -1877,8 +2383,10 @@ function reportShellHTML(title, headMeta, bodyHtml, opts){
   .rv-track{font-size:10px;color:#0da9a6;font-weight:600;margin-top:2px}
   .rv-role{font-size:10px;color:#666;margin-top:3px;font-weight:600}
   .rv-cell.principal .rv-role{color:#07a869;font-weight:700}
-  /* Print footer on EVERY page — fixed bottom position */
+
+  /* Per-page footer (ONLY in print) */
   .print-footer{display:none}
+
   .toolbar{
     position:sticky;top:0;background:#fff;z-index:10;
     border-bottom:1px solid #15445a;padding:10px 0;margin-bottom:14px;
@@ -1893,24 +2401,38 @@ function reportShellHTML(title, headMeta, bodyHtml, opts){
   .toolbar button.primary{background:#15445a;color:#fff;border-color:#15445a}
   .toolbar button.primary:hover{background:#0a2e3f}
   @media print{
-    body{padding:10mm 8mm 26mm 8mm;max-width:none}
+    /* CRITICAL: bottom margin must be > print-footer height + breathing room
+       to prevent text overlap. We use 30mm bottom space:
+       - 6mm: footer position from bottom edge
+       - ~6mm: footer line height
+       - 18mm: gap between content end and footer */
+    body{padding:8mm 8mm 32mm 8mm;max-width:none;font-size:10.5px}
     .no-print{display:none}
     .gov-header{break-inside:avoid;page-break-inside:avoid}
-    /* Inline footer (end of report) — keep together */
     .footer{break-inside:avoid;page-break-inside:avoid}
-    /* Repeating supervisor signature on every page */
+    /* Per-page footer — tighter, more breathing room */
     .print-footer{
-      display:block !important;
-      position:fixed;bottom:6mm;left:8mm;right:8mm;
-      border-top:1.5px solid #15445a;padding-top:4px;
-      font-size:9.5px;color:#15445a;
-      display:flex !important;justify-content:space-between;align-items:center;
+      display:flex !important;
+      position:fixed;bottom:8mm;left:10mm;right:10mm;
+      border-top:1.5px solid #15445a;padding-top:5px;
+      font-size:9px;color:#15445a;
+      justify-content:space-between;align-items:center;
+      background:#fff; /* opaque so content above doesn't bleed through */
     }
     .print-footer .pf-stamp{font-weight:700}
-    .print-footer .pf-sig{font-weight:700;color:#15445a}
-    .print-footer .pf-sig .ln{display:inline-block;width:120px;border-bottom:1px solid #15445a;margin:0 6px;vertical-align:middle;height:1px}
-    /* Card image stays small in print */
-    .card-img{max-width:100px;max-height:100px}
+    .print-footer .pf-sig{font-weight:700;color:#15445a;display:flex;align-items:center;gap:4px}
+    .print-footer .pf-sig .ln{display:inline-block;width:140px;border-bottom:1px solid #15445a;margin:0 6px;height:1px}
+    /* Card image — slightly smaller in print */
+    .card-img{max-width:96px;max-height:96px}
+    /* Ensure cells have ample padding so multi-line content never crowds borders */
+    th,td{padding:7px 8px;line-height:1.6}
+    td.q,td.a,td.notes-col,td.xp-col{font-size:10px}
+    .extra{font-size:9px;line-height:1.65}
+    /* Tables wrap properly across pages */
+    table{page-break-inside:auto}
+    tr{page-break-inside:avoid;break-inside:avoid}
+    thead{display:table-header-group}
+    tfoot{display:table-footer-group}
   }
 </style>
 </head>
@@ -1943,7 +2465,7 @@ function reportShellHTML(title, headMeta, bodyHtml, opts){
       // fallback to single-supervisor block
       return `<div class="footer">
         <div class="footer-meta">
-          <div>صدر هذا التقرير تلقائياً عبر مبادرة إتقان — أ.أحمد عطية (Vocab)</div>
+          <div>صدر هذا التقرير تلقائياً عبر مبادرة إتقان — أ.أحمد عطية حسن (Vocab)</div>
           <div style="margin-top:3px">${dateStr} · ${ts.toLocaleTimeString('ar-SA',{hour:'2-digit',minute:'2-digit'})}</div>
         </div>
         <div class="signature">
@@ -1973,7 +2495,7 @@ function reportShellHTML(title, headMeta, bodyHtml, opts){
     return `
     <div class="report-signatures">
       <div class="rs-meta">
-        <span>صدر هذا التقرير تلقائياً عبر مبادرة إتقان — أ.أحمد عطية (Vocab)</span>
+        <span>صدر هذا التقرير تلقائياً عبر مبادرة إتقان — أ.أحمد عطية حسن (Vocab)</span>
         <span>${dateStr} · ${ts.toLocaleTimeString('ar-SA',{hour:'2-digit',minute:'2-digit'})}</span>
       </div>
       ${reviewers.length ? `<div class="rs-section">
@@ -2026,7 +2548,7 @@ function openReportWindow(html, opts){
     '<button id="pb-print" style="background:#fff;color:#15445a;border:1.5px solid #fff;padding:8px 16px;border-radius:6px;font-weight:700;cursor:pointer;font-family:inherit;font-size:13px">طباعة / حفظ PDF</button>'+
     '<button id="pb-tab"   style="background:transparent;color:#fff;border:1.5px solid #fff;padding:7px 14px;border-radius:6px;font-weight:600;cursor:pointer;font-family:inherit;font-size:13px">فتح في تبويب</button>'+
     '<button id="pb-dl"    style="background:transparent;color:#fff;border:1.5px solid #fff;padding:7px 14px;border-radius:6px;font-weight:600;cursor:pointer;font-family:inherit;font-size:13px">تنزيل HTML</button>'+
-    '<button id="pb-close" style="background:transparent;color:#fff;border:1.5px solid #fff;padding:7px 14px;border-radius:6px;font-weight:600;cursor:pointer;font-family:inherit;font-size:13px">إغلاق ✕</button>';
+    '<button id="pb-close" style="background:transparent;color:#fff;border:1.5px solid #fff;padding:7px 14px;border-radius:6px;font-weight:600;cursor:pointer;font-family:inherit;font-size:13px">إغلاق ×</button>';
 
   /* The iframe — visible and full size. We use srcdoc instead of document.write
      because srcdoc preserves same-origin context properly across all browsers
@@ -2135,8 +2657,8 @@ function rowForCard(c, idx){
   const q=esc((c.q||c.cloze||'').replace(/\\n|\n/g,' / '));
   let a;
   if(c.qType==='mcq'){
-    const opts=(c.options||[]).map(o=>o===c.a?`<b>[X] ${esc(o)}</b>`:`[ ] ${esc(o)}`).join(' &nbsp; ');
-    a=opts+'<br><b>الصحيح:</b> '+esc(c.a||'');
+    const opts=(c.options||[]).map(o=>o===c.a?`<b>[X] ${esc(o)}</b>`:`[ ] ${esc(o)}`).join('<br>');
+    a=opts;
   } else if(c.qType==='tf'){
     a=c.tf?'<b>[X] صح · TRUE</b>':'<b>[X] خطأ · FALSE</b>';
   } else if(c.qType==='cloze'){
@@ -2144,21 +2666,24 @@ function rowForCard(c, idx){
   } else {
     a=esc(String(c.a||'').replace(/\\n|\n/g,' / '));
   }
-  /* Image cell — embedded as <img> if the card has one */
+  /* Image cell */
   const imgCell = c.img
     ? `<img src="${esc(c.img)}" alt="" class="card-img" onerror="this.style.display='none'">`
     : '<span class="muted">—</span>';
-  const extra=[];
-  if(c.ctx)     extra.push('<i>سياق:</i> '+esc(c.ctx));
-  if(c.explain) extra.push('<i>شرح:</i> '+esc(c.explain));
-  if(c.creator) extra.push('<i>المنشئ:</i> '+esc(c.creator));
-  const extraRow=extra.length?`<div class="extra">${extra.join(' &nbsp;|&nbsp; ')}</div>`:'';
+  /* الخبرات المكتسبة (formerly سياق) — now a dedicated column */
+  const xpCell = c.ctx ? esc(c.ctx) : '<span class="muted">—</span>';
+  /* Remaining extras (شرح + المنشئ) stay under the question */
+  const pairs=[];
+  if(c.explain) pairs.push(`<span class="pair"><i>شرح:</i>${esc(c.explain)}</span>`);
+  if(c.creator) pairs.push(`<span class="pair"><i>المنشئ:</i>${esc(c.creator)}</span>`);
+  const extraRow=pairs.length?`<div class="extra">${pairs.join('')}</div>`:'';
   return `<tr>
     <td class="num">${idx+1}</td>
     <td class="type">${esc(TYPE_LBL[c.qType]||'?')}</td>
     <td class="q">${q}${extraRow}</td>
     <td class="img-col">${imgCell}</td>
     <td class="a">${a}</td>
+    <td class="xp-col">${xpCell}</td>
     <td class="notes-col"></td>
   </tr>`;
 }
@@ -2185,7 +2710,7 @@ function printDeck(){
       const rows=cards.map((c,i)=>rowForCard(c,i)).join('');
       return `<h3>${esc(ct)} <span class="muted">(${cards.length})</span></h3>
         <table>
-          <thead><tr><th class="num">#</th><th class="type">النوع</th><th>السؤال</th><th class="img-col">الصورة</th><th>الإجابة</th><th class="notes-col">ملاحظات المشرف</th></tr></thead>
+          <thead><tr><th class="num">#</th><th class="type">النوع</th><th>السؤال</th><th class="img-col">الصورة</th><th>الإجابة</th><th class="xp-col">الخبرات المكتسبة</th><th class="notes-col">ملاحظات المشرف</th></tr></thead>
           <tbody>${rows}</tbody>
         </table>`;
     }).join('');
@@ -2235,7 +2760,7 @@ function printByCreator(){
     const rows=cards.map((c,i)=>rowForCard(c,i)).join('');
     return `<h2>${esc(cr)} <span class="muted">(${cards.length} بطاقة)</span></h2>
       <table>
-        <thead><tr><th class="num">#</th><th class="type">النوع</th><th>السؤال</th><th class="img-col">الصورة</th><th>الإجابة</th><th class="notes-col">ملاحظات المشرف</th></tr></thead>
+        <thead><tr><th class="num">#</th><th class="type">النوع</th><th>السؤال</th><th class="img-col">الصورة</th><th>الإجابة</th><th class="xp-col">الخبرات المكتسبة</th><th class="notes-col">ملاحظات المشرف</th></tr></thead>
         <tbody>${rows}</tbody>
       </table>`;
   }).join('');
@@ -2302,7 +2827,7 @@ function printByTrack(){
       const rows=cards.map((c,i)=>rowForCard(c,i)).join('');
       return `<h3>${esc(ct)} <span class="muted">(${cards.length})</span></h3>
         <table>
-          <thead><tr><th class="num">#</th><th class="type">النوع</th><th>السؤال</th><th class="img-col">الصورة</th><th>الإجابة</th><th class="notes-col">ملاحظات المشرف</th></tr></thead>
+          <thead><tr><th class="num">#</th><th class="type">النوع</th><th>السؤال</th><th class="img-col">الصورة</th><th>الإجابة</th><th class="xp-col">الخبرات المكتسبة</th><th class="notes-col">ملاحظات المشرف</th></tr></thead>
           <tbody>${rows}</tbody>
         </table>`;
     }).join('');
@@ -2347,7 +2872,7 @@ function printSingleTrack(track){
     const rows=arr.map((c,i)=>rowForCard(c,i)).join('');
     return `<h3>${esc(ct)} <span class="muted">(${arr.length})</span></h3>
       <table>
-        <thead><tr><th class="num">#</th><th class="type">النوع</th><th>السؤال</th><th class="img-col">الصورة</th><th>الإجابة</th><th class="notes-col">ملاحظات المشرف</th></tr></thead>
+        <thead><tr><th class="num">#</th><th class="type">النوع</th><th>السؤال</th><th class="img-col">الصورة</th><th>الإجابة</th><th class="xp-col">الخبرات المكتسبة</th><th class="notes-col">ملاحظات المشرف</th></tr></thead>
         <tbody>${rows}</tbody>
       </table>`;
   }).join('');
@@ -2388,7 +2913,7 @@ function printSingleCreator(creatorName){
       const rows=arr.map((c,i)=>rowForCard(c,i)).join('');
       return `<h3>${esc(ct)} <span class="muted">(${arr.length})</span></h3>
         <table>
-          <thead><tr><th class="num">#</th><th class="type">النوع</th><th>السؤال</th><th class="img-col">الصورة</th><th>الإجابة</th><th class="notes-col">ملاحظات المشرف</th></tr></thead>
+          <thead><tr><th class="num">#</th><th class="type">النوع</th><th>السؤال</th><th class="img-col">الصورة</th><th>الإجابة</th><th class="xp-col">الخبرات المكتسبة</th><th class="notes-col">ملاحظات المشرف</th></tr></thead>
           <tbody>${rows}</tbody>
         </table>`;
     }).join('');
@@ -2529,12 +3054,186 @@ function openReportsPicker(){
   });
 }
 
+/* ════════════════════════════════════════════════════════════════════
+   CLOUD PUBLISH — push deck JSON to a Webhook for students to pull.
+   ════════════════════════════════════════════════════════════════════ */
+
+/* Clean the deck before publishing:
+   1. Remove cards missing both q and cloze (corrupted/empty)
+   2. Remove cards with no answer (a, tf, options, or cloze brackets)
+   3. Deduplicate by content hash (same q+a = drop later duplicates)
+   4. Ensure every card has a hash field for student-side smart sync
+   Returns {cleaned:[], removed:N, deduped:N} */
+function cleanDeckForPublish(){
+  const original = State.cards.length;
+  const valid = [];
+  const seenHashes = new Set();
+  let removed = 0, deduped = 0;
+  for(const c of State.cards){
+    /* Validation: must have a question side */
+    if(!c.q && !c.cloze){ removed++; continue; }
+    /* Validation: must have an answer side */
+    const hasAns = (c.a && String(c.a).trim()) ||
+                   (c.qType==='tf' && (c.tf===true || c.tf===false)) ||
+                   (c.qType==='mcq' && Array.isArray(c.options) && c.options.length>=2) ||
+                   (c.qType==='cloze' && /\{\{.+?\}\}/.test(c.cloze||''));
+    if(!hasAns){ removed++; continue; }
+    /* Ensure hash exists */
+    if(!c.hash) c.hash = contentHash(c);
+    /* Dedup */
+    if(seenHashes.has(c.hash)){ deduped++; continue; }
+    seenHashes.add(c.hash);
+    valid.push(c);
+  }
+  return {cleaned:valid, removed, deduped, original};
+}
+
+/* Clean + publish in one action — preferred for final teacher workflow */
+async function publishAllClean(){
+  const url = $('publish-url').value.trim();
+  if(!url){ toast('اكتب رابط النشر أولاً','error'); $('publish-url').focus(); return; }
+  if(State.cards.length===0){ toast('لا بطاقات للنشر','error'); return; }
+
+  const result = cleanDeckForPublish();
+  /* If cleaning would remove cards, ask for confirmation */
+  if(result.removed > 0 || result.deduped > 0){
+    const parts = [];
+    if(result.removed > 0) parts.push(`${result.removed} بطاقة فارغة/معطّلة`);
+    if(result.deduped > 0) parts.push(`${result.deduped} بطاقة مكررة`);
+    const ok = confirm(
+      `سيتم حذف ${parts.join(' + ')} قبل النشر.\n\n`+
+      `الأصل: ${result.original} بطاقة\n`+
+      `بعد التنظيف: ${result.cleaned.length} بطاقة\n\n`+
+      `هل تريد المتابعة؟`
+    );
+    if(!ok) return;
+    /* Apply cleanup to State.cards */
+    State.cards = result.cleaned;
+    persist();
+    renderList();
+    renderJSON();
+    toast(`تم تنظيف ${result.removed + result.deduped} بطاقة`, 'success');
+  }
+  /* Now delegate to standard publish */
+  return publishToCloud();
+}
+
+async function publishToCloud(){
+  const url = $('publish-url').value.trim();
+  const token = $('publish-token').value.trim();
+  const log = $('publish-log');
+  const btn = $('btn-publish');
+  if(!url){ toast('اكتب رابط النشر أولاً','error'); $('publish-url').focus(); return; }
+  if(State.cards.length===0){ toast('لا بطاقات للنشر','error'); return; }
+  if(!/^https?:\/\//.test(url)){ toast('الرابط يجب أن يبدأ بـ https://','error'); return; }
+
+  const payload = buildJSON();
+  const txt = JSON.stringify(payload);
+  const sizeStr = fmtSize(new Blob([txt]).size);
+
+  btn.disabled = true;
+  btn.style.opacity = '0.6';
+  log.textContent = 'جاري النشر... ('+sizeStr+')';
+  log.style.color = 'var(--text-3)';
+
+  try{
+    /* Form-encoded POST is more compatible with Google Apps Script + most webhooks */
+    const params = new URLSearchParams();
+    params.append('payload', txt);
+    if(token) params.append('token', token);
+    params.append('source', 'Vocab Teacher');
+    params.append('deck', payload.deck.name||'');
+    params.append('count', String(State.cards.length));
+    params.append('ts', String(Date.now()));
+
+    const res = await fetch(url, {
+      method:'POST',
+      mode:'cors',
+      body:params,
+    });
+    /* Some endpoints (GAS) return 200 even for errors; some block CORS read */
+    let ok = res.ok;
+    let respText = '';
+    try{ respText = await res.text(); }catch(_){}
+    if(!ok){ throw new Error('HTTP '+res.status); }
+    log.textContent = 'OK · تم النشر · '+sizeStr+' · '+new Date().toLocaleTimeString('ar-SA');
+    log.style.color = 'var(--good)';
+    $('cloud-stat').textContent='منشور';
+    toast('تم نشر الحزمة بنجاح ('+sizeStr+')','success');
+    /* Save URL+token + last publish timestamp */
+    persistPublishConfig();
+  }catch(e){
+    /* opaque CORS responses still indicate the server received it */
+    if(String(e).includes('CORS') || String(e).includes('opaque')){
+      log.textContent='تم الإرسال (CORS opaque) — تحقّق من السيرفر';
+      log.style.color='var(--warn)';
+      toast('تم الإرسال — تحقّق من تطبيق الطالب','warn');
+    } else {
+      log.textContent='FAIL · فشل النشر: '+(e.message||e);
+      log.style.color='var(--bad)';
+      toast('فشل النشر: '+(e.message||e),'error');
+    }
+  } finally {
+    btn.disabled = false;
+    btn.style.opacity = '1';
+  }
+}
+function copyPublishLink(){
+  const url = $('publish-url').value.trim();
+  if(!url){ toast('اكتب رابط النشر أولاً','error'); return; }
+  /* Build a "subscribe link" — the same URL the student pastes in Cloud Sync URL field */
+  const text = url;
+  if(navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(text).then(
+      ()=>toast('تم نسخ الرابط','success'),
+      ()=>fallbackCopy(text)
+    );
+  } else { fallbackCopy(text); }
+}
+function fallbackCopy(text){
+  try{
+    const ta=document.createElement('textarea');
+    ta.value=text;
+    ta.style.cssText='position:fixed;left:-9999px;top:0';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    ta.remove();
+    toast('تم نسخ الرابط','success');
+  }catch(_){ toast('فشل النسخ','error'); }
+}
+function persistPublishConfig(){
+  try{
+    const cfg = {
+      url: $('publish-url').value.trim(),
+      token: $('publish-token').value.trim(),
+      lastPublish: Date.now(),
+    };
+    localStorage.setItem('vocab_teacher_publish', JSON.stringify(cfg));
+  }catch(_){}
+}
+function restorePublishConfig(){
+  try{
+    const raw = localStorage.getItem('vocab_teacher_publish');
+    if(!raw) return;
+    const cfg = JSON.parse(raw);
+    if(cfg.url) $('publish-url').value = cfg.url;
+    if(cfg.token) $('publish-token').value = cfg.token;
+    if(cfg.lastPublish){
+      const d = new Date(cfg.lastPublish);
+      $('cloud-stat').textContent = 'آخر نشر: '+d.toLocaleDateString('ar-SA');
+    }
+  }catch(_){}
+}
+
 /* expose */
 window.App={
   setType, addOption, saveCard, clearForm, editCard, deleteCard, clearAll,
   copyJSON, downloadJSON, clearImage, previewLastCard,
   printDeck, printByCreator, printByTrack, printSingleTrack, printSingleCreator,
   openReportsPicker,
+  publishToCloud, publishAllClean, copyPublishLink,
+  importFromClipboard, openPasteImport,
 };
 
 init();
