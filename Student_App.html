@@ -946,6 +946,32 @@ textarea{resize:vertical;min-height:90px;line-height:1.6}
   50%   {box-shadow:0 6px 28px rgba(16,185,129,.6)}
 }
 
+/* ════════════ QUIZ POOL INFO — testable vs study-only counts ════════════ */
+.quiz-pool-info{
+  display:flex;align-items:center;gap:10px;
+  margin:14px 0 12px;padding:10px 12px;
+  border-radius:var(--r-md);
+  font-family:var(--f-ar);font-size:12.5px;line-height:1.5;
+  border:1px solid transparent;
+}
+.quiz-pool-info svg{width:18px;height:18px;flex-shrink:0}
+.quiz-pool-info b{font-family:var(--f-en);font-weight:800;margin:0 2px}
+.quiz-pool-info.qpi-ok{
+  background:rgba(16,185,129,.10);
+  border-color:rgba(16,185,129,.22);
+  color:#10b981;
+}
+.quiz-pool-info.qpi-info{
+  background:var(--primary-soft);
+  border-color:rgba(99,102,241,.22);
+  color:var(--primary);
+}
+.quiz-pool-info.qpi-warn{
+  background:rgba(249,115,22,.10);
+  border-color:rgba(249,115,22,.25);
+  color:#f97316;
+}
+
 /* ════════════ INSTALL BANNER — captures attention without being annoying ════════════ */
 .install-banner{
   display:flex;align-items:center;gap:12px;width:100%;
@@ -1387,6 +1413,8 @@ img,video,canvas,svg{max-width:100%;height:auto}
         </select>
         <div class="field-help" style="font-family:var(--f-ar);font-size:11.5px;color:var(--text-3);margin-top:4px">قياس سرعة الإجابة. عند انتهاء الوقت يُسلَّم الاختبار تلقائياً.</div>
       </div>
+
+      <div id="quiz-pool-info" class="quiz-pool-info" style="display:none"></div>
 
       <button class="btn primary block" onclick="App.startQuiz()">
         <svg class="ico ico-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -2400,26 +2428,114 @@ function editCurrent(){
 /* ════════════════════════════════════════════════════════════════════
    QUIZ ENGINE
    ════════════════════════════════════════════════════════════════════ */
+
+/* Count cards in track that are valid for QUIZ mode (not study-only).
+   Mirrors the filter used in startQuiz to keep displayed counts honest. */
+function quizPoolFor(track){
+  const TESTABLE = new Set(['mcq','tf','cloze','sa']);
+  return cardsForTrack(track).filter(c=>{
+    const t = c.qType || 'card';
+    if(TESTABLE.has(t)) return true;
+    if(t==='card' && typeof detectMCQ==='function'){
+      return detectMCQ(c) !== null;
+    }
+    return false;
+  });
+}
+
 function renderQuizSetup(){
   const sel=$('quiz-track');
   sel.innerHTML='';
   Object.keys(TRACKS).forEach(k=>{
     const o=document.createElement('option');
-    o.value=k; o.textContent=`${TRACKS[k].name} (${cardsForTrack(k).length})`;
+    const total = cardsForTrack(k).length;
+    const testable = quizPoolFor(k).length;
+    /* Show testable/total to be honest with the student */
+    o.value=k;
+    o.textContent = testable === total
+      ? `${TRACKS[k].name} (${total})`
+      : `${TRACKS[k].name} (${testable} قابلة · ${total} إجمالاً)`;
     sel.appendChild(o);
   });
   sel.value=State.activeTrack;
+  /* Wire up reactive update + initial render */
+  sel.onchange = updateQuizPoolInfo;
+  $('quiz-type').onchange = updateQuizPoolInfo;
+  updateQuizPoolInfo();
 }
+
+/* Live info banner — updates as student changes track/type selectors */
+function updateQuizPoolInfo(){
+  const el = $('quiz-pool-info');
+  if(!el) return;
+  const track = $('quiz-track').value;
+  const type  = $('quiz-type').value;
+  let pool = quizPoolFor(track);
+  if(type !== 'mixed') pool = pool.filter(c=>(c.qType||'card')===type);
+  const totalInTrack = cardsForTrack(track).length;
+  const testable = quizPoolFor(track).length;
+  const studyOnly = totalInTrack - testable;
+
+  if(testable === 0){
+    el.style.display = '';
+    el.className = 'quiz-pool-info qpi-warn';
+    el.innerHTML = `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span>لا توجد بطاقات قابلة للاختبار في هذا المسار. استخدم "المذاكرة" للبطاقات التأملية.</span>`;
+  } else if(pool.length === 0){
+    el.style.display = '';
+    el.className = 'quiz-pool-info qpi-warn';
+    el.innerHTML = `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/></svg>
+      <span>لا أسئلة من هذا النوع. جرّب "مختلط" بدلاً منه.</span>`;
+  } else if(studyOnly > 0){
+    el.style.display = '';
+    el.className = 'quiz-pool-info qpi-info';
+    el.innerHTML = `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <span><b>${pool.length}</b> سؤال جاهز · <b>${studyOnly}</b> بطاقة تأملية للمذاكرة فقط</span>`;
+  } else {
+    el.style.display = '';
+    el.className = 'quiz-pool-info qpi-ok';
+    el.innerHTML = `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      <span><b>${pool.length}</b> سؤال جاهز للاختبار</span>`;
+  }
+}
+
 function startQuiz(){
   const track=$('quiz-track').value;
   const type =$('quiz-type').value;
   const cnt  =parseInt($('quiz-count').value)||0;
   const tm   =parseInt($('quiz-timer').value)||0;
   let pool=cardsForTrack(track);
+  /* ════════════ QUIZ vs STUDY SEPARATION ════════════
+     The quiz screen tests recall against a definite answer (typed or selected).
+     Cards of qType==='card' are open-ended notes/explanations meant for STUDY mode
+     (where the student self-rates after revealing) — they have no testable answer.
+     Including them in quiz produces the bug from the screenshot: a long explanatory
+     paragraph rendered as the "correct answer" against the student's short typed input.
+
+     Strict filter: ONLY testable types reach the quiz pool.
+     Auto-detected MCQ patterns inside 'card' bodies are still recovered later in
+     showQuizQ() via detectMCQ — but the base filter must be definite types first. */
+  const TESTABLE = new Set(['mcq','tf','cloze','sa']);
+  pool = pool.filter(c=>{
+    const t = c.qType || 'card';
+    if(TESTABLE.has(t)) return true;
+    /* Allow 'card' through ONLY if it has detectable MCQ patterns */
+    if(t==='card' && typeof detectMCQ==='function'){
+      return detectMCQ(c) !== null;
+    }
+    return false;
+  });
   if(type!=='mixed') pool=pool.filter(c=>(c.qType||'card')===type);
   pool=shuffle(pool);
   if(cnt>0) pool=pool.slice(0,cnt);
-  if(pool.length===0){ toast('لا توجد بطاقات تطابق الإعداد','error'); return; }
+  if(pool.length===0){
+    toast('لا أسئلة قابلة للاختبار في هذه الحزمة. استخدم "المذاكرة".','error');
+    return;
+  }
   State.quiz={
     list:pool, idx:0, score:0, answered:false, type, track, results:[],
     timerMin: tm,
