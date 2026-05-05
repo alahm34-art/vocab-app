@@ -823,7 +823,23 @@ img,video,canvas,svg{max-width:100%;height:auto}
       <input class="inp" id="publish-token" placeholder="رمز يُمرَّر في الطلب لمنع النشر العام">
       <div class="field-help">يضاف للحقل <code style="font-family:var(--f-en);background:var(--surface-2);padding:1px 6px;border-radius:3px">token</code> في الـ POST.</div>
     </div>
-    <div class="row gap-8 mt-8">
+
+    <div class="rule mt-8" style="margin-top:14px"></div>
+    <div class="t-label mb-8" style="font-weight:700">تجهيز محلي (بدون إنترنت)</div>
+    <div class="row gap-8">
+      <button class="btn flex-1" onclick="App.cleanCardsList()" type="button" id="btn-clean" title="يحذف البطاقات الفارغة والمعطّلة والمكررة من القائمة">
+        <svg class="ico ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+        تنظيف القائمة
+      </button>
+      <button class="btn flex-1" onclick="App.downloadCleanJSON()" type="button" id="btn-download-clean" title="ينظّف ثم يُنزّل ملف JSON كامل جاهز للتوزيع">
+        <svg class="ico ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        تنزيل JSON نظيف
+      </button>
+    </div>
+
+    <div class="rule mt-8" style="margin-top:14px"></div>
+    <div class="t-label mb-8" style="font-weight:700">النشر للسحاب</div>
+    <div class="row gap-8">
       <button class="btn primary flex-1" onclick="App.publishAllClean()" type="button" id="btn-publish-all" title="ينظّف البطاقات الفارغة والمكررة ثم ينشر الكل">
         <svg class="ico ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/><polyline points="20 12 9 23 4 18"/></svg>
         نشر كل البطاقات (تنظيف + نشر)
@@ -3118,6 +3134,85 @@ async function publishAllClean(){
   return publishToCloud();
 }
 
+/* ════════════════════════════════════════════════════════════════════
+   STANDALONE CLEANUP — clean the in-memory list without publishing.
+   Use case: teacher wants to review the clean list before doing anything
+   else (download/publish/send via WhatsApp). Same logic as cleanDeckForPublish
+   but invoked separately + always asks confirmation when work would be done.
+   ════════════════════════════════════════════════════════════════════ */
+async function cleanCardsList(){
+  if(State.cards.length===0){ toast('لا بطاقات للتنظيف','error'); return; }
+  const result = cleanDeckForPublish();
+  /* Nothing to clean → tell the teacher the list is already pristine */
+  if(result.removed===0 && result.deduped===0){
+    toast('القائمة نظيفة بالفعل · لا بطاقات معطّلة أو مكررة','success');
+    return;
+  }
+  const parts = [];
+  if(result.removed > 0) parts.push(`${result.removed} بطاقة فارغة/معطّلة`);
+  if(result.deduped > 0) parts.push(`${result.deduped} بطاقة مكررة`);
+  const ok = confirm(
+    `سيتم حذف ${parts.join(' + ')} نهائياً من القائمة.\n\n`+
+    `الأصل: ${result.original} بطاقة\n`+
+    `بعد التنظيف: ${result.cleaned.length} بطاقة\n\n`+
+    `هل تريد المتابعة؟`
+  );
+  if(!ok) return;
+  State.cards = result.cleaned;
+  persist();
+  renderList();
+  renderJSON();
+  toast(`تم تنظيف ${result.removed + result.deduped} بطاقة`, 'success');
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   OFFLINE EXPORT — clean + download a complete deck JSON.
+   Doesn't touch the in-memory list (non-destructive view). Builds the
+   exported file from the cleaned snapshot so the teacher can mass-distribute
+   via WhatsApp / email / USB without configuring any cloud webhook.
+   ════════════════════════════════════════════════════════════════════ */
+async function downloadCleanJSON(){
+  if(State.cards.length===0){ toast('لا بطاقات للتنزيل','error'); return; }
+  const result = cleanDeckForPublish();
+  /* If cleanup would change anything, confirm first */
+  if(result.removed > 0 || result.deduped > 0){
+    const parts = [];
+    if(result.removed > 0) parts.push(`${result.removed} فارغة/معطّلة`);
+    if(result.deduped > 0) parts.push(`${result.deduped} مكررة`);
+    const ok = confirm(
+      `سيُنزَّل ملف نظيف بعد استبعاد ${parts.join(' + ')}.\n\n`+
+      `الأصل: ${result.original} بطاقة\n`+
+      `في الملف: ${result.cleaned.length} بطاقة\n\n`+
+      `(القائمة في التطبيق لن تتغيّر — استخدم "تنظيف القائمة" لذلك)\n\n`+
+      `هل تريد المتابعة؟`
+    );
+    if(!ok) return;
+  }
+  /* Build payload from CLEANED cards without mutating State */
+  const originalCards = State.cards;
+  State.cards = result.cleaned;
+  const payload = buildJSON();
+  State.cards = originalCards; /* restore — non-destructive */
+
+  /* Add metadata so receiving teacher knows what they got */
+  payload.exported = now();
+  payload.cleaned = {
+    removed: result.removed,
+    deduped: result.deduped,
+    finalCount: result.cleaned.length,
+  };
+
+  const txt = JSON.stringify(payload, null, 2);
+  const blob = new Blob([txt], {type:'application/json'});
+  const a = document.createElement('a');
+  const baseName = ($('deck-name').value.trim()||'etqan_deck').replace(/[^\w\u0600-\u06FF\-]+/g,'_');
+  a.href = URL.createObjectURL(blob);
+  a.download = baseName + '_clean_' + dayKey() + '.json';
+  document.body.appendChild(a); a.click();
+  setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); }, 200);
+  toast(`تم تنزيل ${result.cleaned.length} بطاقة نظيفة`, 'success');
+}
+
 async function publishToCloud(){
   const url = $('publish-url').value.trim();
   const token = $('publish-token').value.trim();
@@ -3233,6 +3328,7 @@ window.App={
   printDeck, printByCreator, printByTrack, printSingleTrack, printSingleCreator,
   openReportsPicker,
   publishToCloud, publishAllClean, copyPublishLink,
+  cleanCardsList, downloadCleanJSON,
   importFromClipboard, openPasteImport,
 };
 
