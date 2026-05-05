@@ -7,8 +7,8 @@
     "reviewers": "عبدالله غرسان - الرياضيات\nضيف الله  سعيد -الكيمياء\nعتيق غراز - الأحياء\nفيصل علوان - الفيزياء\nجمعان حسن - اللغة العربية\nمحمد معيض - اللغة الانجليزية",
     "principal": "حسن احمد",
     "track": "en",
-    "created": 1777966356516,
-    "count": 206
+    "created": 1778014527530,
+    "count": 342
   },
   "cards": [
     {
@@ -1549,8 +1549,9 @@
       "creator": "المعلمين",
       "qType": "mcq",
       "ctx": "تطبيق إيجاد المفتاح",
-      "explain": "الأخطاء لا تصنع إنجاز. تصنع تعلم. إذن تصنع خبرة[cite: 1].",
-      "q": "لا تحزن من الأخطاء التي تقع بها فإنها تجعل عندك ........[cite: 1]",
+      "explain": "الأخطاء لا تصنع إنجاز. تصنع تعلم. إذن تصنع خبرة",
+      "created": 1778005342122,
+      "q": "لا تحزن من الأخطاء التي تقع بها فإنها تجعل عندك ........",
       "options": [
         "إنجازات",
         "خبرة",
@@ -1558,7 +1559,8 @@
         "إخفاق"
       ],
       "a": "خبرة",
-      "hash": "9c85db68"
+      "hash": "41ac5e2c",
+      "modified": 1778005342122
     },
     {
       "id": "c_exp_26",
@@ -1609,8 +1611,9 @@
       "creator": "المعلمين",
       "qType": "mcq",
       "ctx": "تطبيق علاقة الاحتياج",
-      "explain": "القلم يشتغل بالحبر. السيارة تشتغل بالبنزين[cite: 1]. علاقة واضحة.",
-      "q": "قلم : حبر[cite: 1]",
+      "explain": "القلم يشتغل بالحبر. السيارة تشتغل بالبنزين. علاقة واضحة.",
+      "created": 1778013537437,
+      "q": "قلم : حبر",
       "options": [
         "سيارة : بنزين",
         "شعر : خيال",
@@ -1618,7 +1621,8 @@
         "إجابة : سؤال"
       ],
       "a": "سيارة : بنزين",
-      "hash": "2b04ad73"
+      "hash": "3e42b1a9",
+      "modified": 1778013873568
     },
     {
       "id": "c_exp_28",
@@ -1670,7 +1674,8 @@
       "qType": "mcq",
       "ctx": "تطبيق علاقة التغطية",
       "explain": "الحذاء يغطي القدم. القبعة تغطي الرأس[cite: 1]. علاقة لبس وتغطية.",
-      "q": "حذاء : قدم[cite: 1]",
+      "created": 1778010100361,
+      "q": "حذاء : قدم",
       "options": [
         "سماعة : أذن",
         "قبعة : رأس",
@@ -1678,7 +1683,8 @@
         "غطاء : إناء"
       ],
       "a": "قبعة : رأس",
-      "hash": "6810cef7"
+      "hash": "be110639",
+      "modified": 1778010100361
     },
     {
       "id": "c_exp_30",
@@ -1699,8 +1705,9 @@
       "creator": "المعلمين",
       "qType": "mcq",
       "ctx": "تطبيق التوقع والمنطق",
-      "explain": "يمدحك كذبا. يذمك كذبا. هذا طبع المنافق[cite: 1].",
-      "q": "من ...... بما ليس فيك فهو خليق أن ......... بما ليس فيك.[cite: 1]",
+      "explain": "يمدحك كذبا. يذمك كذبا. هذا طبع المنافق.",
+      "created": 1778010086957,
+      "q": "من ...... بما ليس فيك فهو خليق أن ......... بما ليس فيك.",
       "options": [
         "مدحك - يذمك",
         "ذمك - يمدحك",
@@ -1708,7 +1715,8 @@
         "ضربك - ينفعك"
       ],
       "a": "مدحك - يذمك",
-      "hash": "3e520ec4"
+      "hash": "2affb5e8",
+      "modified": 1778010086957
     },
     {
       "id": "c_exp_31",
@@ -1759,8 +1767,9 @@
       "creator": "المعلمين",
       "qType": "mcq",
       "ctx": "تطبيق فهم الكلمة",
-      "explain": "النص ذكرها صراحة. الرعد هو صوت يسمى الهزيم[cite: 1].",
-      "q": "اقرأ النص: 'يحدث اصطدام يولد شرارة... ويرافق هذا الاصطدام حدوث صوت مرعب ومخيف يسمى بالرعد... والرعد هو صوت خفيف أو انفجارات قوية تسمى الهزيم.'\nكلمة الهزيم تعني صوت :[cite: 1]",
+      "explain": "النص ذكرها صراحة. الرعد هو صوت يسمى الهزيم",
+      "created": 1778010061317,
+      "q": "اقرأ النص: 'يحدث اصطدام يولد شرارة... ويرافق هذا الاصطدام حدوث صوت مرعب ومخيف يسمى بالرعد... والرعد هو صوت خفيف أو انفجارات قوية تسمى الهزيم.'\nكلمة الهزيم تعني صوت",
       "options": [
         "الانفجارات",
         "الرعد",
@@ -1768,7 +1777,8 @@
         "السالبة"
       ],
       "a": "الرعد",
-      "hash": "e9e164ad"
+      "hash": "446d057f",
+      "modified": 1778013853185
     },
     {
       "id": "c_exp_33",
@@ -1993,24 +2003,6 @@
       "hash": "a4273df2"
     },
     {
-      "id": "c_mcq_4_upd",
-      "track": "qudurat",
-      "cat": "لفظي · إكمال الجمل",
-      "creator": "المعلمين",
-      "qType": "mcq",
-      "ctx": "تطبيق التضاد الزمني",
-      "explain": "راحة الكسل مؤقتة. هم الكسل مستمر. عارضة ومتصلا هو الحل[cite: 1].",
-      "q": "الكسل يمنحك راحة ...... لكنه يورثك هما ......[cite: 1]",
-      "options": [
-        "دائمة - كبيرا",
-        "عارضة - متصلا",
-        "طويلة - صغيرا",
-        "مفيدة - سعيدا"
-      ],
-      "a": "عارضة - متصلا",
-      "hash": "7321ef72"
-    },
-    {
       "id": "c_exp_37",
       "track": "qudurat",
       "cat": "لفظي · التناظر اللفظي",
@@ -2029,8 +2021,9 @@
       "creator": "المعلمين",
       "qType": "mcq",
       "ctx": "تطبيق علاقة الإزالة",
-      "explain": "النوم يزيل التعب. العلم يزيل الجهل[cite: 1]. العلاقة هي الإزالة.",
-      "q": "تعب : نوم[cite: 1]",
+      "explain": "النوم يزيل التعب. العلم يزيل الجهل . العلاقة هي الإزالة.",
+      "created": 1778013574032,
+      "q": "تعب : نوم",
       "options": [
         "الراحة : الصلاة",
         "المعرفة : السفر",
@@ -2038,7 +2031,8 @@
         "الجهل : العلم"
       ],
       "a": "الجهل : العلم",
-      "hash": "257ef572"
+      "hash": "9d8b186e",
+      "modified": 1778013574032
     },
     {
       "id": "c_exp_38",
@@ -2090,7 +2084,8 @@
       "qType": "mcq",
       "ctx": "تطبيق كشف التناقض",
       "explain": "السجون العائمة تكون مائية. لا يمكن أن تكون صحراوية وعائمة في نفس الوقت[cite: 1].",
-      "q": "نشر تقرير عن السجون الصحراوية العائمة التي تديرها الدول الغربية.[cite: 1]",
+      "created": 1778013600439,
+      "q": "نشر تقرير عن السجون الصحراوية العائمة التي تديرها الدول الغربية.",
       "options": [
         "تقرير",
         "الصحراوية",
@@ -2098,7 +2093,8 @@
         "الغربية"
       ],
       "a": "الصحراوية",
-      "hash": "c8a4f6f0"
+      "hash": "ea0b4e22",
+      "modified": 1778013600439
     },
     {
       "id": "c_exp_40",
@@ -2180,7 +2176,8 @@
       "qType": "mcq",
       "ctx": "تطبيق إكمال الجمل",
       "explain": "قطرة الماء تحفر الصخر. تحفره بالتكرار المستمر. ليس بقوة الاندفاع[cite: 1].",
-      "q": "قطرة الغيث لا ........ الحجر بالإندفاع، بل بالإصرار و..........[cite: 1]",
+      "created": 1778013630690,
+      "q": "قطرة الغيث لا ........ الحجر بالإندفاع، بل بالإصرار و..........",
       "options": [
         "تكسر - التوقف",
         "تحفر - التكرار",
@@ -2188,7 +2185,8 @@
         "تبلل - الجفاف"
       ],
       "a": "تحفر - التكرار",
-      "hash": "273aa42e"
+      "hash": "ee60cee8",
+      "modified": 1778013630690
     },
     {
       "id": "c_exp_43",
@@ -2210,7 +2208,8 @@
       "qType": "mcq",
       "ctx": "تطبيق كشف الكلمة غير المنطقية",
       "explain": "النجاح لا يتحقق بالكسل. يتحقق بالاجتهاد. الكلمة الخطأ هي بالكسل[cite: 1].",
-      "q": "الفشل يتحقق بالاستسلام، أما النجاح يتحقق بالكسل.[cite: 1]",
+      "created": 1778013616495,
+      "q": "الفشل يتحقق بالاستسلام، أما النجاح يتحقق بالكسل",
       "options": [
         "الفشل",
         "بالاستسلام",
@@ -2218,7 +2217,8 @@
         "بالكسل"
       ],
       "a": "بالكسل",
-      "hash": "e3733d9d"
+      "hash": "24721069",
+      "modified": 1778013616495
     },
     {
       "id": "c_exp_44",
@@ -2299,8 +2299,9 @@
       "creator": "المعلمين",
       "qType": "mcq",
       "ctx": "تطبيق سياق العطف",
-      "explain": "الوصل والعطاء والعفو أفعال خير. وتسمى الفضائل[cite: 1].",
-      "q": "من ...... أن تصل من قطعك ، و...... عمن ظلمك ، وتعطي من حرمك .[cite: 1]",
+      "explain": "الوصل والعطاء والعفو أفعال خير. وتسمى الفضائل.",
+      "created": 1778013651992,
+      "q": "من ...... أن تصل من قطعك ، و...... عمن ظلمك ، وتعطي من حرمك .",
       "options": [
         "الواجبات - تبتعد",
         "الفضائل - تعفو",
@@ -2308,7 +2309,8 @@
         "السيئات - تصفح"
       ],
       "a": "الفضائل - تعفو",
-      "hash": "bdc974f6"
+      "hash": "c3206f6a",
+      "modified": 1778013651992
     },
     {
       "id": "c_exp_47",
@@ -2390,7 +2392,8 @@
       "qType": "mcq",
       "ctx": "تطبيق علاقة الأداة والمفعول",
       "explain": "المقص يقطع القماش. المنشار يقطع الخشب[cite: 1]. علاقة أداة وما تقطعه.",
-      "q": "مقص : قماش[cite: 1]",
+      "created": 1778013928617,
+      "q": "مقص : قماش",
       "options": [
         "نار : رماد",
         "منشار : خشب",
@@ -2398,7 +2401,8 @@
         "نخلة : تمر"
       ],
       "a": "منشار : خشب",
-      "hash": "e5d8c314"
+      "hash": "f235d0c8",
+      "modified": 1778013928617
     },
     {
       "id": "c_exp_51",
@@ -2420,7 +2424,8 @@
       "qType": "mcq",
       "ctx": "تطبيق منطق التدرج",
       "explain": "أخذ التمرة يجر لأخذ النخلة كلها[cite: 1]. المعنى متدرج.",
-      "q": "من يتجرأ أن يأخذ ........ بغير حق يوماً ، يوشك أن ........ على النخلة كلها .[cite: 1]",
+      "created": 1778013913912,
+      "q": "من يتجرأ أن يأخذ ........ بغير حق يوماً ، يوشك أن ........ على النخلة كلها .",
       "options": [
         "حقوق - يستولي",
         "تمرة - يتجرأ",
@@ -2428,7 +2433,8 @@
         "سعفة - يبكي"
       ],
       "a": "تمرة - يتجرأ",
-      "hash": "afda9820"
+      "hash": "6202994e",
+      "modified": 1778013913912
     },
     {
       "id": "c_exp_53",
@@ -2450,7 +2456,8 @@
       "qType": "mcq",
       "ctx": "تطبيق كشف التناقض",
       "explain": "المزح المقبول لا كذب فيه. وجود كلمة (صدق) أفسد المعنى[cite: 1].",
-      "q": "المزح هو ملح الحياة طالما أنه بحق لا صدق فيه ولا استهزاء .[cite: 1]",
+      "created": 1778013982235,
+      "q": "اكتشف الخطأ السياقي:\nالمزح هو ملح الحياة طالما أنه بحق لا صدق فيه ولا استهزاء .",
       "options": [
         "ملح",
         "صدق",
@@ -2458,7 +2465,8 @@
         "بحق"
       ],
       "a": "صدق",
-      "hash": "98215001"
+      "hash": "04341fb0",
+      "modified": 1778013982236
     },
     {
       "id": "c_exp_55",
@@ -2479,8 +2487,9 @@
       "creator": "المعلمين",
       "qType": "mcq",
       "ctx": "تطبيق صيد الأسباب",
-      "explain": "النص ذكر اصطدام شحنات موجبة بسالبة[cite: 1]. يعني مختلفة.",
-      "q": "اقرأ النص: 'البرق شرارة تحدث عند اصطدام بعض السحب التي تحمل الشحنات الموجبة مع سحب تحمل الشحنات السالبة...'\nمتى يحدث البرق؟[cite: 1]",
+      "explain": "النص ذكر اصطدام شحنات موجبة بسالبة. يعني مختلفة.",
+      "created": 1778014006127,
+      "q": "اقرأ النص: 'البرق شرارة تحدث عند اصطدام بعض السحب التي تحمل الشحنات الموجبة مع سحب تحمل الشحنات السالبة...'\nمتى يحدث البرق؟",
       "options": [
         "عندما يشتد الحر",
         "عندما تغيب الشمس",
@@ -2488,7 +2497,8 @@
         "عند تصادم شحنات متشابهة"
       ],
       "a": "عند تصادم شحنات مختلفة",
-      "hash": "1b0f6176"
+      "hash": "6b20d39a",
+      "modified": 1778014006127
     },
     {
       "id": "c_exp_57",
@@ -2509,8 +2519,9 @@
       "creator": "المعلمين",
       "qType": "mcq",
       "ctx": "تطبيق علاقة الأكل والهلاك",
-      "explain": "الحوت يأكل الهامور، والنار تأكل الحطب وتقضي عليه[cite: 1]. الترتيب دقيق.",
-      "q": "حوت : هامور[cite: 1]",
+      "explain": "الحوت يأكل الهامور، والنار تأكل الحطب وتقضي عليه. الترتيب دقيق.",
+      "created": 1778014070765,
+      "q": "حوت : هامور",
       "options": [
         "فأس : خشب",
         "نار : حطب",
@@ -2518,7 +2529,8 @@
         "أبريق : شاي"
       ],
       "a": "نار : حطب",
-      "hash": "b5318568"
+      "hash": "7bdc92be",
+      "modified": 1778014070765
     },
     {
       "id": "c_exp_59",
@@ -2540,7 +2552,8 @@
       "qType": "mcq",
       "ctx": "تطبيق المنطق في الحكم",
       "explain": "الاستعانة بظالم تجعلك فريسة له في النهاية[cite: 1]. هذه هي الحكمة.",
-      "q": "لا تستعن بظالم على ........ حتى لا تكون ........ للاثنين .[cite: 1]",
+      "created": 1778014051127,
+      "q": "اكمل الجملة التالية:\nلا تستعن بظالم على ........ حتى لا تكون ........ للاثنين .",
       "options": [
         "عادل - ظلمت",
         "ظالم - فريسة",
@@ -2548,7 +2561,8 @@
         "قوي - ضعيفا"
       ],
       "a": "ظالم - فريسة",
-      "hash": "e864783f"
+      "hash": "64e8652a",
+      "modified": 1778014051127
     },
     {
       "id": "c_exp_61",
@@ -2569,8 +2583,9 @@
       "creator": "المعلمين",
       "qType": "mcq",
       "ctx": "تطبيق كشف تناقض الصفات",
-      "explain": "العظيم يعفو ولا ينتقم. كلمة (للانتقام) أفسدت المعنى، والصحيح (للعفو)[cite: 1].",
-      "q": "عظمة الرجل تقاس بمدى استعداده للانتقام ممن اساء اليه[cite: 1]",
+      "explain": "العظيم يعفو ولا ينتقم. كلمة (للانتقام) أفسدت المعنى، والصحيح (للعفو).",
+      "created": 1778014112613,
+      "q": "ماهو الخطأ السياقي في الجملة التالية :\nعظمة الرجل تقاس بمدى استعداده للانتقام ممن اساء اليه[cite: 1]",
       "options": [
         "عظمة",
         "تقاس",
@@ -2578,7 +2593,8 @@
         "اساء"
       ],
       "a": "للانتقام",
-      "hash": "84d8b69e"
+      "hash": "3b86c062",
+      "modified": 1778014112613
     },
     {
       "id": "c_exp_63",
@@ -2629,8 +2645,9 @@
       "creator": "المعلمين",
       "qType": "mcq",
       "ctx": "تطبيق علاقة السبب والنتيجة",
-      "explain": "الاحتكار يسبب الغلاء. الزواج يسبب الإنجاب[cite: 1].",
-      "q": "احتكار : غلاء[cite: 1]",
+      "explain": "الاحتكار يسبب الغلاء. الزواج يسبب الإنجاب.",
+      "created": 1778013715346,
+      "q": "احتكار : غلاء",
       "options": [
         "زواج : إنجاب",
         "مريض : طبيب",
@@ -2638,7 +2655,8 @@
         "نوم : راحة"
       ],
       "a": "زواج : إنجاب",
-      "hash": "70bb272c"
+      "hash": "1ed4e156",
+      "modified": 1778013715346
     },
     {
       "id": "c_exp_67",
@@ -2660,7 +2678,8 @@
       "qType": "mcq",
       "ctx": "تطبيق علاقة الأساس",
       "explain": "القاعدة تحمل المبنى. الجذر يحمل الشجرة[cite: 1].",
-      "q": "قواعد : أبنية[cite: 1]",
+      "created": 1778013683118,
+      "q": "قواعد : أبنية",
       "options": [
         "جذور : أشجار",
         "عجلات : سيارة",
@@ -2668,7 +2687,8 @@
         "عجين : خبز"
       ],
       "a": "جذور : أشجار",
-      "hash": "bed61e1e"
+      "hash": "1e4791b8",
+      "modified": 1778013683119
     },
     {
       "id": "c_exp_69",
@@ -2966,7 +2986,8 @@
       "qType": "mcq",
       "ctx": "تطبيق تخيل الموقف",
       "explain": "النجاح يحتاج عمل. كصعود السلم يحتاج استخدام اليدين[cite: 1].",
-      "q": "النجاح سلم لا تستطيع أن ......... و ......... في جيبك[cite: 1]",
+      "created": 1778013732303,
+      "q": "النجاح سلم لا تستطيع أن ......... و ......... في جيبك.",
       "options": [
         "تتسلقه - يداك",
         "تنزله - رجلك",
@@ -2974,7 +2995,8 @@
         "تصعده - كتابك"
       ],
       "a": "تتسلقه - يداك",
-      "hash": "d53606c6"
+      "hash": "e5151cb6",
+      "modified": 1778013732304
     },
     {
       "id": "c_exp_101",
@@ -3026,7 +3048,8 @@
       "qType": "mcq",
       "ctx": "تطبيق أداة القياس",
       "explain": "البوصلة لمعرفة الاتجاه. الساعة لمعرفة الوقت[cite: 1].",
-      "q": "بوصلة : اتجاه[cite: 1]",
+      "created": 1778013779520,
+      "q": "بوصلة : اتجاه",
       "options": [
         "ساعة : وقت",
         "دلو : ماء",
@@ -3034,7 +3057,8 @@
         "كرة : هواء"
       ],
       "a": "ساعة : وقت",
-      "hash": "2dbd736c"
+      "hash": "7fce0dae",
+      "modified": 1778013779520
     },
     {
       "id": "c_exp_105",
@@ -3085,8 +3109,9 @@
       "creator": "المعلمين",
       "qType": "mcq",
       "ctx": "تطبيق التشبيه البليغ",
-      "explain": "المتكبر يرى الناس صغاراً من علوه الكاذب، والناس يروه حقيراً وصغيراً لتكبره[cite: 1].",
-      "q": "إنما مثل ........ كالواقف على قمة جبل ، يرى الناس صغاراً ويرونه ........[cite: 1]",
+      "explain": "المتكبر يرى الناس صغاراً من علوه الكاذب، والناس يروه حقيراً وصغيراً لتكبره.",
+      "created": 1778013802171,
+      "q": "إنما مثل ........ كالواقف على قمة جبل ، يرى الناس صغاراً ويرونه ........",
       "options": [
         "المتكبر - حقيراً",
         "اللئيم - ذليلاً",
@@ -3094,7 +3119,8 @@
         "المجتهد - عظيماً"
       ],
       "a": "المتكبر - حقيراً",
-      "hash": "f56bbd90"
+      "hash": "2027ed2e",
+      "modified": 1778013802171
     },
     {
       "id": "c_exp_109",
@@ -3263,12 +3289,2146 @@
       ],
       "a": "القيمة الاولى اكبر",
       "hash": "86651092"
+    },
+    {
+      "id": "c_mos2hgvy_ilgn",
+      "track": "qudurat",
+      "cat": "كمي · الحساب",
+      "creator": "مهند ياسر",
+      "qType": "mcq",
+      "ctx": "",
+      "explain": "",
+      "created": 1777951613375,
+      "q": "اذا كان عمر احمد =٦ سنوات وعمر اخته نصفه اذا اصبح عمر احمد = ٦٠ فكم عمر اخته",
+      "options": [
+        "٣٣",
+        "٥٤",
+        "٥٧",
+        "٥٩"
+      ],
+      "a": "٥٧",
+      "hash": "8bf7bb4e"
+    },
+    {
+      "id": "c_mos2dvba_pf63",
+      "track": "qudurat",
+      "cat": "كمي · الحساب",
+      "creator": "مهند ياسر",
+      "qType": "mcq",
+      "ctx": "",
+      "explain": "٨ اس ٢ = ٨*٨=٦٤ \n٤ اس ٣ = ٤*٤*٤=٦٤",
+      "created": 1777951445446,
+      "q": "قارن بين :\nالقيمه الاولى= ٨ اس ٢\nالقيمه الثانيه =٤اس ٣",
+      "options": [
+        "القيمه الاولى اكبر",
+        "القيمه الثانيه اكبر",
+        "القيمتان متساويتنا",
+        "المعطيات غير كافيه"
+      ],
+      "a": "القيمتان متساويتنا",
+      "hash": "e43d3915"
+    },
+    {
+      "id": "c_mos28o4n_3grn",
+      "track": "qudurat",
+      "cat": "كمي · الحساب",
+      "creator": "مهند ياسر",
+      "qType": "mcq",
+      "ctx": "",
+      "explain": "قانون الاعداد المكرره ١٠(١٠+١)/٢\n٥ضرب ١١=٥٥\n٥٥*٥٥*٥٥=الآحاد =٥",
+      "created": 1777951202857,
+      "q": "ماقيمة احاد العدد (١+٢+٣+٤+……+١٠)*٣",
+      "options": [
+        "٢",
+        "٣",
+        "٤",
+        "٥"
+      ],
+      "a": "٥",
+      "hash": "7337cf23"
+    },
+    {
+      "id": "c_moq854r9_ngjf",
+      "track": "qudurat",
+      "cat": "كمي · الإحصاء والاحتمالات",
+      "creator": "مهند ياسر",
+      "qType": "mcq",
+      "ctx": "",
+      "explain": "نسبة النساء = 100%\nنسبة الرجال =155لانها زايده على النساء ب55 \nتقسم 100/155\n=20:31",
+      "created": 1777840183128,
+      "q": "عدد الرجال يزيد عن عدد النساء ب55% فكم نسبة الرجال الى النساء ؟",
+      "options": [
+        "32:5",
+        "11:45",
+        "7:19",
+        "20:31"
+      ],
+      "a": "20:31",
+      "hash": "72c8e031"
+    },
+    {
+      "id": "c_mopdaxdf_u2n4",
+      "track": "qudurat",
+      "cat": "كمي · المقارنات",
+      "creator": "مهند ياسر",
+      "qType": "mcq",
+      "ctx": "",
+      "explain": "54+22=76\n50+26=76",
+      "created": 1777788385397,
+      "q": "قارن بين \nالقيمة 54+22\nالقيمة 26+50",
+      "options": [
+        "القيمه الاولى",
+        "القيمه الثانيه",
+        "القيمتان متساويه",
+        "المعطيات غير كافيه"
+      ],
+      "a": "القيمتان متساويه",
+      "hash": "e762ee90"
+    },
+    {
+      "id": "c_moszhkhs_o1kb",
+      "track": "qudurat",
+      "cat": "",
+      "creator": "موسى جمعان",
+      "qType": "mcq",
+      "ctx": "اكتساب مهارة الاستنتاج السريع لعلاقة الاحتياج والسببية بين الكلمات",
+      "explain": "المريض يحتاج الى الدعاء\nالمجرم يحتاج الى محاكمة",
+      "created": 1778007045376,
+      "q": "مريض:دعاء",
+      "options": [
+        "مجرم:محاكمة",
+        "صغير:سفر",
+        "السارق:قتل"
+      ],
+      "a": "مجرم:محاكمة",
+      "hash": "50364846",
+      "modified": 1778008293100
+    },
+    {
+      "id": "c_moszf7zi_xrye",
+      "track": "qudurat",
+      "cat": "",
+      "creator": "موسى جمعان",
+      "qType": "mcq",
+      "ctx": "الخبرة المكتسبة تتراوح بين القدرة على التفكير المنطقي أو معرفه استخدامات عملية للقشر",
+      "explain": "القشرة تحيط بالبرتقال\nالهالة تحيط بالقمر",
+      "created": 1778006935854,
+      "q": "قشرة:برتقال",
+      "options": [
+        "مزرعة:حبوب",
+        "بحيرة:اسماك",
+        "هالة:قمر"
+      ],
+      "a": "هالة:قمر",
+      "hash": "92c46b90",
+      "modified": 1778008208760
+    },
+    {
+      "id": "c_moszcrq1_7r95",
+      "track": "qudurat",
+      "cat": "لفظي · التناظر اللفظي",
+      "creator": "موسى جمعان",
+      "qType": "mcq",
+      "ctx": "الخبرة هي تمييز علاقة:نوع،حجم",
+      "explain": "الجدول اصغر من النهر\nالهضبة اصغر من الجبل",
+      "created": 1778006821465,
+      "q": "جدول:نهر",
+      "options": [
+        "هضبة:جبل",
+        "نجم:شهاب",
+        "بركان:نار"
+      ],
+      "a": "هضبة:جبل",
+      "hash": "914a5665",
+      "modified": 1778008081858
+    },
+    {
+      "id": "c_moszay7x_alw5",
+      "track": "qudurat",
+      "cat": "لفظي · التناظر اللفظي",
+      "creator": "موسى جمعان",
+      "qType": "mcq",
+      "ctx": "تحديد العلاقات الزمنية،\nفهم ان الشروق بداية الصباح",
+      "explain": "الشروق بعده الصباح\nالتطعيم بعده مناعه",
+      "created": 1778006736573,
+      "q": "الشروق:الصباح",
+      "options": [
+        "دافئ:حار",
+        "التطعيم:المناعة"
+      ],
+      "a": "التطعيم:المناعة",
+      "hash": "f0adda2e",
+      "modified": 1778007873611
+    },
+    {
+      "id": "c_mosz8wpx_zvw8",
+      "track": "qudurat",
+      "cat": "لفظي · التناظر اللفظي",
+      "creator": "موسى جمعان",
+      "qType": "mcq",
+      "ctx": "ينمي سرعة البديهة والقدرة على تحليل العلاقات بين المواد والأفعال المرتبطة بها في الاختبار",
+      "explain": "الربط\n(يحدث لها)",
+      "created": 1778006641318,
+      "q": "ورق:تمزق",
+      "options": [
+        "حديد:انصهار",
+        "زجاج:تكسر",
+        "شجر:حفر"
+      ],
+      "a": "زجاج:تكسر",
+      "hash": "6c908d1c",
+      "modified": 1778007984101
+    },
+    {
+      "id": "c_molpepi6_nnl7",
+      "track": "qudurat",
+      "cat": "كمي · المقارنات",
+      "creator": "موسى جمعان",
+      "qType": "mcq",
+      "ctx": "مهارة تجميع الحدود المتشابهة\nاستراتيجية النقل مع تغيير الإشارة\nمبدأ \"موازنة الكفتين\nالانتقال من \"الجمع\" إلى \"القسمة\"",
+      "explain": "س+٢س-٥=١٣\n٣س=١٨ اقسم على ٣ في الطرفين\nس=٦",
+      "created": 1777566852510,
+      "q": "أوجد العدد:",
+      "options": [
+        "أ",
+        "ب",
+        "ج",
+        "د"
+      ],
+      "a": "د",
+      "img": "data:image/jpeg;base64,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G49AOO9AGj4U8Z6d4wjll0+3uoViC5NzEYwd2cbTk56dq6+qWnS3k1hBLqEIt7h41MsSsHCMRyoYcHB71doAKKKKACiiigAooooAKKKKACiiigDx3xxoV5/wlOnX1lqVzp8Grn+z7vySDn5WaPAYEKTgrkcjNdx4Y8J23heORIbq5vGkCIGun3skcYIRFwBhRk1oa1pX9rR2qghTbXUNxk/9M2yQPcjitqgCjBqNtc3tzYRZMlrs8w44BkBIGfXAyfqKszyiCF5iCwRSxCjJOBnAHc15/rnhbxOusy674Q1WOykulQXEFxF5sTsgwrDupxwcVh2Vr8QtbuLizbxTYxm1cR3C2VsGkRiM4Jc8HFAHp2i6ta67pVvq9lu8m5QOoYYYZ7EeoPBrTrK0TSYdD0uDS7d2kWFSN743MSSWY4AGSSTwK1aACiiigAooooAKKKKACiiigAooooA5TxroMniPw7cWFtM8FyoE1vJGxUrNH8yHI7ZrD+HFpc3GkReJNSv5tQvL6FEZplVPKEZIMaqgA4bOT1Nej1ieHtI/sTTRYbg2JZpOOmJZGcD8A2KAMfU5JovG+jgMRFNbXaFc8Fh5bA49cA12dZV3paXep2WpM2DZebgY6+Yu2tWgAooooAD0r86vEv8AyMep/wDX5P8A+jGr9FT0r86vEv8AyMep/wDX5P8A+jGpoDGooooA/9X6pooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigArzzX/Ak1/qza/4f1W40e+lVVmaIB45gvCl0bgkDjNeh0UAcp4f0XxFpzmXXNcl1M4wqeRDCg9zsXcT+NdXRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAVWgs7S2klmt4Ujedt8rKoBdsYyxHU49as0UAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAB6V+dXiX/AJGPU/8Ar8n/APRjV+ip6V+dXiX/AJGPU/8Ar8n/APRjU0BjUUUUAf/W+qaKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAD0r86vEv8AyMep/wDX5P8A+jGr9FT0r86vEv8AyMep/wDX5P8A+jGpoDGooooA/9k=",
+      "hash": "5924f63a",
+      "modified": 1778008541589
+    },
+    {
+      "id": "c_molp83a5_hlql",
+      "track": "qudurat",
+      "cat": "كمي · المقارنات",
+      "creator": "موسى جمعان",
+      "qType": "mcq",
+      "ctx": "مهارة تفكيك الأسس: تعلمت أن الأس ليس مجرد رقم، بل هو عملية تكرار للضرب يمكنك \"فرطها\" لتبسيط المقارنة.\nاستراتيجية \"توحيد الأساس\": الخبرة هنا هي رؤية الأرقام الكبيرة (125) كقوى للرقم الصغير (5).\nالتقدير التقريبي السريع\nقاعدة \"الأساس الأقوى\"",
+      "explain": "دائما الاس الاكبر\nتبسط ال ٥اس٧ :(١٢٥)(١٢٥)(٥)\nتبسط ٧اس٥ :(٤٩)(٤٩)(٧) واضح من القيم من الأكبر \nملاحظه الأقواس=يعني الضرب",
+      "created": 1777566543773,
+      "q": "قارن بين:",
+      "options": [
+        "أ",
+        "ب",
+        "ج",
+        "د"
+      ],
+      "a": "أ",
+      "img": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAB9KADAAQAAAABAAAAlgAAAAD/7QA4UGhvdG9zaG9wIDMuMAA4QklNBAQAAAAAAAA4QklNBCUAAAAAABDUHYzZjwCyBOmACZjs+EJ+/8AAEQgAlgH0AwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/bAEMABgYGBgYGCgYGCg4KCgoOEg4ODg4SFxISEhISFxwXFxcXFxccHBwcHBwcHCIiIiIiIicnJycnLCwsLCwsLCwsLP/bAEMBBwcHCwoLEwoKEy4fGh8uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLv/dAAQAIP/aAAwDAQACEQMRAD8A+qaKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooARvun6V+Z46V+mDfdP0r8zx0poB9FFFAH//0PqmiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAorK1O+s4Xt9NuQ7NqDNAip1+4WYk5GAFB5HNcPr9xqngPSNJ03wnax3UT3C2m26lbIMgOw7+f4qAPTaK8Pg8dR6La6v4e8caotlqyu7RSRq5GyZAyeVwchCSB9K9O8KXl9feGNPvdTBFzJbo0mRgk46kds9aALd9rmn6dqFlpl0XE2oMyQhUZgSg3HJAwOPWteuY8Ka03iXQk1WUKvnPKFCZG1VdlAJyfmwOfeuP0n+2YPAmpWunXha506a5jtrhyH3LC+5QxPXj5SaAOvGt3beLJvDyxoI0sVuUc5yXZymD7DAqj4X1bXL69u7LXLjTXlt1QGGydmkjc53eYGPA6YrlL7xPpula/pXifXJPsVtqWkmMSsCVWUssgUkA44JxXDfDoG58b202lz2l1FbRXCXN1aRzK06v8yNOXULvLehJ69qAPoPXdYttC0yXUrnkRj5V7sx6AfWvnK78UeJ/EuorDFcSI0rbY4omKKPQcdfqa9P+LSynRLYrnYJ/m+u04ry3wwj2EN34m4/0FQsQPeaTgcewya9rA0oxpOra7PmM2r1J4hUE7RWr/NhpHjXxDot0GNw86KcPFMxYH1HPIP0r6W0nU7fWNOh1K1+5MucHqD3B+hr5t8Z6dFFdw6zZ4+zamnnIB/Cx++v51698L1lHhdTJnaZpCn+7x/XNTj6cJUlWirMrKK1WFeWGm7r+vzPRaKKK8c+lCiiigBG+6fpX5njpX6YN90/SvzPHSmgH0UUUAf/0fqmiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigDifGOia7qJsdV8NTRRahpsrSIlxnypFdSroxXkZB4IrB/sb4ha9LFdeIJNPtVs28+3trfzJFkuFB8tpnbB2qecL1r1SigDg5tL8Wz2L3E40qXVFljMEjQuUSL5fMXJy2c7sY9q7sZwM9aWigDzCf4VaLJeTT2l/qNlb3DmSW0trgx27M33vlAyN3fBFR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",
+      "hash": "c9395128",
+      "modified": 1778008831237
+    },
+    {
+      "id": "c_molos2as_7et2",
+      "track": "qudurat",
+      "cat": "كمي · المقارنات",
+      "creator": "موسى جمعان",
+      "qType": "mcq",
+      "ctx": "",
+      "explain": "القيمه الأولى: ٧تربيع وتساوي=٤٩سم\nالقيمه الثانية: نص في نص=ربع متر",
+      "created": 1777565796004,
+      "q": "قارن بين:",
+      "options": [
+        "القيمة الأولى اكبر",
+        "القيمة الثانيه اكبر",
+        "متساويتان",
+        "المعلومات غير كافيه"
+      ],
+      "a": "القيمة الثانيه اكبر",
+      "img": "data:image/jpeg;base64,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",
+      "hash": "0b003038"
+    },
+    {
+      "id": "c_moiv269g_5kll",
+      "track": "qudurat",
+      "cat": "كمي · المقارنات",
+      "creator": "موسى جمعان",
+      "qType": "card",
+      "ctx": "",
+      "explain": "",
+      "created": 1777394946868,
+      "q": "قارن بين:",
+      "a": "أضرب ربع ٤:١ في ٦٠ تساوي ١٥ \nالقيمتان متساويتان",
+      "img": "data:image/jpeg;base64,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",
+      "hash": "91e139a3"
+    },
+    {
+      "id": "c_exp_121",
+      "track": "qudurat",
+      "cat": "كمي · استراتيجيات",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "استراتيجية التجريب في مسائل الأعمار",
+      "explain": "لا تعقد نفسك بالمعادلات (س و ص). استخدم الخيارات الموجودة في السؤال.",
+      "q": "طريقة الحل: تجريب الخيارات في الأعمار",
+      "a": "مسائل الأعمار تحل بسرعة بالتجريب. خذ خياراً من الخيارات وافترض أنه الجواب الصحيح، ثم طبق عليه كلام السؤال. إذا ضبطت الحسبة، فهذا هو الجواب. مثال حي: يقولك سلمى لها أخت أكبر بـ 8 سنوات وأخت أصغر بسنتين. جرب الخيارات، لو افترضنا عمر سلمى 6، الأكبر بتكون 14، والأصغر بتكون 4. اضرب 14 في 4 يعطيك 56. الحسبة ضبطت! إذن الجواب 6.",
+      "hash": "02db0fc1"
+    },
+    {
+      "id": "c_mcq_122",
+      "track": "qudurat",
+      "cat": "كمي · مسائل لفظية",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "تطبيق استراتيجية التجريب",
+      "explain": "بتجريب الخيار 6: الأخت الكبرى 6+8=14. الأخت الصغرى 6-2=4. حاصل ضربهم 14 × 4 = 56. الجواب صحيح.",
+      "q": "لدى سلمى أخت أكبر منها بـ 8 سنوات و أخت أصغر منها بسنتين ، وحاصل ضرب أعمار أخواتها = 56\nفكم عمر سلمى ؟",
+      "options": [
+        "8",
+        "10",
+        "6",
+        "4"
+      ],
+      "a": "6",
+      "hash": "37dc87ef"
+    },
+    {
+      "id": "c_exp_123",
+      "track": "qudurat",
+      "cat": "كمي · استراتيجيات",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "استراتيجية الحل العكسي",
+      "explain": "الرجوع من نهاية السؤال إلى بدايته مع عكس العمليات الحسابية.",
+      "q": "طريقة الحل: الحل العكسي",
+      "a": "إذا أعطاك النتيجة النهائية وطلب الرقم الأصلي، ابدأ من الأخير واعكس كل شيء. الزائد خله ناقص، والضرب خله قسمة. مثال حي: 'عدد أضفنا لنصفه 13 فأصبح 23'. ابدأ من الـ 23. قالك 'أضفنا 13'؟ أنت اعكس واطرح 13 (23 - 13 = 10). الـ 10 هذه هي نصف العدد. إذن العدد كامل هو 20.",
+      "hash": "0132bc50"
+    },
+    {
+      "id": "c_mcq_124",
+      "track": "qudurat",
+      "cat": "كمي · مسائل لفظية",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "تطبيق الحل العكسي",
+      "explain": "نعكس الخطوات: 23 نطرح منها 13 = 10. هذا هو نصف العدد. إذن العدد كامل يساوي 20.",
+      "q": "عدد أضفنا إلى نصفه 13 فأصبح 23 ، فما هو هذا العدد؟",
+      "options": [
+        "15",
+        "20",
+        "18",
+        "30"
+      ],
+      "a": "20",
+      "hash": "79f38212"
+    },
+    {
+      "id": "c_exp_125",
+      "track": "qudurat",
+      "cat": "كمي · الحساب",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "المقاطع واأجزاء (قانون التقطيع)",
+      "explain": "عدد مرات التقطيع دائماً أقل من عدد القطع الناتجة بواحد.",
+      "q": "طريقة الحل: حساب عدد مرات التقطيع",
+      "a": "تخيل أن معك رغيف خبز طويل. لو قطعت بالسكين مرة واحدة، بيصير عندك قطعتين. لو قطعت مرتين، بيصير عندك 3 قطع. القاعدة: (عدد القطعات = عدد القطع ناقص واحد). مثال حي: خشبة تبي تقطعها 24 قطعة. كم مرة تستخدم المنشار؟ الجواب: 24 - 1 = 23 مرة.",
+      "hash": "580d2047"
+    },
+    {
+      "id": "c_mcq_126",
+      "track": "qudurat",
+      "cat": "كمي · مسائل لفظية",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "تطبيق قانون التقطيع",
+      "explain": "عدد مرات القطع يساوي دائماً عدد القطع المطلوبة ناقص واحد. 24 - 1 = 23.",
+      "q": "قطعة خشب طولها 24 متر ، يُراد تقطيعها إلى 24 قطعة صغيرة، كم عدد مرات تقطيعها ؟",
+      "options": [
+        "24",
+        "25",
+        "23",
+        "22"
+      ],
+      "a": "23",
+      "hash": "5cb748a1"
+    },
+    {
+      "id": "c_exp_127",
+      "track": "qudurat",
+      "cat": "كمي · المقارنات",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "مقارنة الكسور والفواصل العشرية",
+      "explain": "كلما كان الرقم المطروح صغيراً، كان المتبقي أكبر.",
+      "q": "طريقة الحل: مقارنة الطرح في الفواصل",
+      "a": "لو معك 9 ريال. في القيمة الأولى بنطرح منك هللة وحدة (0.004). وفي القيمة الثانية بنطرح منك 4 هللات (0.044). متى يبقى في جيبك فلوس أكثر؟ أكيد لما نطرح منك المبلغ الأصغر. إذن (9 ناقص رقم صغير) أكبر دائماً من (9 ناقص رقم كبير).",
+      "hash": "c20feefe"
+    },
+    {
+      "id": "c_mcq_128",
+      "track": "qudurat",
+      "cat": "كمي · المقارنات",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "تطبيق مقارنة الفواصل المضروبة والمطروحة",
+      "explain": "القيمة الأولى نطرح منها 0.004 (رقم صغير). القيمة الثانية نطرح منها 0.044 (رقم أكبر). كلما صغر المطروح زاد الناتج.",
+      "q": "قارن بين :\nالقيمة الأولى : 9 - 0.004\nالقيمة الثانية : 9 - 0.044",
+      "options": [
+        "القيمة الأولى أكبر",
+        "القيمة الثانية أكبر",
+        "القيمتان متساويتان",
+        "المعطيات غير كافية"
+      ],
+      "a": "القيمة الأولى أكبر",
+      "hash": "21ff50d7"
+    },
+    {
+      "id": "c_exp_129",
+      "track": "qudurat",
+      "cat": "كمي · مسائل لفظية",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "مسائل الراتب والجوال المخفي",
+      "explain": "اطرح الساعات من الساعات. واطرح الفلوس من الفلوس. يطلع لك قيمة الساعة.",
+      "q": "طريقة الحل: كيف نحسب سعر شيء مخفي في الراتب؟",
+      "a": "الطريقة سهلة. شوف الفرق. مثال حي من الملف: مدرب يشتغل 6 ساعات بـ 600 ريال وجوال. وإذا اشتغل 4 ساعات يأخذ 100 ريال وجوال. اطرح الساعات: 6 ناقص 4 يساوي 2 ساعة. اطرح الفلوس: 600 ناقص 100 يساوي 500 ريال. يعني الساعتين بـ 500. الساعة بـ 250. طيب 4 ساعات مفروض 1000 ريال. هو أخذ 100 وجوال. يعني الجوال بـ 900 ريال. الحل واضح جدا.",
+      "hash": "54e76a76"
+    },
+    {
+      "id": "c_mcq_130",
+      "track": "qudurat",
+      "cat": "كمي · مسائل لفظية",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "تطبيق مهارة الفرق",
+      "explain": "الفرق ساعتين. والفرق 500 ريال. إذن الساعة بـ 250. 4 ساعات تساوي 1000. أخذ 100. إذن الجوال 900.",
+      "q": "مدرب يتقاضى 600 ريال + جوال إذا عمل 6 ساعات و 100 ريال + جوال إذا عمل 4 ساعات ، كم سعر الجوال ؟",
+      "options": [
+        "500",
+        "800",
+        "900",
+        "1100"
+      ],
+      "a": "900",
+      "hash": "be40477e"
+    },
+    {
+      "id": "c_exp_131",
+      "track": "qudurat",
+      "cat": "كمي · النسبة المئوية",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "النسبة المئوية بالتدرج المنتظم",
+      "explain": "لا تستخدم قوانين معقدة. تدرج بالرقم. اقسم واضرب.",
+      "q": "طريقة الحل: التدرج المنتظم",
+      "a": "تبي تحسب نسبة؟ قسم الطرفين ثم اضربهم. مثال حي من الملف: 30 سؤال تمثل 60%. المطلوب الأسئلة اللي ما جاوبها. يعني 40%. كيف نوصل من 60 إلى 40؟ اقسم الطرفين على 3. تطلع لك 20% تساوي 10 أسئلة. اضرب في 2. تطلع 40% تساوي 20 سؤال. خطوتين ذهنيا والحل بيدك.",
+      "hash": "06617de8"
+    },
+    {
+      "id": "c_mcq_132",
+      "track": "qudurat",
+      "cat": "كمي · النسبة المئوية",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "تطبيق التدرج المنتظم",
+      "explain": "60% هي 30 سؤال. إذن 20% هي 10 أسئلة. الباقي 40% وهو يمثل 20 سؤال.",
+      "q": "إذا أجاب طالب على 30 سؤال في الاختبار وهي تمثل 60 % ، كم عدد الأسئلة التي لم يجب عنها ؟",
+      "options": [
+        "10",
+        "15",
+        "20",
+        "30"
+      ],
+      "a": "20",
+      "hash": "4a7945dd"
+    },
+    {
+      "id": "c_exp_133",
+      "track": "qudurat",
+      "cat": "كمي · الحساب",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "التناسب الطردي المباشر",
+      "explain": "المجموعات تزيد مع بعض. استخدم المضاعفة. ابحث عن المجموعات الكبيرة.",
+      "q": "طريقة الحل: التناسب الطردي",
+      "a": "رقم يزيد، الثاني يزيد معه. قسم الكبير على الصغير لتعرف عدد المجموعات. مثال حي من الملف: كل 15 طالب معهم 2 معلم. عندنا 450 طالب. كم معلم؟ اقسم 450 على 15. الصفر ينزل. 45 تقسيم 15 يساوي 3. يعني 30 مجموعة. كل مجموعة لها 2 معلم. اضرب 30 في 2. الناتج 60 معلم.",
+      "hash": "b5a07167"
+    },
+    {
+      "id": "c_mcq_134",
+      "track": "qudurat",
+      "cat": "كمي · الحساب",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "تطبيق التناسب الطردي",
+      "explain": "450 تقسيم 15 يساوي 30 مجموعة. 30 مجموعة ضرب 2 معلم يساوي 60 معلم.",
+      "q": "رحلة فيها 450 طالب ، وكل 15 طالب معهم 2 معلم ، فكم عدد المعلمين ؟",
+      "options": [
+        "10",
+        "30",
+        "45",
+        "60"
+      ],
+      "a": "60",
+      "hash": "14860acb"
+    },
+    {
+      "id": "c_exp_135",
+      "track": "qudurat",
+      "cat": "كمي · المتتابعات",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "المتتابعات العكسية",
+      "explain": "المتتابعة تمشي للأمام بزيادة. إذا طلب الحدود السابقة، ارجع للخلف وانقص.",
+      "q": "طريقة الحل: الرجوع للخلف في المتتابعات",
+      "a": "إذا أعطاك حد وطلب اللي قبله، اعكس العملية. الزائد خله ناقص. مثال حي من الملف: الحد 13 وكل حد يزيد عن السابق بـ 3. يبي مجموع الحد 13 والحدود الثلاثة اللي قبله. ارجع ورا وانقص 3. اللي قبله 10. واللي قبله 7. واللي قبله 4. اجمعهم: 13 + 10 + 7 + 4. الناتج 34.",
+      "hash": "1dfba199"
+    },
+    {
+      "id": "c_mcq_136",
+      "track": "qudurat",
+      "cat": "كمي · المتتابعات",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "تطبيق الرجوع للخلف",
+      "explain": "الحدود هي: 13 واللي قبله 10 و 7 و 4. نجمعها: 13+10+7+4 = 34.",
+      "q": "متتابعة حسابية فيها س = 13 ، وكل حد يزيد عن السابق بـ 3 ما مقدار مجموع س و الحدود الثلاثة السابقة له ؟",
+      "options": [
+        "32",
+        "34",
+        "35",
+        "40"
+      ],
+      "a": "34",
+      "hash": "b66abd3f"
+    },
+    {
+      "id": "c_exp_137",
+      "track": "qudurat",
+      "cat": "كمي · العمليات العكسية",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "الكمي. الكسور والعمليات العكسية.",
+      "explain": "كلمة (ثلثه) تعني مقسوم على 3. عكسها اضرب في 3.",
+      "q": "طريقة الحل: التعامل مع كسور المجاهيل",
+      "a": "لما يقولك (عدد ثلثه يساوي كذا). كأنه يقول العدد انقسم على 3. كيف نرجعه لأصله؟ نعكس العملية ونضرب في 3. مثال حي من الملف: عدد ثلثه يساوي 10/15. اضرب 10/15 في 3. بتصير 30/15. و 30 تقسيم 15 يساوي 2. الحل بكل بساطة هو 2.",
+      "hash": "665854b7"
+    },
+    {
+      "id": "c_mcq_138",
+      "track": "qudurat",
+      "cat": "كمي · العمليات العكسية",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "تطبيق العمليات العكسية على الكسور",
+      "explain": "بما أن ثلث العدد هو 10/15، نضرب في 3 لنحصل على العدد الأصلي. 3 × (10/15) = 30/15 = 2.",
+      "q": "ما العدد الذي ثلثه يساوي 10/15 ؟",
+      "options": [
+        "1",
+        "2",
+        "4",
+        "8/15"
+      ],
+      "a": "2",
+      "hash": "3dd7e62e"
+    },
+    {
+      "id": "c_exp_139",
+      "track": "qudurat",
+      "cat": "كمي · مسائل لفظية",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "الكمي. القسمة مع الباقي في الحياة.",
+      "explain": "إذا كان فيه باقي من الأشياء، لازم نزيد صندوق إضافي.",
+      "q": "طريقة الحل: مسائل الاستيعاب والصناديق",
+      "a": "هذه المسائل تعتمد على المنطق. اقسم العدد الكلي على سعة الصندوق. إذا طلع فيه باقي، لازم تزيد صندوق عشان يشيل هذا الباقي! مثال حي من الملف: صندوق يشيل 9 بيضات. وعندنا 120 بيضة. اقسم 120 على 9. أقرب شيء 9 ضرب 13 بـ 117. بقى 3 بيضات. وين نوديها؟ نحتاج صندوق إضافي لها. إذن 13 + 1 = 14 صندوق.",
+      "hash": "613c5a0a"
+    },
+    {
+      "id": "c_mcq_140",
+      "track": "qudurat",
+      "cat": "كمي · مسائل لفظية",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "تطبيق القسمة مع الباقي",
+      "explain": "120 تقسيم 9 يساوي 13 والباقي 3 بيضات. البيضات الثلاث تحتاج صندوقاً إضافياً، فيصبح المجموع 14 صندوقاً.",
+      "q": "إذا كان هناك صندوق يحمل 9 بيضات، ومع خالد 120 بيضة ، فكم صندوق يحتاج لحملها كلها ؟",
+      "options": [
+        "11",
+        "13",
+        "14",
+        "21"
+      ],
+      "a": "14",
+      "hash": "998bce22"
+    },
+    {
+      "id": "c_exp_141",
+      "track": "qudurat",
+      "cat": "كمي · المتوسط الحسابي",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "الكمي. المتوسط الحسابي والمجهول.",
+      "explain": "المجموع الكلي = المتوسط ضرب العدد.",
+      "q": "طريقة الحل: إيجاد المجهول في المتوسط",
+      "a": "إذا أعطاك المتوسط وطلب مجهول (س). استخدم هذا السر: اضرب المتوسط في عدد الأرقام عشان تطلع (المجموع الكلي). ثم اطرح منه الأرقام الموجودة ويطلع لك المجهول. مثال حي من الملف: متوسط 3 و 8 و 12 و س هو 20. هم 4 أرقام. اضرب 4 في 20 = 80. مجموع الأرقام الموجودة 23. نقص 23 من 80 يطلع لك 57. وهو الحل.",
+      "hash": "1b21fb2a"
+    },
+    {
+      "id": "c_mcq_142",
+      "track": "qudurat",
+      "cat": "كمي · المتوسط الحسابي",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "تطبيق إيجاد المجهول في المتوسط",
+      "explain": "المجموع = المتوسط × عددهم (20 × 4 = 80). مجموع الأرقام المعلومة = 3+8+12 = 23. المجهول س = 80 - 23 = 57.",
+      "q": "إذا كان متوسط القيم 3 ، 8 ، 12 ، س يساوي 20 ، ما قيمة س؟",
+      "options": [
+        "54",
+        "57",
+        "66",
+        "78"
+      ],
+      "a": "57",
+      "hash": "bc5a3154"
+    },
+    {
+      "id": "c_exp_143",
+      "track": "qudurat",
+      "cat": "كمي · الأنماط والدوريات",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "الكمي. الدوريات وقابلية القسمة على 4.",
+      "explain": "الدورة تتكرر كل عدد معين. ابحث عن مضاعفات هذا العدد.",
+      "q": "طريقة الحل: مسائل التكرار والدوريات",
+      "a": "إذا قالك شيء يتكرر كل 4 خطوات. ويرجع لوضعه الطبيعي. يعني راح يرجع عند كل رقم يقبل القسمة على 4. كيف تعرف أن الرقم يقبل القسمة على 4 بسرعة؟ طالع في أول رقمين (الآحاد والعشرات)، إذا موجودة بجدول 4، يعني يقبل! مثال حي من الملف: زر يرجع لوضعه كل 4 ضغطات. الخيارات: 91، 92، 85، 83. الوحيد اللي يقبل القسمة على 4 هو 92 (لأن 92 تقسيم 4 = 23 بدون باقي).",
+      "hash": "fdebea4e"
+    },
+    {
+      "id": "c_mcq_144",
+      "track": "qudurat",
+      "cat": "كمي · الأنماط والدوريات",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "تطبيق الدوريات",
+      "explain": "الزر يعود لوضعه كل 4 ضغطات، أي عند مضاعفات الرقم 4. العدد الوحيد في الخيارات الذي يقبل القسمة على 4 هو 92.",
+      "q": "ضغطت هند أحد الأزرار فبعد كم ضغطة يرجع إلى وضعه الطبيعي مع العلم أن الزر يعود إلى وضعه الطبيعي كل 4 ضغطات ؟",
+      "options": [
+        "83",
+        "85",
+        "91",
+        "92"
+      ],
+      "a": "92",
+      "hash": "1c85b21d"
+    },
+    {
+      "id": "c_exp_145",
+      "track": "qudurat",
+      "cat": "كمي · التناسب",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "الكمي. التناسب الطردي.",
+      "explain": "إذا زاد واحد يزيد الثاني",
+      "q": "طريقة الحل: التناسب",
+      "a": "نضرب ونقسم فقط. مثال: قلم بريالين × 3 = 6 ريال",
+      "hash": "e9cf4658"
+    },
+    {
+      "id": "c_mcq_146",
+      "track": "qudurat",
+      "cat": "كمي · التناسب",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "تطبيق التناسب الطردي",
+      "explain": "نضرب ثم نقسم",
+      "q": "2 كيلو جبن تحتاج 15 لتر حليب، فكم لتر نحتاج لصنع 12 كيلو؟",
+      "options": [
+        "45",
+        "60",
+        "90",
+        "120"
+      ],
+      "a": "90",
+      "hash": "3503df13"
+    },
+    {
+      "id": "c_exp_147",
+      "track": "qudurat",
+      "cat": "كمي · السرعة والزمن",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "الكمي. زمن التقاء جسمين متعاكسين.",
+      "explain": "إذا كانوا عكس بعض نجمع السرعات",
+      "q": "طريقة الحل: زمن الالتقاء",
+      "a": "عكس بعض = جمع السرعات → المسافة ÷ المجموع",
+      "hash": "09ab9429"
+    },
+    {
+      "id": "c_mcq_148",
+      "track": "qudurat",
+      "cat": "كمي · السرعة والزمن",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "تطبيق زمن الالتقاء",
+      "explain": "نجمع السرعات ثم نقسم",
+      "q": "سيارتان بسرعتين 120 و90 كم/س والمسافة 420 كم، بعد كم دقيقة تلتقيان؟",
+      "options": [
+        "60",
+        "90",
+        "105",
+        "120"
+      ],
+      "a": "120",
+      "hash": "a3ac4603"
+    },
+    {
+      "id": "c_exp_149",
+      "track": "qudurat",
+      "cat": "لفظي · إكمال الجمل",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "لفظي. إكمال الجمل بالكلمات المتضادة.",
+      "explain": "دور على الكلمة العكسية",
+      "q": "طريقة الحل: التضاد",
+      "a": "يعلمه ↔ يجهله",
+      "hash": "799bffdb"
+    },
+    {
+      "id": "c_mcq_150",
+      "track": "qudurat",
+      "cat": "لفظي · إكمال الجمل",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "تطبيق التضاد",
+      "explain": "نختار الكلمة العكس",
+      "q": "الحكيم هو الذي يميز بين ما يعلمه وما ........",
+      "options": [
+        "يتقنه",
+        "يحسنه",
+        "يجهله",
+        "يكرهه"
+      ],
+      "a": "يجهله",
+      "hash": "7e238ba3"
+    },
+    {
+      "id": "c_exp_151",
+      "track": "qudurat",
+      "cat": "لفظي · الخطأ السياقي",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "الخطأ السياقي",
+      "explain": "مدح ثم ذم = خطأ",
+      "q": "طريقة الحل: اكتشف الكلمة الغلط",
+      "a": "إذا الجملة تمدح لا تجي كلمة سلبية",
+      "hash": "976bbe5a"
+    },
+    {
+      "id": "c_mcq_152",
+      "track": "qudurat",
+      "cat": "لفظي · الخطأ السياقي",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "تطبيق الخطأ السياقي",
+      "explain": "الكلمة السلبية هي الخطأ",
+      "q": "أفضل شيء التخلق بأخلاق حميدة، ومن القبيح المداومة على ذلك...",
+      "options": [
+        "التخلق",
+        "القبيح",
+        "المداومة",
+        "الحق"
+      ],
+      "a": "القبيح",
+      "hash": "baa342be"
+    },
+    {
+      "id": "exp_tanasub_001",
+      "track": "qudurat",
+      "cat": "كمي · التناسب",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "الكمي. التناسب الطردي.",
+      "explain": "إذا زاد واحد يزيد الثاني",
+      "q": "طريقة الحل: التناسب",
+      "a": "نضرب ثم نقسم",
+      "hash": "0d47069b"
+    },
+    {
+      "id": "mcq_tanasub_002",
+      "track": "qudurat",
+      "cat": "كمي · التناسب",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "تطبيق التناسب",
+      "explain": "نضرب ثم نقسم",
+      "q": "2 كيلو جبن تحتاج 15 لتر حليب، فكم نحتاج لـ 12 كيلو؟",
+      "options": [
+        "45",
+        "60",
+        "90",
+        "120"
+      ],
+      "a": "90",
+      "hash": "423bcecc"
+    },
+    {
+      "id": "exp_speed_003",
+      "track": "qudurat",
+      "cat": "كمي · السرعة والزمن",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "زمن الالتقاء",
+      "explain": "عكس بعض = جمع",
+      "q": "طريقة الحل",
+      "a": "نجمع السرعات ثم نقسم المسافة",
+      "hash": "c8393d34"
+    },
+    {
+      "id": "mcq_speed_004",
+      "track": "qudurat",
+      "cat": "كمي · السرعة والزمن",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "تطبيق الالتقاء",
+      "explain": "جمع ثم قسمة",
+      "q": "سيارتان سرعتاهما 120 و90 كم/س والمسافة 420 كم",
+      "options": [
+        "60",
+        "90",
+        "105",
+        "120"
+      ],
+      "a": "120",
+      "hash": "0cf2879d"
+    },
+    {
+      "id": "exp_verbal_005",
+      "track": "qudurat",
+      "cat": "لفظي · إكمال الجمل",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "التضاد",
+      "explain": "دور على العكس",
+      "q": "طريقة الحل",
+      "a": "يعلمه ↔ يجهله",
+      "hash": "1cf069fa"
+    },
+    {
+      "id": "mcq_verbal_006",
+      "track": "qudurat",
+      "cat": "لفظي · إكمال الجمل",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "تطبيق التضاد",
+      "explain": "اختَر العكس",
+      "q": "الحكيم يميز بين ما يعلمه وما …",
+      "options": [
+        "يتقنه",
+        "يحسنه",
+        "يجهله",
+        "يكرهه"
+      ],
+      "a": "يجهله",
+      "hash": "99b9b81f"
+    },
+    {
+      "id": "exp_context_007",
+      "track": "qudurat",
+      "cat": "لفظي · الخطأ السياقي",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "المدح والذم",
+      "explain": "مدح ثم كلمة سلبية = خطأ",
+      "q": "طريقة الحل",
+      "a": "نحذف الكلمة السلبية",
+      "hash": "76360564"
+    },
+    {
+      "id": "mcq_context_008",
+      "track": "qudurat",
+      "cat": "لفظي · الخطأ السياقي",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "كشف الخطأ",
+      "explain": "الكلمة الغلط",
+      "q": "أفضل شيء التخلق بأخلاق حميدة ومن القبيح المداومة...",
+      "options": [
+        "التخلق",
+        "القبيح",
+        "المداومة",
+        "الحق"
+      ],
+      "a": "القبيح",
+      "hash": "473ec6eb"
+    },
+    {
+      "id": "exp_ratio_009",
+      "track": "qudurat",
+      "cat": "كمي · التناسب",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "فهم التناسب من الصفر",
+      "explain": "كلهم يزيدون مع بعض",
+      "q": "مفتاح التناسب",
+      "a": "تضرب الكبير مع الكبير، والصغير مع الصغير",
+      "hash": "4dcb7b76"
+    },
+    {
+      "id": "mcq_ratio_010",
+      "track": "qudurat",
+      "cat": "كمي · التناسب",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "تطبيق مباشر",
+      "explain": "كبير مع كبير",
+      "q": "4 علب تكلف 20 ريال، كم تكلف 6 علب؟",
+      "options": [
+        "24",
+        "30",
+        "40",
+        "60"
+      ],
+      "a": "30",
+      "hash": "5d1b67d8"
+    },
+    {
+      "id": "exp_time_011",
+      "track": "qudurat",
+      "cat": "كمي · الزمن",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "فهم الوقت",
+      "explain": "الساعة فيها 60",
+      "q": "مفتاح تحويل الوقت",
+      "a": "أي ساعة × 60 = دقائق",
+      "hash": "f70413c0"
+    },
+    {
+      "id": "mcq_time_012",
+      "track": "qudurat",
+      "cat": "كمي · الزمن",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "سؤال ذكي",
+      "explain": "حوّل فقط",
+      "q": "كم دقيقة في ساعتين؟",
+      "options": [
+        "60",
+        "90",
+        "120",
+        "180"
+      ],
+      "a": "120",
+      "hash": "108ff271"
+    },
+    {
+      "id": "exp_math_key_013",
+      "track": "qudurat",
+      "cat": "كمي · التناسب",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "فكرة ذكية",
+      "explain": "نفس الشي = نفس الطريقة",
+      "q": "مفتاح مسائل التناسب",
+      "a": "بدّل الأرقام ولا تغيّر الحركة",
+      "hash": "4fc8fc55"
+    },
+    {
+      "id": "mcq_math_key_014",
+      "track": "qudurat",
+      "cat": "كمي · التناسب",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "سؤال ذكي",
+      "explain": "كبير مع كبير",
+      "q": "5 دفاتر بـ 10 ريال، كم سعر 15 دفتر؟",
+      "options": [
+        "20",
+        "25",
+        "30",
+        "40"
+      ],
+      "a": "30",
+      "hash": "ba4d936b"
+    },
+    {
+      "id": "exp_speed_key_015",
+      "track": "qudurat",
+      "cat": "كمي · السرعة",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "فهم السرعة",
+      "explain": "عكس بعض",
+      "q": "مفتاح السرعة",
+      "a": "إذا عكس بعض → جمع",
+      "hash": "9950eb1f"
+    },
+    {
+      "id": "mcq_speed_key_016",
+      "track": "qudurat",
+      "cat": "كمي · السرعة",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "تطبيق مباشر",
+      "explain": "جمع فقط",
+      "q": "شخص يمشي 4 كم/س وآخر 6 كم/س بعكس الاتجاه، ما السرعة بينهم؟",
+      "options": [
+        "2",
+        "6",
+        "10",
+        "24"
+      ],
+      "a": "10",
+      "hash": "fd45b2f9"
+    },
+    {
+      "id": "exp_verbal_key_017",
+      "track": "qudurat",
+      "cat": "لفظي · إكمال الجمل",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "فهم المعنى",
+      "explain": "كلمة ناقصة",
+      "q": "مفتاح الإكمال",
+      "a": "الجملة تقولك الجواب",
+      "hash": "07871087"
+    },
+    {
+      "id": "mcq_verbal_key_018",
+      "track": "qudurat",
+      "cat": "لفظي · إكمال الجمل",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "تطبيق ذكي",
+      "explain": "خذ العكس",
+      "q": "الصادق يقول الحق ولا يقول ........",
+      "options": [
+        "الصدق",
+        "العدل",
+        "الكذب",
+        "الشجاعة"
+      ],
+      "a": "الكذب",
+      "hash": "bcaf0082"
+    },
+    {
+      "id": "exp_context_key_019",
+      "track": "qudurat",
+      "cat": "لفظي · الخطأ السياقي",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "قراءة الجملة",
+      "explain": "الجملة سعيدة",
+      "q": "مفتاح الخطأ السياقي",
+      "a": "إذا الكلام مدح لا تختار كلمة سيئة",
+      "hash": "e5a4caf7"
+    },
+    {
+      "id": "mcq_context_key_020",
+      "track": "qudurat",
+      "cat": "لفظي · الخطأ السياقي",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "كشف الغلط",
+      "explain": "كلمة تخرب المعنى",
+      "q": "الاجتهاد طريق النجاح ومن القبيح السعي إليه",
+      "options": [
+        "الاجتهاد",
+        "الطريق",
+        "القبيح",
+        "النجاح"
+      ],
+      "a": "القبيح",
+      "hash": "85cf2fce"
+    },
+    {
+      "id": "exp_ratio_key_021",
+      "track": "qudurat",
+      "cat": "كمي · التناسب",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "الفهم السريع للتناسب",
+      "explain": "نفس الشي يتغير بنفس النسبة",
+      "q": "مفتاح عبقري للتناسب",
+      "a": "إذا تضاعف واحد يتضاعف الثاني",
+      "hash": "14cf7f2a"
+    },
+    {
+      "id": "mcq_ratio_key_022",
+      "track": "qudurat",
+      "cat": "كمي · التناسب",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "تطبيق مباشر",
+      "explain": "ضاعف بنفسك",
+      "q": "إذا كان 3 أقلام بـ 6 ريالات، فكم سعر 6 أقلام؟",
+      "options": [
+        "9",
+        "10",
+        "12",
+        "15"
+      ],
+      "a": "12",
+      "hash": "6b30bc66"
+    },
+    {
+      "id": "exp_time_key_023",
+      "track": "qudurat",
+      "cat": "كمي · الزمن",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "الوقت ببساطة",
+      "explain": "الساعة أم الدقائق",
+      "q": "مفتاح الزمن",
+      "a": "كل ساعة فيها 60 دقيقة",
+      "hash": "07555669"
+    },
+    {
+      "id": "mcq_time_key_024",
+      "track": "qudurat",
+      "cat": "كمي · الزمن",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "سؤال واضح",
+      "explain": "اضرب ولا تفكر",
+      "q": "كم دقيقة في 3 ساعات؟",
+      "options": [
+        "120",
+        "150",
+        "180",
+        "200"
+      ],
+      "a": "180",
+      "hash": "2d8f79d2"
+    },
+    {
+      "id": "exp_speed_key_025",
+      "track": "qudurat",
+      "cat": "كمي · السرعة",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "فهم الاتجاه",
+      "explain": "نفس الاتجاه أو عكسه",
+      "q": "مفتاح السرعة",
+      "a": "نفس الاتجاه = طرح، عكس الاتجاه = جمع",
+      "hash": "ad0324b7"
+    },
+    {
+      "id": "mcq_speed_key_026",
+      "track": "qudurat",
+      "cat": "كمي · السرعة",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "اتجاه واحد",
+      "explain": "اطرح فقط",
+      "q": "سيارتان بنفس الاتجاه سرعتهما 80 و50 كم/س، ما الفرق؟",
+      "options": [
+        "30",
+        "100",
+        "130",
+        "400"
+      ],
+      "a": "30",
+      "hash": "1100d1db"
+    },
+    {
+      "id": "exp_verbal_key_027",
+      "track": "qudurat",
+      "cat": "لفظي · إكمال الجمل",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "معنى واضح",
+      "explain": "الجملة تكشف نفسها",
+      "q": "مفتاح الإكمال",
+      "a": "اختَر الكلمة التي تُكمل المعنى",
+      "hash": "71689a93"
+    },
+    {
+      "id": "mcq_verbal_key_028",
+      "track": "qudurat",
+      "cat": "لفظي · إكمال الجمل",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "تطبيق بسيط",
+      "explain": "الصح عكس الغلط",
+      "q": "الناجح لا يعرف ........",
+      "options": [
+        "النجاح",
+        "الكسل",
+        "الجد",
+        "الطموح"
+      ],
+      "a": "الكسل",
+      "hash": "0fe1b75b"
+    },
+    {
+      "id": "exp_context_key_029",
+      "track": "qudurat",
+      "cat": "لفظي · الخطأ السياقي",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "انسجام الجملة",
+      "explain": "نغمة واحدة",
+      "q": "مفتاح السياق",
+      "a": "إذا الجملة كلها مدح، أي كلمة ذم هي الجواب",
+      "hash": "3f7252de"
+    },
+    {
+      "id": "mcq_context_key_030",
+      "track": "qudurat",
+      "cat": "لفظي · الخطأ السياقي",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "كشف الكلمة الغلط",
+      "explain": "كلمة تكسر المعنى",
+      "q": "الصدق خلق نبيل ومن القبيح التمسك به",
+      "options": [
+        "الصدق",
+        "نبيل",
+        "القبيح",
+        "التمسك"
+      ],
+      "a": "القبيح",
+      "hash": "4eea045d"
+    },
+    {
+      "id": "exp_percent_key_031",
+      "track": "qudurat",
+      "cat": "كمي · النسبة المئوية",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "فهم النسبة",
+      "explain": "النسبة من 100",
+      "q": "مفتاح النسبة",
+      "a": "حوّل٪ إلى كسر من 100",
+      "hash": "fcc5eedf"
+    },
+    {
+      "id": "mcq_percent_key_032",
+      "track": "qudurat",
+      "cat": "كمي · النسبة المئوية",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "تطبيق مباشر",
+      "explain": "اقسم على 100",
+      "q": "كم يساوي 20٪ من 50؟",
+      "options": [
+        "5",
+        "10",
+        "20",
+        "25"
+      ],
+      "a": "10",
+      "hash": "aa5e73eb"
+    },
+    {
+      "id": "exp_average_key_033",
+      "track": "qudurat",
+      "cat": "كمي · المتوسط",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "المتوسط بسهولة",
+      "explain": "جمع ثم قسمة",
+      "q": "مفتاح المتوسط",
+      "a": "اجمع الأعداد ثم اقسم على عددها",
+      "hash": "43ce3f80"
+    },
+    {
+      "id": "mcq_average_key_034",
+      "track": "qudurat",
+      "cat": "كمي · المتوسط",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "سؤال بسيط",
+      "explain": "لا أكثر ولا أقل",
+      "q": "ما متوسط الأعداد 2 و 4 و 6؟",
+      "options": [
+        "3",
+        "4",
+        "6",
+        "12"
+      ],
+      "a": "4",
+      "hash": "4fbe8b6a"
+    },
+    {
+      "id": "exp_fraction_key_035",
+      "track": "qudurat",
+      "cat": "كمي · الكسور",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "الكسور ببساطة",
+      "explain": "كلها أجزاء",
+      "q": "مفتاح الكسر",
+      "a": "البسط فوق والمقام تحت",
+      "hash": "ec7f8544"
+    },
+    {
+      "id": "mcq_fraction_key_036",
+      "track": "qudurat",
+      "cat": "كمي · الكسور",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "اختيار واضح",
+      "explain": "نصف الشي",
+      "q": "أي كسر يساوي النصف؟",
+      "options": [
+        "1/3",
+        "2/4",
+        "3/5",
+        "4/3"
+      ],
+      "a": "2/4",
+      "hash": "2340094a"
+    },
+    {
+      "id": "exp_synonym_key_037",
+      "track": "qudurat",
+      "cat": "لفظي · الترادف",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "نفس المعنى",
+      "explain": "كلمتان = معنى واحد",
+      "q": "مفتاح الترادف",
+      "a": "اختر الكلمة الأقرب بالمعنى",
+      "hash": "8c074a21"
+    },
+    {
+      "id": "mcq_synonym_key_038",
+      "track": "qudurat",
+      "cat": "لفظي · الترادف",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "سؤال مباشر",
+      "explain": "قريب جدًا",
+      "q": "مرادف كلمة (سعيد) هو:",
+      "options": [
+        "حزين",
+        "فرح",
+        "غاضب",
+        "متعب"
+      ],
+      "a": "فرح",
+      "hash": "9fd93973"
+    },
+    {
+      "id": "exp_antonym_key_039",
+      "track": "qudurat",
+      "cat": "لفظي · التضاد",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "عكس المعنى",
+      "explain": "كلمتان متعاكستان",
+      "q": "مفتاح التضاد",
+      "a": "اختَر الكلمة العكس",
+      "hash": "de087d70"
+    },
+    {
+      "id": "mcq_antonym_key_040",
+      "track": "qudurat",
+      "cat": "لفظي · التضاد",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "اختيار ذكي",
+      "explain": "العكس تمامًا",
+      "q": "عكس كلمة (قوي) هو:",
+      "options": [
+        "شديد",
+        "ضعيف",
+        "سريع",
+        "كبير"
+      ],
+      "a": "ضعيف",
+      "hash": "6b181799"
+    },
+    {
+      "id": "exp_compare_key_041",
+      "track": "qudurat",
+      "cat": "كمي · المقارنات",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "قارِن بذكاء",
+      "explain": "نفس الوحدة أولاً",
+      "q": "مفتاح المقارنة",
+      "a": "وحّد الوحدات قبل الحكم",
+      "hash": "b9f6a87c"
+    },
+    {
+      "id": "mcq_compare_key_042",
+      "track": "qudurat",
+      "cat": "كمي · المقارنات",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "اختيار مباشر",
+      "explain": "حوّل ثم قارِن",
+      "q": "قارِن بين: 2 ساعة و 90 دقيقة",
+      "options": [
+        "الأولى أكبر",
+        "الثانية أكبر",
+        "متساويتان",
+        "لا يمكن المقارنة"
+      ],
+      "a": "الأولى أكبر",
+      "hash": "72183763"
+    },
+    {
+      "id": "exp_area_key_043",
+      "track": "qudurat",
+      "cat": "كمي · المساحة",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "المساحة بسهولة",
+      "explain": "طول في عرض",
+      "q": "مفتاح المساحة",
+      "a": "المستطيل = اضرب الضلعين",
+      "hash": "c3613ff2"
+    },
+    {
+      "id": "mcq_area_key_044",
+      "track": "qudurat",
+      "cat": "كمي · المساحة",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "سؤال واضح",
+      "explain": "اضرب الرقمين",
+      "q": "مستطيل طوله 5 وعرضه 4، كم مساحته؟",
+      "options": [
+        "9",
+        "18",
+        "20",
+        "40"
+      ],
+      "a": "20",
+      "hash": "9be4bba1"
+    },
+    {
+      "id": "exp_pattern_key_045",
+      "track": "qudurat",
+      "cat": "كمي · الأنماط",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "التتابعات",
+      "explain": "شوف الفرق",
+      "q": "مفتاح النمط",
+      "a": "لاحظ الزيادة أو النقصان",
+      "hash": "4ba9589d"
+    },
+    {
+      "id": "mcq_pattern_key_046",
+      "track": "qudurat",
+      "cat": "كمي · الأنماط",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "نمط بسيط",
+      "explain": "نفس الزيادة",
+      "q": "ما العدد التالي؟ 2 ، 4 ، 6 ، ؟",
+      "options": [
+        "7",
+        "8",
+        "9",
+        "10"
+      ],
+      "a": "8",
+      "hash": "c9972b8e"
+    },
+    {
+      "id": "exp_chart_key_047",
+      "track": "qudurat",
+      "cat": "كمي · قراءة البيانات",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "الرسوم البيانية",
+      "explain": "اقرأ قبل ما تحسب",
+      "q": "مفتاح الرسوم",
+      "a": "أكبر عمود = أكبر قيمة",
+      "hash": "d22ca036"
+    },
+    {
+      "id": "mcq_chart_key_048",
+      "track": "qudurat",
+      "cat": "كمي · قراءة البيانات",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "تحليل ذكي",
+      "explain": "دور الأعلى",
+      "q": "في الرسم، أي شهر هو الأعلى؟",
+      "options": [
+        "يناير",
+        "فبراير",
+        "مارس",
+        "أبريل"
+      ],
+      "a": "مارس",
+      "hash": "d886b707"
+    },
+    {
+      "id": "exp_volume_key_049",
+      "track": "qudurat",
+      "cat": "كمي · الحجوم",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "حجم المستطيل",
+      "explain": "طول × عرض × ارتفاع",
+      "q": "مفتاح الحجم",
+      "a": "اضرب الثلاثة معًا",
+      "hash": "41b55f94"
+    },
+    {
+      "id": "mcq_volume_key_050",
+      "track": "qudurat",
+      "cat": "كمي · الحجوم",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "تطبيق مباشر",
+      "explain": "اضرب فقط",
+      "q": "متوازي مستطيلات أبعاده 2 و3 و4، كم حجمه؟",
+      "options": [
+        "9",
+        "10",
+        "24",
+        "48"
+      ],
+      "a": "24",
+      "hash": "1232f44f"
+    },
+    {
+      "id": "exp_equation_key_051",
+      "track": "qudurat",
+      "cat": "كمي · المعادلات",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "حل المعادلة",
+      "explain": "انقل وعدّل",
+      "q": "مفتاح المعادلات",
+      "a": "انقل الرقم لوحده",
+      "hash": "433d34a4"
+    },
+    {
+      "id": "mcq_equation_key_052",
+      "track": "qudurat",
+      "cat": "كمي · المعادلات",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "حل سريع",
+      "explain": "خلّ س لوحدها",
+      "q": "إذا كان س + 3 = 7، فما قيمة س؟",
+      "options": [
+        "3",
+        "4",
+        "7",
+        "10"
+      ],
+      "a": "4",
+      "hash": "96d591c5"
+    },
+    {
+      "id": "exp_ineq_key_053",
+      "track": "qudurat",
+      "cat": "كمي · المتباينات",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "أكبر وأصغر",
+      "explain": "السهم يعلّمك",
+      "q": "مفتاح المتباينات",
+      "a": "اتّبع إشارة أكبر أو أصغر",
+      "hash": "adaf612d"
+    },
+    {
+      "id": "mcq_ineq_key_054",
+      "track": "qudurat",
+      "cat": "كمي · المتباينات",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "اختيار مباشر",
+      "explain": "بس قارن",
+      "q": "أي عدد أكبر من 5؟",
+      "options": [
+        "3",
+        "5",
+        "6",
+        "2"
+      ],
+      "a": "6",
+      "hash": "28c2708a"
+    },
+    {
+      "id": "exp_probability_key_055",
+      "track": "qudurat",
+      "cat": "كمي · الاحتمالات",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "الفرص",
+      "explain": "نجاح من الكل",
+      "q": "مفتاح الاحتمال",
+      "a": "المطلوب ÷ الكلي",
+      "hash": "66bba2f0"
+    },
+    {
+      "id": "mcq_probability_key_056",
+      "track": "qudurat",
+      "cat": "كمي · الاحتمالات",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "مثال بسيط",
+      "explain": "واحد من اثنين",
+      "q": "عملة لها وجه وصورة، ما احتمال ظهور الوجه؟",
+      "options": [
+        "1",
+        "1/2",
+        "2",
+        "0"
+      ],
+      "a": "1/2",
+      "hash": "dec4aaeb"
+    },
+    {
+      "id": "exp_angle_key_057",
+      "track": "qudurat",
+      "cat": "كمي · الزوايا",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "مجموع الزوايا",
+      "explain": "المثلث 180",
+      "q": "مفتاح الزوايا",
+      "a": "اجمع علشان تكمل 180",
+      "hash": "2feab0f9"
+    },
+    {
+      "id": "mcq_angle_key_058",
+      "track": "qudurat",
+      "cat": "كمي · الزوايا",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "سؤال مباشر",
+      "explain": "كم الباقي؟",
+      "q": "إذا زاويتان 50 و60 في مثلث، كم الزاوية الثالثة؟",
+      "options": [
+        "50",
+        "60",
+        "70",
+        "180"
+      ],
+      "a": "70",
+      "hash": "8ba12f6d"
+    },
+    {
+      "id": "exp_order_key_059",
+      "track": "qudurat",
+      "cat": "كمي · الترتيب",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "ترتيب الأعداد",
+      "explain": "من الصغير للكبير",
+      "q": "مفتاح الترتيب",
+      "a": "رتّب ثم خذ الموقع",
+      "hash": "e3f4339a"
+    },
+    {
+      "id": "mcq_order_key_060",
+      "track": "qudurat",
+      "cat": "كمي · الترتيب",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "اختيار ذكي",
+      "explain": "شوف الترتيب",
+      "q": "ما العدد الأوسط بين 2 ، 5 ، 9؟",
+      "options": [
+        "2",
+        "5",
+        "9",
+        "16"
+      ],
+      "a": "5",
+      "hash": "84739319"
+    },
+    {
+      "id": "exp_read_key_061",
+      "track": "qudurat",
+      "cat": "لفظي · الاستيعاب القرائي",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "فهم النص",
+      "explain": "النص يقول الجواب",
+      "q": "مفتاح الاستيعاب",
+      "a": "اقرأ السؤال ثم ارجع للنص",
+      "hash": "90758765"
+    },
+    {
+      "id": "mcq_read_key_062",
+      "track": "qudurat",
+      "cat": "لفظي · الاستيعاب القرائي",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "فكرة عامة",
+      "explain": "خذ الفكرة لا التفاصيل",
+      "q": "أفضل عنوان للنص هو:",
+      "options": [
+        "تفاصيل صغيرة",
+        "الفكرة الرئيسية",
+        "مثال واحد",
+        "كلمة عابرة"
+      ],
+      "a": "الفكرة الرئيسية",
+      "hash": "1fdd01bc"
+    },
+    {
+      "id": "exp_relation_key_063",
+      "track": "qudurat",
+      "cat": "لفظي · علاقات",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "علاقة الكلمات",
+      "explain": "بينهم رابط",
+      "q": "مفتاح العلاقات",
+      "a": "اسأل: ما الرابط بين الكلمتين؟",
+      "hash": "412d5258"
+    },
+    {
+      "id": "mcq_relation_key_064",
+      "track": "qudurat",
+      "cat": "لفظي · علاقات",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "اختيار ذكي",
+      "explain": "ابحث عن نفس العلاقة",
+      "q": "قلم : كتابة :: سكين : ؟",
+      "options": [
+        "أكل",
+        "قطع",
+        "يد",
+        "حديد"
+      ],
+      "a": "قطع",
+      "hash": "9ebf43ab"
+    },
+    {
+      "id": "exp_logic_key_065",
+      "track": "qudurat",
+      "cat": "كمي · المنطق",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "تفكير بسيط",
+      "explain": "رتّب أفكارك",
+      "q": "مفتاح المنطق",
+      "a": "لا تتسرع، كل كلمة لها دور",
+      "hash": "0674f2ed"
+    },
+    {
+      "id": "mcq_logic_key_066",
+      "track": "qudurat",
+      "cat": "كمي · المنطق",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "سؤال منطقي",
+      "explain": "اختيار واحد صحيح",
+      "q": "إذا كان كل الطلاب مجتهدين، وأحمد طالب، فهل أحمد مجتهد؟",
+      "options": [
+        "نعم",
+        "لا",
+        "غير معروف",
+        "أحيانًا"
+      ],
+      "a": "نعم",
+      "hash": "ad30282b"
+    },
+    {
+      "id": "exp_table_key_067",
+      "track": "qudurat",
+      "cat": "كمي · الجداول",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "قراءة الجدول",
+      "explain": "الأكبر واضح",
+      "q": "مفتاح الجداول",
+      "a": "دور على الرقم الأكبر أو الأصغر",
+      "hash": "33548741"
+    },
+    {
+      "id": "mcq_table_key_068",
+      "track": "qudurat",
+      "cat": "كمي · الجداول",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "تحليل بسيط",
+      "explain": "اقرأ الصف",
+      "q": "في الجدول، أي فئة عددها الأعلى؟",
+      "options": [
+        "الأولى",
+        "الثانية",
+        "الثالثة",
+        "الرابعة"
+      ],
+      "a": "الثالثة",
+      "hash": "a653f029"
+    },
+    {
+      "id": "exp_vlogic_key_069",
+      "track": "qudurat",
+      "cat": "لفظي · المنطق اللفظي",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "ربط العبارات",
+      "explain": "النتيجة من الكلام",
+      "q": "مفتاح المنطق اللفظي",
+      "a": "إذا كان الشرط صحيح فالنتيجة صحيحة",
+      "hash": "23c458cb"
+    },
+    {
+      "id": "mcq_vlogic_key_070",
+      "track": "qudurat",
+      "cat": "لفظي · المنطق اللفظي",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "استنتاج مباشر",
+      "explain": "اتبع الشرط",
+      "q": "كل المجتهدين ناجحون. خالد مجتهد. إذن خالد:",
+      "options": [
+        "راسب",
+        "ناجح",
+        "غير معروف",
+        "متوسط"
+      ],
+      "a": "ناجح",
+      "hash": "1acccd8c"
+    },
+    {
+      "id": "exp_contextword_key_071",
+      "track": "qudurat",
+      "cat": "لفظي · المفردة في سياقها",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "المعنى من الجملة",
+      "explain": "السياق يشرح",
+      "q": "مفتاح المفردة",
+      "a": "اقرأ الكلمة مع الجملة",
+      "hash": "2d930419"
+    },
+    {
+      "id": "mcq_contextword_key_072",
+      "track": "qudurat",
+      "cat": "لفظي · المفردة في سياقها",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "معنى مناسب",
+      "explain": "لا تخرج عن السياق",
+      "q": "سار الفريق بخطى ثابتة نحو الهدف، معنى (ثابتة):",
+      "options": [
+        "سريعة",
+        "مترددة",
+        "مستمرة",
+        "متوقفة"
+      ],
+      "a": "مستمرة",
+      "hash": "7dbff70b"
+    },
+    {
+      "id": "exp_syllable_key_073",
+      "track": "qudurat",
+      "cat": "لفظي · المقاطع والكلمات",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "تجزئة الكلمة",
+      "explain": "قسم الكلمة",
+      "q": "مفتاح المقاطع",
+      "a": "كل نطق مقطع",
+      "hash": "fe7dc4d5"
+    },
+    {
+      "id": "mcq_syllable_key_074",
+      "track": "qudurat",
+      "cat": "لفظي · المقاطع والكلمات",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "عدّ المقاطع",
+      "explain": "انطق وعدّ",
+      "q": "كم مقطع في كلمة (مدرسة)؟",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "a": "3",
+      "hash": "1d1514bd"
+    },
+    {
+      "id": "exp_vcompare_key_075",
+      "track": "qudurat",
+      "cat": "لفظي · المقارنة اللفظية",
+      "creator": "المعلمين",
+      "qType": "card",
+      "ctx": "مقارنة معاني",
+      "explain": "نفس القوة",
+      "q": "مفتاح المقارنة",
+      "a": "اختر الأقرب معنى",
+      "hash": "94c38779"
+    },
+    {
+      "id": "mcq_vcompare_key_076",
+      "track": "qudurat",
+      "cat": "لفظي · المقارنة اللفظية",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "ctx": "اختيار ذكي",
+      "explain": "قريب أقرب",
+      "q": "أيهما أقرب معنى لكلمة (شجاع)؟",
+      "options": [
+        "جبان",
+        "قوي",
+        "خائف",
+        "كسول"
+      ],
+      "a": "قوي",
+      "hash": "5583a27c"
+    },
+    {
+      "id": "mcq_skill_ratio_101",
+      "track": "qudurat",
+      "cat": "كمي · التناسب",
+      "qType": "mcq",
+      "q": "2 كيلو جبن تحتاج 15 لتر حليب، فكم لتر نحتاج لصنع 12 كيلو جبن؟",
+      "options": [
+        "45",
+        "60",
+        "90",
+        "120"
+      ],
+      "a": "90",
+      "explain": "كبر الوزن × كبر الحليب → 12 × 15 ÷ 2",
+      "hash": "69decd29"
+    },
+    {
+      "id": "mcq_skill_speed_103",
+      "track": "qudurat",
+      "cat": "كمي · السرعة والزمن",
+      "qType": "mcq",
+      "q": "سيارتان بسرعتين 120 و90 كم/س بعكس الاتجاه، بعد كم دقيقة تلتقيان إذا كانت المسافة 420 كم؟",
+      "options": [
+        "60",
+        "90",
+        "105",
+        "120"
+      ],
+      "a": "120",
+      "explain": "عكس بعض = جمع → 120+90 ثم قسمة المسافة",
+      "hash": "7d2313cc"
+    },
+    {
+      "id": "mcq_skill_angle_104",
+      "track": "qudurat",
+      "cat": "كمي · الزوايا",
+      "qType": "mcq",
+      "q": "في مثلث زاويتان 50 و60، كم الزاوية الثالثة؟",
+      "options": [
+        "50",
+        "60",
+        "70",
+        "180"
+      ],
+      "a": "70",
+      "explain": "مجموع زوايا المثلث = 180",
+      "hash": "dff53db3"
+    },
+    {
+      "id": "mcq_skill_complete_106",
+      "track": "qudurat",
+      "cat": "لفظي · إكمال الجمل",
+      "qType": "mcq",
+      "q": "الحكيم هو الذي يميز بين ما يعلمه وما ......",
+      "options": [
+        "يتقنه",
+        "يحسنه",
+        "يجهله",
+        "ينساه"
+      ],
+      "a": "يجهله",
+      "explain": "المطلوب عكس (يعلمه)",
+      "hash": "8f423482"
+    },
+    {
+      "id": "mcq_skill_context_107",
+      "track": "qudurat",
+      "cat": "لفظي · الخطأ السياقي",
+      "qType": "mcq",
+      "q": "أفضل شيء التخلق بأخلاق حميدة، ومن القبيح المداومة على ذلك",
+      "options": [
+        "التخلق",
+        "القبيح",
+        "المداومة",
+        "الحق"
+      ],
+      "a": "القبيح",
+      "explain": "الجملة مدح → كلمة ذم = الجواب",
+      "hash": "8757d742"
+    },
+    {
+      "id": "mcq_skill_relation_108",
+      "track": "qudurat",
+      "cat": "لفظي · العلاقات",
+      "qType": "mcq",
+      "q": "قلم : كتابة :: سكين : ؟",
+      "options": [
+        "قطع",
+        "أكل",
+        "حديد",
+        "يد"
+      ],
+      "a": "قطع",
+      "explain": "الأداة وما تؤدي",
+      "hash": "b4609db6"
+    },
+    {
+      "id": "mcq_ratio_file_201",
+      "track": "qudurat",
+      "cat": "كمي · التناسب",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "q": "2 كيلو جبن تحتاج إلى 15 لتر حليب،\nفكم لتر نحتاج من الحليب لصنع 12 كيلو جبن؟",
+      "options": [
+        "45",
+        "60",
+        "90",
+        "120"
+      ],
+      "a": "90",
+      "explain": "الكيلو زاد 6 مرات → الحليب يزيد 6 مرات",
+      "hash": "39cc6be2"
+    },
+    {
+      "id": "mcq_speed_file_202",
+      "track": "qudurat",
+      "cat": "كمي · السرعة والزمن",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "q": "سيارتان انطلقتا في نفس الوقت.\nالأولى من (أ) إلى (ب) بسرعة 120 كم/س، والثانية من (ب) إلى (أ) بسرعة 90 كم/س، والمسافة بين المدينتين 420 كم، بعد كم دقيقة تلتقي السيارتان؟",
+      "options": [
+        "60",
+        "90",
+        "105",
+        "120"
+      ],
+      "a": "120",
+      "explain": "عكس بعض = جمع السرعات ثم قسمة",
+      "hash": "919e8895"
+    },
+    {
+      "id": "mcq_angle_file_203",
+      "track": "qudurat",
+      "cat": "كمي · الزوايا",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "q": "في مثلث زاويتان قياسهما 50 و 60،\nفما قياس الزاوية الثالثة؟",
+      "options": [
+        "50",
+        "60",
+        "70",
+        "180"
+      ],
+      "a": "70",
+      "explain": "مجموع زوايا المثلث = 180",
+      "hash": "3b69dde9"
+    },
+    {
+      "id": "mcq_data_file_204",
+      "track": "qudurat",
+      "cat": "كمي · قراءة البيانات",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "q": "ما الدرجة التي حصل عليها أكبر عدد من الطلاب؟\n(بالرجوع إلى الشكل البياني)",
+      "options": [
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "a": "6",
+      "explain": "أطول عمود = الجواب",
+      "hash": "ffebc394"
+    },
+    {
+      "id": "mcq_verbal_file_205",
+      "track": "qudurat",
+      "cat": "لفظي · إكمال الجمل",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "q": "أكمل الفراغات في الجملة التالية بما يناسبها لغويًا ومعنويًا:\nالحكيم هو الذي يميز بين ما يعلمه وما ....",
+      "options": [
+        "يتقنه",
+        "يحسنه",
+        "يجهله",
+        "يكرهه"
+      ],
+      "a": "يجهله",
+      "explain": "يعلمه → نأخذ العكس",
+      "hash": "c22ea760"
+    },
+    {
+      "id": "mcq_context_file_206",
+      "track": "qudurat",
+      "cat": "لفظي · الخطأ السياقي",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "q": "حدد الكلمة الشاذة التي أفسدت المعنى في الجملة التالية:\nأفضل شيء التخلق بأخلاق حميدة، ومن القبيح المداومة على ذلك، فإن أفضل شيء الثبات على الحق حتى النهاية.",
+      "options": [
+        "التخلق",
+        "القبيح",
+        "المداومة",
+        "الحق"
+      ],
+      "a": "القبيح",
+      "explain": "الجملة مدح → كلمة ذم هي الخطأ",
+      "hash": "531a81de"
+    },
+    {
+      "id": "mcq_ratio_file_001",
+      "track": "qudurat",
+      "cat": "كمي · التناسب",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "q": "اقرأ المسألة التالية وحلها:\n2 كيلو جبن تحتاج إلى 15 لتر حليب، فكم لتر نحتاج من الحليب لصنع 12 كيلو جبن؟",
+      "options": [
+        "45",
+        "60",
+        "90",
+        "120"
+      ],
+      "a": "90",
+      "explain": "الكمية كبرت 6 مرات → الحليب يكبر 6 مرات",
+      "hash": "c202e3e4"
+    },
+    {
+      "id": "mcq_verbal_complete_003",
+      "track": "qudurat",
+      "cat": "لفظي · إكمال الجمل",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "q": "أكمل الفراغات في الجملة التالية بما يناسبها لغويًا ومعنويًا:\nالحكيم هو الذي يميز بين ما يعلمه وما ........",
+      "options": [
+        "يتقنه",
+        "يحسنه",
+        "يجهله",
+        "يكرهه"
+      ],
+      "a": "يجهله",
+      "explain": "يعلمه → نأخذ الكلمة العكس",
+      "hash": "a0e99ad8"
+    },
+    {
+      "id": "mcq_context_error_004",
+      "track": "qudurat",
+      "cat": "لفظي · الخطأ السياقي",
+      "creator": "المعلمين",
+      "qType": "mcq",
+      "q": "حدد الكلمة الشاذة التي أفسدت المعنى في الجملة التالية:\nأفضل شيء التخلق بأخلاق حميدة ، ومن القبيح المداومة على ذلك ، فإن أفضل شيء الثبات على الحق حتى النهاية.",
+      "options": [
+        "التخلق",
+        "القبيح",
+        "المداومة",
+        "الحق"
+      ],
+      "a": "القبيح",
+      "explain": "الكلام مدح → كلمة ذم تكسر المعنى",
+      "hash": "eb0d6d1e"
     }
   ],
-  "exported": 1777966356516,
+  "exported": 1778014527530,
   "cleaned": {
     "removed": 0,
     "deduped": 0,
-    "finalCount": 206
+    "finalCount": 342
   }
 }
