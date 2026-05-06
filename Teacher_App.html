@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
 <meta name="theme-color" content="#6366f1">
-<title>Vocab — تطبيق المعلم</title>
+<title>إتقان — بوابة المعلم</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -424,6 +424,119 @@ textarea{resize:vertical;min-height:80px;line-height:1.6}
 .modal h3 .ico{color:var(--primary)}
 .m-actions{display:flex;gap:8px;margin-top:18px;justify-content:flex-end;flex-wrap:wrap}
 
+/* ════════════ IMAGE PREVIEW MODAL ════════════ */
+.img-preview-modal-body{max-width:760px}
+.ipm-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;
+  margin-bottom:14px;
+}
+.ipm-side{display:flex;flex-direction:column;gap:6px;min-width:0}
+.ipm-label{
+  font-family:var(--f-ar);font-size:12.5px;font-weight:700;
+  color:var(--text-3);letter-spacing:-0.005em;
+  display:flex;align-items:center;gap:6px;
+}
+.ipm-label-primary{color:var(--primary)}
+.ipm-img-wrap{
+  border-radius:var(--r-md);overflow:hidden;
+  background:repeating-conic-gradient(#1f2937 0% 25%, #111827 0% 50%) 50%/16px 16px;
+  border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;
+  aspect-ratio:1;
+}
+.ipm-img-wrap img{
+  max-width:100%;max-height:100%;width:auto;height:auto;
+  display:block;
+}
+.ipm-meta{
+  font-family:var(--f-en);font-size:11px;color:var(--text-3);
+  font-weight:600;letter-spacing:0.02em;line-height:1.4;
+}
+.ipm-savings{
+  text-align:center;
+  font-family:var(--f-ar);font-size:13px;font-weight:600;
+  color:var(--good);
+  background:var(--good-soft);
+  border-radius:var(--r-md);
+  padding:10px 12px;line-height:1.5;
+}
+.ipm-savings b{font-family:var(--f-en);font-weight:800;margin:0 2px}
+@media (max-width:560px){
+  .ipm-grid{grid-template-columns:1fr}
+}
+
+/* ════════════ CARD PREVIEW MODAL ════════════ */
+.card-preview-modal-body{max-width:520px}
+.cpm-type-pill{
+  display:inline-block;
+  font-family:var(--f-en);font-size:10.5px;font-weight:800;
+  letter-spacing:0.06em;text-transform:uppercase;
+  padding:3px 10px;border-radius:var(--r-pill);
+  background:var(--primary-soft);color:var(--primary);
+  margin-bottom:12px;
+}
+.cpm-meta{
+  font-family:var(--f-en);font-size:11px;font-weight:600;
+  color:var(--text-3);margin-bottom:14px;letter-spacing:0.02em;
+}
+.cpm-meta span{margin-inline-end:14px}
+.cpm-question{
+  font-family:var(--f-ar);font-size:16px;font-weight:600;
+  color:var(--text);line-height:1.65;
+  background:var(--surface-2);border:1px solid var(--line);
+  border-inline-start:3px solid var(--primary);
+  padding:14px 16px;border-radius:var(--r-md);
+  margin-bottom:14px;white-space:pre-wrap;word-break:break-word;
+}
+.cpm-answer{
+  font-family:var(--f-ar);font-size:14px;font-weight:600;
+  color:var(--text);line-height:1.65;
+  background:var(--good-soft);border:1px solid rgba(34,197,94,.22);
+  border-inline-start:3px solid var(--good);
+  padding:12px 14px;border-radius:var(--r-md);
+  margin-bottom:10px;white-space:pre-wrap;word-break:break-word;
+}
+.cpm-answer-label{
+  display:flex;align-items:center;gap:6px;
+  font-family:var(--f-ar);font-weight:800;font-size:12.5px;
+  color:var(--good);margin-bottom:6px;
+}
+.cpm-options{margin:8px 0}
+.cpm-opt{
+  display:flex;align-items:center;gap:10px;
+  padding:9px 12px;margin-bottom:6px;
+  border:1px solid var(--line);border-radius:var(--r-md);
+  background:var(--surface-2);
+  font-family:var(--f-ar);font-size:13.5px;
+}
+.cpm-opt.correct{
+  background:var(--good-soft);border-color:var(--good);color:var(--good);
+  font-weight:700;
+}
+.cpm-opt-letter{
+  font-family:var(--f-en);font-weight:800;font-size:11px;
+  width:22px;height:22px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--surface-3);color:var(--text-2);
+  flex-shrink:0;
+}
+.cpm-opt.correct .cpm-opt-letter{background:var(--good);color:#fff}
+.cpm-image{
+  margin:10px 0;border-radius:var(--r-md);overflow:hidden;
+  border:1px solid var(--line);
+}
+.cpm-image img{display:block;width:100%;max-height:360px;object-fit:contain;background:#0f1117}
+.cpm-context, .cpm-explain{
+  font-family:var(--f-ar);font-size:12.5px;color:var(--text-2);
+  background:var(--surface-2);
+  padding:10px 12px;border-radius:var(--r-md);
+  margin-top:8px;line-height:1.6;
+}
+.cpm-context-label, .cpm-explain-label{
+  font-weight:800;font-size:11.5px;color:var(--text-3);
+  margin-bottom:4px;text-transform:uppercase;letter-spacing:0.04em;
+}
+
 /* MCQ option editor */
 .opt-row{
   display:flex;align-items:center;gap:8px;margin-bottom:8px;
@@ -566,8 +679,8 @@ img,video,canvas,svg{max-width:100%;height:auto}
 
 <header class="header">
   <div class="brand">
-    <div class="brand-mark">V</div>
-    <span>Vocab</span>
+    <div class="brand-mark">إ</div>
+    <span>إتقان</span>
     <span class="brand-sub">· بوابة المعلم</span>
   </div>
   <div class="h-spacer"></div>
@@ -881,6 +994,14 @@ img,video,canvas,svg{max-width:100%;height:auto}
           <option value="qudurat">القدرات</option>
           <option value="tahseeli">التحصيلي</option>
         </select>
+        <select class="inp inp-sm" id="filter-type" title="تصفية حسب نوع البطاقة">
+          <option value="">كل الأنواع</option>
+          <option value="card">بطاقة</option>
+          <option value="mcq">اختيارات</option>
+          <option value="tf">صح/خطأ</option>
+          <option value="cloze">إكمال</option>
+          <option value="sa">إجابة قصيرة</option>
+        </select>
         <select class="inp inp-sm" id="filter-creator" title="تصفية حسب المنشئ">
           <option value="">كل المنشئين</option>
         </select>
@@ -984,6 +1105,61 @@ img,video,canvas,svg{max-width:100%;height:auto}
   </div>
 </div>
 
+<!-- ════════════ CARD PREVIEW MODAL — quick view as student would see ════════════ -->
+<div class="modal-bg" id="card-preview-modal">
+  <div class="modal card-preview-modal-body">
+    <h3>
+      <svg class="ico ico-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+      معاينة البطاقة
+    </h3>
+    <div id="cpm-body"></div>
+    <div class="m-actions">
+      <button class="btn" type="button" onclick="App.closeCardPreview()">إغلاق</button>
+      <button class="btn primary" type="button" id="cpm-edit-btn">
+        <svg class="ico ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        تعديل
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ IMAGE PREVIEW MODAL ════════════ -->
+<div class="modal-bg" id="img-preview-modal">
+  <div class="modal img-preview-modal-body">
+    <h3>
+      <svg class="ico ico-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      معاينة الصورة قبل الحفظ
+    </h3>
+
+    <div class="ipm-grid">
+      <div class="ipm-side">
+        <div class="ipm-label">الأصلية</div>
+        <div class="ipm-img-wrap">
+          <img id="ipm-orig" alt="">
+        </div>
+        <div class="ipm-meta" id="ipm-orig-meta">—</div>
+      </div>
+      <div class="ipm-side">
+        <div class="ipm-label ipm-label-primary">بعد المعالجة (مع علامة "إتقان")</div>
+        <div class="ipm-img-wrap">
+          <img id="ipm-processed" alt="">
+        </div>
+        <div class="ipm-meta" id="ipm-processed-meta">—</div>
+      </div>
+    </div>
+
+    <div class="ipm-savings" id="ipm-savings"></div>
+
+    <div class="m-actions">
+      <button class="btn" type="button" onclick="App.cancelImagePreview()">إلغاء</button>
+      <button class="btn primary" type="button" onclick="App.confirmImagePreview()">
+        <svg class="ico ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        حفظ في البطاقة
+      </button>
+    </div>
+  </div>
+</div>
+
 <script>
 /* ════════════════════════════════════════════════════════════════════
    VOCAB TEACHER — APP ENGINE
@@ -1037,6 +1213,7 @@ const State={
   },
   searchQ:'',
   filterTrack:'',
+  filterType:'',
   filterCreator:'',
   sortBy:'created-desc',
   reportOrientation:'landscape',  // 'landscape' | 'portrait'
@@ -1273,53 +1450,88 @@ async function applyImageFile(file){
   $('f-img-file-name').textContent=file.name;
   toast('جاري المعالجة...');
   try{
-    const result=await forceCompress(file);
-    State.form.img={
-      data:result.dataUrl, name:file.name,
-      size:result.size, original:file.size, mode:'compressed',
-      format:result.format, w:result.w, h:result.h,
+    /* Process: resize + compress + watermark */
+    const processed = await processImageWithWatermark(file);
+    /* Read original for the BEFORE side */
+    const originalDataUrl = await readFileAsDataURL(file);
+    /* Stash for confirmation step */
+    _pendingImageData = {
+      processed,
+      originalDataUrl,
+      fileName: file.name,
+      originalSize: file.size,
     };
-    renderImgPreview();
-    toast(`تم: ${fmtSize(result.size)} · ${result.w}×${result.h}`,'success');
+    /* Show preview modal — user must explicitly confirm */
+    showImagePreviewModal();
   }catch(e){
     console.error(e);
-    toast('فشل ضغط الصورة','error');
+    toast('فشل معالجة الصورة','error');
   }
 }
-function fileToDataURL(file){
-  return new Promise((res,rej)=>{
-    const r=new FileReader();
-    r.onload=()=>res(r.result);
-    r.onerror=()=>rej(r.error);
-    r.readAsDataURL(file);
-  });
+
+/* ════════════════════════════════════════════════════════════════════
+   IMAGE PROCESSING PIPELINE — 1200px max + smart compression + watermark.
+   Goals:
+   1. Resize to ≤1200px (any axis) preserving aspect ratio
+   2. Compress as JPEG q=0.75 (good balance for mobile data + readability)
+   3. Burn-in "إتقان" watermark, bottom-right, white-on-shadow, ~35% opacity
+   4. Watermark size scales with image (so it stays readable but never
+      dominates) — clamped between 14px and 36px regardless of image size
+   5. Output preview-ready dataURL + metadata for the modal
+   No background removal — see chat for rationale (50MB+ AI dependency).
+   ════════════════════════════════════════════════════════════════════ */
+const IMG_MAX_DIM = 1200;
+const IMG_QUALITY = 0.75;
+const IMG_WATERMARK_TEXT = 'إتقان';
+
+async function processImageWithWatermark(file){
+  const img = await loadImage(file);
+  /* Resize keeping aspect ratio */
+  const scale = Math.min(1, IMG_MAX_DIM / Math.max(img.width, img.height));
+  const w = Math.round(img.width * scale);
+  const h = Math.round(img.height * scale);
+
+  const c = document.createElement('canvas');
+  c.width = w; c.height = h;
+  const ctx = c.getContext('2d');
+  /* JPEG has no alpha → white background ensures transparent PNGs come out clean */
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, 0, w, h);
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = 'high';
+  ctx.drawImage(img, 0, 0, w, h);
+
+  /* Burn the watermark in bottom-right.
+     Font scales with image but is clamped — never tiny, never huge */
+  const fontSize = Math.max(14, Math.min(36, Math.round(Math.min(w, h) * 0.038)));
+  const padding = Math.max(8, Math.round(fontSize * 0.6));
+  ctx.font = `900 ${fontSize}px "Tajawal","Cairo","Segoe UI",Arial,sans-serif`;
+  ctx.textAlign = 'right';
+  ctx.textBaseline = 'bottom';
+  /* Drop shadow for readability on any background */
+  ctx.shadowColor = 'rgba(0,0,0,0.55)';
+  ctx.shadowBlur = Math.round(fontSize * 0.35);
+  ctx.shadowOffsetX = 1;
+  ctx.shadowOffsetY = 2;
+  /* Semi-transparent white fill — 35% as specified */
+  ctx.fillStyle = 'rgba(255,255,255,0.78)';
+  ctx.globalAlpha = 0.35;
+  ctx.fillText(IMG_WATERMARK_TEXT, w - padding, h - padding);
+  /* Reset state */
+  ctx.globalAlpha = 1;
+  ctx.shadowColor = 'transparent';
+
+  const dataUrl = c.toDataURL('image/jpeg', IMG_QUALITY);
+  const b64 = dataUrl.slice(dataUrl.indexOf(',')+1);
+  const size = Math.floor(b64.length * 0.75);
+  return {dataUrl, size, format:'jpeg', q:IMG_QUALITY, w, h, originalSize:file.size};
 }
 
-/* ─── Forced compression: ALL uploads → Canvas 500px max → JPEG 0.5 ─── */
+/* Legacy alias — kept for any other callers */
 async function forceCompress(file){
-  const MAX_DIM=500;       // mandatory cap
-  const QUALITY=0.5;       // mandatory JPEG quality
-
-  const img=await loadImage(file);
-  const scale=Math.min(1, MAX_DIM/Math.max(img.width, img.height));
-  const w=Math.round(img.width*scale);
-  const h=Math.round(img.height*scale);
-
-  const c=document.createElement('canvas');
-  c.width=w; c.height=h;
-  const ctx=c.getContext('2d');
-  /* JPEG has no alpha — fill white so transparent PNGs render cleanly. */
-  ctx.fillStyle='#ffffff';
-  ctx.fillRect(0,0,w,h);
-  ctx.imageSmoothingEnabled=true;
-  ctx.imageSmoothingQuality='high';
-  ctx.drawImage(img,0,0,w,h);
-
-  const dataUrl=c.toDataURL('image/jpeg', QUALITY);
-  const b64=dataUrl.slice(dataUrl.indexOf(',')+1);
-  const size=Math.floor(b64.length*0.75);
-  return {dataUrl, size, format:'jpeg', q:QUALITY, w, h};
+  return processImageWithWatermark(file);
 }
+
 function loadImage(file){
   return new Promise((res,rej)=>{
     const url=URL.createObjectURL(file);
@@ -1328,6 +1540,181 @@ function loadImage(file){
     img.onerror=e=>{ URL.revokeObjectURL(url); rej(e); };
     img.src=url;
   });
+}
+
+/* Read original file as data URL — for the BEFORE side of preview */
+function readFileAsDataURL(file){
+  return new Promise((res,rej)=>{
+    const r=new FileReader();
+    r.onload=()=>res(r.result);
+    r.onerror=()=>rej(r.error);
+    r.readAsDataURL(file);
+  });
+}
+
+/* Preview state — pending image awaits user confirmation */
+let _pendingImageData = null;
+
+/* ════════════════════════════════════════════════════════════════════
+   IMAGE PREVIEW MODAL — show before/after, let teacher confirm or cancel
+   before committing the processed image to the card form state.
+   ════════════════════════════════════════════════════════════════════ */
+function showImagePreviewModal(){
+  if(!_pendingImageData) return;
+  const {processed, originalDataUrl, fileName, originalSize} = _pendingImageData;
+  $('ipm-orig').src = originalDataUrl;
+  $('ipm-processed').src = processed.dataUrl;
+  $('ipm-orig-meta').textContent = `${fileName} · ${fmtSize(originalSize)}`;
+  $('ipm-processed-meta').textContent = `إتقان · ${processed.w}×${processed.h} · ${fmtSize(processed.size)}`;
+  /* Savings line */
+  const saved = originalSize - processed.size;
+  const pct = originalSize > 0 ? Math.round((saved/originalSize)*100) : 0;
+  if(saved > 0){
+    $('ipm-savings').innerHTML =
+      `توفير <b>${fmtSize(saved)}</b> (<b>${pct}%</b>) · مع علامة "إتقان" المضافة`;
+    $('ipm-savings').style.display = '';
+  } else {
+    $('ipm-savings').innerHTML = `الصورة جاهزة مع علامة "إتقان"`;
+    $('ipm-savings').style.display = '';
+  }
+  $('img-preview-modal').classList.add('show');
+}
+
+function confirmImagePreview(){
+  if(!_pendingImageData) return;
+  const {processed, fileName, originalSize} = _pendingImageData;
+  /* Commit to form state */
+  State.form.img = {
+    data: processed.dataUrl,
+    name: fileName,
+    size: processed.size,
+    original: originalSize,
+    mode: 'compressed',
+    format: processed.format,
+    w: processed.w,
+    h: processed.h,
+    watermark: 'إتقان',
+  };
+  renderImgPreview();
+  toast(`تم: ${fmtSize(processed.size)} · ${processed.w}×${processed.h}`, 'success');
+  /* Cleanup */
+  _pendingImageData = null;
+  $('img-preview-modal').classList.remove('show');
+}
+
+function cancelImagePreview(){
+  _pendingImageData = null;
+  /* Reset file input so the same file can be re-selected */
+  const inp = $('f-img-file');
+  if(inp) inp.value = '';
+  $('f-img-file-name').textContent = 'اختر صورة من الجهاز';
+  $('img-preview-modal').classList.remove('show');
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   CARD PREVIEW MODAL — show a card as the student would see it.
+   Quick read-only view; teacher can click "تعديل" to jump to edit form.
+   ════════════════════════════════════════════════════════════════════ */
+function openCardPreview(id){
+  const c = State.cards.find(x=>x.id===id);
+  if(!c){ toast('البطاقة غير موجودة','error'); return; }
+
+  const TYPE_LBL = {card:'بطاقة', mcq:'خيارات', tf:'صح/خطأ', cloze:'فراغ', sa:'إجابة قصيرة'};
+  const TRACK_LBL = {en:'الإنجليزي', qudurat:'القدرات', tahseeli:'التحصيلي'};
+  const trackLabel = TRACK_LBL[c.track] || c.track || '—';
+
+  let html = '';
+  html += `<div class="cpm-type-pill">${TYPE_LBL[c.qType]||c.qType||'بطاقة'}</div>`;
+  html += `<div class="cpm-meta">`;
+  html += `<span>المسار: <b>${esc(trackLabel)}</b></span>`;
+  if(c.cat)     html += `<span>الفئة: <b>${esc(c.cat)}</b></span>`;
+  if(c.creator) html += `<span>المنشئ: <b>${esc(c.creator)}</b></span>`;
+  html += `</div>`;
+
+  /* Question / cloze with mask */
+  if(c.qType === 'cloze' && c.cloze){
+    const masked = String(c.cloze).replace(/\{\{(.+?)\}\}/g, '______');
+    html += `<div class="cpm-question">${esc(masked)}</div>`;
+  } else if(c.q){
+    html += `<div class="cpm-question">${esc(c.q)}</div>`;
+  }
+
+  /* Image */
+  if(c.img){
+    html += `<div class="cpm-image"><img src="${esc(c.img)}" alt=""></div>`;
+  }
+
+  /* Answer area */
+  if(c.qType === 'mcq' && Array.isArray(c.options) && c.options.length){
+    const letters = ['A','B','C','D','E','F'];
+    html += '<div class="cpm-options">';
+    c.options.forEach((opt, i)=>{
+      const isCorrect = String(opt) === String(c.a);
+      html += `<div class="cpm-opt${isCorrect?' correct':''}">
+        <span class="cpm-opt-letter">${letters[i]||'?'}</span>
+        <span>${esc(opt)}</span>
+      </div>`;
+    });
+    html += '</div>';
+  } else if(c.qType === 'tf'){
+    const v = c.tf === true ? 'صح · TRUE' : (c.tf === false ? 'خطأ · FALSE' : '—');
+    html += `<div class="cpm-answer-label">
+      <svg class="ico ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      الإجابة الصحيحة
+    </div>`;
+    html += `<div class="cpm-answer">${esc(v)}</div>`;
+  } else if(c.qType === 'cloze'){
+    /* Show full cloze with answer highlighted */
+    if(c.cloze){
+      const filled = String(c.cloze).replace(/\{\{(.+?)\}\}/g, '<b style="color:var(--good);background:var(--good-soft);padding:1px 6px;border-radius:4px">$1</b>');
+      html += `<div class="cpm-answer-label">
+        <svg class="ico ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        النص الكامل
+      </div>`;
+      html += `<div class="cpm-answer">${filled}</div>`;
+    }
+  } else if(c.a){
+    html += `<div class="cpm-answer-label">
+      <svg class="ico ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      الإجابة
+    </div>`;
+    html += `<div class="cpm-answer">${esc(c.a)}</div>`;
+  }
+
+  /* Optional context + explain */
+  if(c.ctx){
+    html += `<div class="cpm-context">
+      <div class="cpm-context-label">السياق</div>
+      ${esc(c.ctx)}
+    </div>`;
+  }
+  if(c.explain){
+    html += `<div class="cpm-explain">
+      <div class="cpm-explain-label">شرح إضافي</div>
+      ${esc(c.explain)}
+    </div>`;
+  }
+
+  $('cpm-body').innerHTML = html;
+  /* Wire edit button — closes preview then opens edit form */
+  $('cpm-edit-btn').onclick = ()=>{
+    closeCardPreview();
+    editCard(id);
+  };
+  $('card-preview-modal').classList.add('show');
+}
+
+function closeCardPreview(){
+  $('card-preview-modal').classList.remove('show');
+}
+
+/* Search aliases — allow programmatic access from elsewhere */
+function searchCards(query){
+  const inp = $('search');
+  if(inp){ inp.value = query||''; State.searchQ = query||''; renderList(); }
+}
+function clearSearch(){
+  searchCards('');
 }
 
 /* ════════════════════════════════════════════════════════════════════
@@ -1557,8 +1944,9 @@ function renderList(){
   const q=State.searchQ.trim().toLowerCase();
   const filtTrack = State.filterTrack;
   const filtCreator = State.filterCreator;
+  const filtType = State.filterType;
 
-  /* Multi-stage filter: search → track → creator */
+  /* Multi-stage filter: search → track → type → creator */
   let filtered = State.cards.slice();
   if(q){
     filtered = filtered.filter(c=>{
@@ -1569,6 +1957,9 @@ function renderList(){
   }
   if(filtTrack){
     filtered = filtered.filter(c=>(c.track||'en')===filtTrack);
+  }
+  if(filtType){
+    filtered = filtered.filter(c=>(c.qType||'card')===filtType);
   }
   if(filtCreator){
     filtered = filtered.filter(c=>(c.creator||'').trim()===filtCreator);
@@ -1611,6 +2002,9 @@ function renderList(){
           <div class="meta">${esc(c.cat||'—')} · ${trackLbl}${c.creator?' · '+esc(c.creator):''}</div>
         </div>
         <div class="acts">
+          <button onclick="App.openCardPreview('${c.id}')" type="button" title="معاينة سريعة">
+            <svg class="ico ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
           <button onclick="App.editCard('${c.id}')" type="button" title="تعديل">
             <svg class="ico ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
           </button>
@@ -2064,6 +2458,7 @@ function init(){
   // search
   $('search').addEventListener('input', e=>{ State.searchQ=e.target.value; renderList(); });
   $('filter-track').addEventListener('change', e=>{ State.filterTrack=e.target.value; renderList(); });
+  $('filter-type').addEventListener('change', e=>{ State.filterType=e.target.value; renderList(); });
   $('filter-creator').addEventListener('change', e=>{ State.filterCreator=e.target.value; renderList(); });
   $('sort-by').addEventListener('change', e=>{ State.sortBy=e.target.value; renderList(); });
 
@@ -2418,14 +2813,21 @@ function reportShellHTML(title, headMeta, bodyHtml, opts){
   .toolbar button.primary:hover{background:#0a2e3f}
   @media print{
     /* CRITICAL: bottom margin must be > print-footer height + breathing room
-       to prevent text overlap. We use 30mm bottom space:
-       - 6mm: footer position from bottom edge
-       - ~6mm: footer line height
-       - 18mm: gap between content end and footer */
-    body{padding:8mm 8mm 32mm 8mm;max-width:none;font-size:10.5px}
+       to prevent text overlap with the fixed footer. Increased from 32mm to
+       42mm to handle tall multi-line rows (image + Q + A + ctx + notes).
+       Breakdown:
+       - 8mm: footer position from bottom edge
+       - 6mm: footer line height
+       - 28mm: gap (gives even tall rows room to flow to next page) */
+    body{padding:8mm 8mm 42mm 8mm;max-width:none;font-size:10.5px}
     .no-print{display:none}
     .gov-header{break-inside:avoid;page-break-inside:avoid}
     .footer{break-inside:avoid;page-break-inside:avoid}
+    /* Force each table row to fit a single page — never split across pages.
+       Without this, Chrome/Firefox can split a row mid-cell, which is what
+       creates the "Vocab • date" overlap visible in the screenshot. */
+    table tr{break-inside:avoid;page-break-inside:avoid}
+    table thead{display:table-header-group} /* repeat header on each page */
     /* Per-page footer — tighter, more breathing room */
     .print-footer{
       display:flex !important;
@@ -2434,6 +2836,7 @@ function reportShellHTML(title, headMeta, bodyHtml, opts){
       font-size:9px;color:#15445a;
       justify-content:space-between;align-items:center;
       background:#fff; /* opaque so content above doesn't bleed through */
+      z-index:100;
     }
     .print-footer .pf-stamp{font-weight:700}
     .print-footer .pf-sig{font-weight:700;color:#15445a;display:flex;align-items:center;gap:4px}
@@ -2526,7 +2929,7 @@ function reportShellHTML(title, headMeta, bodyHtml, opts){
   })()}
   <!-- Per-page footer (visible only when printing) — has supervisor signature line on every page -->
   <div class="print-footer">
-    <span class="pf-stamp">Vocab · ${dateStr}</span>
+    <span class="pf-stamp">إتقان · ${dateStr}</span>
     <span class="pf-sig">اعتماد المشرف:<span class="ln"></span></span>
   </div>
 </body>
@@ -3330,6 +3733,8 @@ window.App={
   publishToCloud, publishAllClean, copyPublishLink,
   cleanCardsList, downloadCleanJSON,
   importFromClipboard, openPasteImport,
+  confirmImagePreview, cancelImagePreview,
+  searchCards, clearSearch, openCardPreview, closeCardPreview,
 };
 
 init();

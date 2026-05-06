@@ -568,6 +568,58 @@ textarea{resize:vertical;min-height:90px;line-height:1.6}
 .empty .t{font-family:var(--f-ar);font-weight:700;font-size:20px;margin-bottom:6px;color:var(--text)}
 .empty .s{font-family:var(--f-ar);font-size:14px;color:var(--text-3);margin-bottom:18px;font-weight:500}
 
+/* ════════════ EMPTY-CELEBRATE — daily-dose completion screen ════════════
+   Replaces the bare "no cards due" message with a celebratory layout that
+   shows progress + offers a bonus dose for motivated students. */
+.empty-celebrate .ico-wrap{
+  background:linear-gradient(135deg,var(--good),#059669);
+  color:#fff;
+  width:84px;height:84px;
+  box-shadow:0 8px 28px rgba(16,185,129,.35);
+  animation:celebPop .6s var(--ease-back);
+}
+@keyframes celebPop{
+  0%{transform:scale(.4) rotate(-10deg);opacity:0}
+  60%{transform:scale(1.12) rotate(2deg)}
+  100%{transform:scale(1) rotate(0);opacity:1}
+}
+.empty-stats{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
+  max-width:380px;margin:0 auto 18px;
+}
+.es-cell{
+  background:var(--surface-2);border:1px solid var(--line);
+  border-radius:var(--r-md);padding:12px 8px;
+  text-align:center;
+}
+.es-n{
+  font-family:var(--f-en);font-weight:900;font-size:22px;
+  color:var(--primary);line-height:1;letter-spacing:-0.02em;
+}
+.es-l{
+  font-family:var(--f-ar);font-size:11.5px;color:var(--text-3);
+  margin-top:6px;font-weight:600;
+}
+.empty-bonus{
+  max-width:420px;margin:0 auto 8px;
+  padding:14px;border-radius:var(--r-md);
+  background:var(--primary-soft);
+  border:1px solid rgba(99,102,241,.2);
+}
+.eb-row{
+  display:flex;align-items:center;gap:8px;
+  font-family:var(--f-ar);font-size:13px;font-weight:600;
+  color:var(--text-2);margin-bottom:10px;line-height:1.5;
+}
+.eb-row .ico{color:var(--primary);flex-shrink:0}
+.eb-row b{font-family:var(--f-en);color:var(--primary);font-weight:800}
+.empty-bonus .btn{margin:0}
+@media (max-width:480px){
+  .empty-stats{grid-template-columns:repeat(3,1fr);gap:6px}
+  .es-n{font-size:18px}
+  .es-l{font-size:10.5px}
+}
+
 .kbd-bar{
   display:flex;gap:14px;justify-content:center;padding:12px 0 0;flex-wrap:wrap;
   font-family:var(--f-ar);font-size:12px;color:var(--text-3);font-weight:500;
@@ -1352,13 +1404,42 @@ img,video,canvas,svg{max-width:100%;height:auto}
     </div>
 
     <div id="study-empty" class="hidden">
-      <div class="empty">
-        <div class="ico-wrap">
+      <div class="empty empty-celebrate" id="empty-celebrate">
+        <div class="ico-wrap" id="empty-icon">
           <svg class="ico ico-xl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
         <div class="t" id="empty-title">لا توجد بطاقات مستحقة</div>
         <div class="s" id="empty-sub">لقد أنجزت كل المراجعات اليوم</div>
-        <button class="btn primary" onclick="App.go('home')">العودة للرئيسية</button>
+
+        <!-- Stats grid (shown only when student studied today) -->
+        <div class="empty-stats" id="empty-stats" style="display:none">
+          <div class="es-cell">
+            <div class="es-n" id="es-today">0</div>
+            <div class="es-l">اليوم</div>
+          </div>
+          <div class="es-cell">
+            <div class="es-n" id="es-streak">0</div>
+            <div class="es-l">يوم متتالي</div>
+          </div>
+          <div class="es-cell">
+            <div class="es-n" id="es-remaining">0</div>
+            <div class="es-l">بطاقة لاحقاً</div>
+          </div>
+        </div>
+
+        <!-- Bonus dose CTA (shown when daily cap is hit but cards remain) -->
+        <div class="empty-bonus" id="empty-bonus" style="display:none">
+          <div class="eb-row">
+            <svg class="ico ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            <span>تريد المزيد؟ يمكنك فتح <b id="eb-amount">20</b> بطاقة إضافية الآن</span>
+          </div>
+          <button class="btn primary block" type="button" onclick="App.unlockBonusDose()">
+            <svg class="ico ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 4 12"/><polyline points="14 6 20 12 14 18"/></svg>
+            افتح جرعة إضافية
+          </button>
+        </div>
+
+        <button class="btn" onclick="App.go('home')" id="empty-back-btn" style="margin-top:14px">العودة للرئيسية</button>
       </div>
     </div>
   </section>
@@ -2031,11 +2112,61 @@ function displayName(s){
   t=t.replace(/^ال/,'');                               // leading definite article
   return t.trim();
 }
+/* ════════════════════════════════════════════════════════════════════
+   dueCount — what's actually studyable RIGHT NOW.
+   Counts:
+     • mature dues (any reps>0 with due time passed)
+     • PLUS new cards up to today's remaining daily-cap budget
+
+   Previously this counted ALL fresh cards regardless of cap, which produced
+   the bug from the screenshot: home shows "334 due" but study screen says
+   "no cards due" (because cap was already hit). Single source of truth now.
+
+   `t` = track key, defaults to 'all'.
+   ════════════════════════════════════════════════════════════════════ */
 function dueCount(t='all'){
   const list=cardsForTrack(t);
+  let mature=0, freshCount=0;
+  const todayMs=today();
+  for(const c of list){
+    const p=State.progress[c.id];
+    if(!p || p.reps===0) freshCount++;
+    else if(p.due<=todayMs) mature++;
+  }
+  /* Apply daily-new budget to fresh cards only (mature reviews are unlimited) */
+  const cap = Number(State.settings.dailyNew ?? 20);
+  let allowedNew = freshCount;
+  if(cap > 0){
+    const todayKey = dayKey();
+    const introduced = (State.history[todayKey]||{}).newIntroduced || 0;
+    allowedNew = Math.max(0, Math.min(freshCount, cap - introduced));
+  }
+  return mature + allowedNew;
+}
+
+/* Total fresh cards in track regardless of cap — used for "remaining" displays */
+function freshCount(t='all'){
+  const list=cardsForTrack(t);
   let n=0;
-  for(const c of list){ const p=State.progress[c.id]; if(!p || p.due<=today()) n++; }
+  for(const c of list){
+    const p=State.progress[c.id];
+    if(!p || p.reps===0) n++;
+  }
   return n;
+}
+
+/* True total count of cards still owed today + locked-until-tomorrow.
+   Used by "completed today" screen to tell student how many remain overall. */
+function totalRemaining(t='all'){
+  const list=cardsForTrack(t);
+  let mature=0, fresh=0;
+  const todayMs=today();
+  for(const c of list){
+    const p=State.progress[c.id];
+    if(!p || p.reps===0) fresh++;
+    else if(p.due<=todayMs) mature++;
+  }
+  return {mature, fresh, total: mature + fresh};
 }
 function streakDays(){
   let n=0;
@@ -2154,8 +2285,7 @@ function showCard(){
   const main=$('study-main'), empty=$('study-empty');
   if(State.studyIdx >= State.studyQueue.length){
     main.classList.add('hidden'); empty.classList.remove('hidden');
-    $('empty-title').textContent = State.studyQueue.length===0 ? 'لا توجد بطاقات مستحقة' : 'أحسنت — انتهت المراجعة';
-    $('empty-sub').textContent  = State.studyQueue.length===0 ? 'لقد أنجزت كل المراجعات اليوم' : `راجعت ${State.studyQueue.length} بطاقة`;
+    renderEmptyState();
     /* Session complete: flush ping + force autosave */
     if(State.studyQueue.length>0){
       pingMonitor({event:'session_end', total:State.studyQueue.length});
@@ -2231,6 +2361,109 @@ function clozeMask(s){ return String(s||'').replace(/\{\{(.+?)\}\}/g,'____'); }
 function clozeReveal(s){
   return String(s||'').replace(/\{\{(.+?)\}\}/g, (_,a)=>`<span class="cloze-blank">${esc(a)}</span>`);
 }
+
+/* ════════════════════════════════════════════════════════════════════
+   EMPTY-STATE RENDERER — celebratory completion screen.
+
+   Three scenarios:
+   1. NO CARDS in deck at all → onboarding-style message (rare)
+   2. SESSION FINISHED (had cards, completed all) → celebrate + show
+      stats + offer bonus dose if cap was hit and more cards exist
+   3. NOTHING DUE TODAY (queue was empty from the start) → "all caught up"
+
+   The bonus-dose CTA is the key behavioral fix: it appears ONLY when
+   the daily cap is the reason no more cards show. The student isn't
+   blocked, they're invited to do more if they want.
+   ════════════════════════════════════════════════════════════════════ */
+function renderEmptyState(){
+  const startedWithCards = State.studyQueue.length > 0;
+  const todayKey = dayKey();
+  const todaysHistory = State.history[todayKey] || {count:0, newIntroduced:0};
+  const sessionCount = State.studyQueue.length; /* cards just completed */
+
+  /* Compute remaining cards (mature + locked-fresh) across active track */
+  const rem = totalRemaining(State.activeTrack);
+  const cap = Number(State.settings.dailyNew ?? 20);
+  const introduced = todaysHistory.newIntroduced || 0;
+  const hitCap = cap > 0 && introduced >= cap;
+  const lockedNew = hitCap ? Math.max(0, rem.fresh) : 0;
+
+  /* Compute streak */
+  const streak = streakDays();
+
+  /* Title + subtitle by scenario */
+  let title, sub;
+  if(startedWithCards){
+    title = 'أحسنت — انتهت الجلسة';
+    sub   = `راجعت ${sessionCount} بطاقة في هذه الجلسة`;
+  } else if(rem.total === 0){
+    title = 'كل شيء على ما يرام';
+    sub   = 'لا بطاقات مستحقة الآن — عُد لاحقاً';
+  } else if(hitCap && lockedNew > 0){
+    title = 'أكملت جرعة اليوم';
+    sub   = 'البطاقات الجديدة المتبقية ستُفتح غداً تلقائياً';
+  } else {
+    title = 'لا توجد بطاقات مستحقة الآن';
+    sub   = 'عُد لاحقاً عند حلول موعد المراجعة';
+  }
+  $('empty-title').textContent = title;
+  $('empty-sub').textContent   = sub;
+
+  /* Stats grid — show whenever there's meaningful today data OR remaining */
+  const statsEl = $('empty-stats');
+  const showStats = todaysHistory.count > 0 || streak > 0 || rem.total > 0;
+  if(showStats){
+    statsEl.style.display = '';
+    $('es-today').textContent     = todaysHistory.count || 0;
+    $('es-streak').textContent    = streak;
+    $('es-remaining').textContent = rem.total;
+  } else {
+    statsEl.style.display = 'none';
+  }
+
+  /* Bonus dose CTA — only when cap is the reason cards are locked */
+  const bonusEl = $('empty-bonus');
+  if(hitCap && lockedNew > 0){
+    bonusEl.style.display = '';
+    /* Offer the smaller of: 20 or actual locked-fresh count */
+    const offered = Math.min(20, lockedNew);
+    $('eb-amount').textContent = offered;
+  } else {
+    bonusEl.style.display = 'none';
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   unlockBonusDose — opt-in extension of today's daily-new budget.
+   Decrements today's `newIntroduced` counter so the next buildStudyQueue
+   call lets through up to 20 more new cards. We DON'T raise the global
+   `dailyNew` setting — this is a today-only override that resets at midnight.
+   ════════════════════════════════════════════════════════════════════ */
+async function unlockBonusDose(){
+  const BONUS_AMOUNT = 20;
+  const todayKey = dayKey();
+  /* Make sure history record exists */
+  let h = State.history[todayKey];
+  if(!h){
+    h = {day: todayKey, count: 0, newIntroduced: 0, correct: 0, wrong: 0};
+    State.history[todayKey] = h;
+  }
+  /* Reduce introduced count → effectively grants BONUS_AMOUNT more new cards
+     for today's buildStudyQueue. Floor at 0 so we never produce negatives. */
+  h.newIntroduced = Math.max(0, (h.newIntroduced || 0) - BONUS_AMOUNT);
+  /* Persist */
+  if(typeof idbPut === 'function'){
+    try{ await idbPut('history', h); }catch(_){}
+  }
+  toast(`تم فتح ${BONUS_AMOUNT} بطاقة إضافية`, 'success');
+  /* Rebuild queue + restart session in study screen */
+  State.studyQueue = buildStudyQueue();
+  State.studyIdx = 0;
+  State.lastAction = null;
+  hideUndo();
+  showCard();
+}
+
 function tapCard(e){
   if(State.revealed) return;
   if(e && e.target && e.target.closest && e.target.closest('.icon-btn')) return;
@@ -4153,14 +4386,14 @@ async function init(){
 
   // background: autosave + cloud sync (silent)
   startAutoSave();
-  /* ════════════ SMART AUTO-SYNC (twice daily) ════════════
-     Only sync if 12+ hours passed since last successful sync.
-     Otherwise the app loads instantly from local IndexedDB. */
+  /* ════════════ AUTO-SYNC ON EVERY OPEN ════════════
+     Sync runs in the background after 800ms (UI paints first).
+     30-second debounce prevents thrash when user reopens the app rapidly
+     (e.g. switching tabs). Network failure is silent — app stays usable. */
   if(State.cloudUrl){
-    const HOURS_12 = 12 * 60 * 60 * 1000;
+    const DEBOUNCE_MS = 30 * 1000;
     const sinceLastSync = Date.now() - (State.lastSync || 0);
-    if(sinceLastSync > HOURS_12){
-      /* Defer 800ms to let UI paint first */
+    if(sinceLastSync > DEBOUNCE_MS){
       setTimeout(()=>cloudSync(true), 800);
     }
   }
@@ -4486,7 +4719,7 @@ window.App = {
   resetProgress, wipeAll,
   saveStudentName, saveCloudConfig, cloudSyncNow,
   acceptConsent, declineConsent, showConsentAgain,
-  openNewCards, triggerInstall,
+  openNewCards, triggerInstall, unlockBonusDose,
 };
 
 /* boot */
