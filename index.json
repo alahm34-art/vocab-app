@@ -2,31 +2,41 @@
  "app": "vocab",
  "version": 4,
  "manifest": true,
- "updated": 1792235655511,
+ "updated": 1792237957808,
  "deck": {
   "name": "إتقان",
   "supervisor": "",
   "track": "en"
  },
- "schools": [],
+ "schools": [
+  {
+   "code": "jawfa",
+   "name": "ثانوية الجوفاء"
+  },
+  {
+   "code": "ofoos",
+   "name": "ثانوية العفوص"
+  }
+ ],
+ "defaultSchool": "",
  "packs": [
   {
    "key": "q-verbal",
    "name": "القدرات — لفظي",
    "track": "qudurat",
-   "count": 172,
-   "size": 66810,
+   "count": 181,
+   "size": 69340,
    "audio": 0,
    "mode": "auto",
    "schools": [
     "*"
    ],
-   "hash": "7de618e8",
+   "hash": "10e4852a",
    "files": [
     {
-     "file": "packs/q-verbal-7de618e8-1.json",
-     "size": 70241,
-     "count": 172
+     "file": "packs/q-verbal-10e4852a-1.json",
+     "size": 72942,
+     "count": 181
     }
    ]
   },
@@ -34,33 +44,61 @@
    "key": "q-quant",
    "name": "القدرات — كمي",
    "track": "qudurat",
-   "count": 110,
-   "size": 37896,
+   "count": 127,
+   "size": 88963,
    "audio": 0,
    "mode": "auto",
    "schools": [
     "*"
    ],
-   "hash": "48cdbc70",
+   "hash": "4f512222",
    "files": [
     {
-     "file": "packs/q-quant-48cdbc70-1.json",
-     "size": 40038,
-     "count": 110
+     "file": "packs/q-quant-4f512222-1.json",
+     "size": 91411,
+     "count": 127
+    }
+   ]
+  },
+  {
+   "key": "en-listen",
+   "name": "الإنجليزي — استماع",
+   "track": "en",
+   "count": 1,
+   "size": 453904,
+   "audio": 1,
+   "mode": "auto",
+   "schools": [
+    "*"
+   ],
+   "hash": "27e03aeb",
+   "files": [
+    {
+     "file": "packs/en-listen-27e03aeb-1.json",
+     "size": 454121,
+     "count": 1
     }
    ]
   }
  ],
- "legacyHash": "72d1dba3",
+ "legacyHash": "dd1e0dbb",
  "release": {
-  "n": 1,
-  "at": 1792235655511,
-  "total": 282,
-  "added": 282,
+  "n": 2,
+  "at": 1792237957808,
+  "total": 309,
+  "added": 28,
   "updated": 0,
-  "removed": 0
+  "removed": 1
  },
  "history": [
+  {
+   "n": 2,
+   "at": 1792237957808,
+   "total": 309,
+   "added": 28,
+   "updated": 0,
+   "removed": 1
+  },
   {
    "n": 1,
    "at": 1792235655511,
