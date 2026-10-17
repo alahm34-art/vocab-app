@@ -1,0 +1,73 @@
+{
+ "app": "vocab",
+ "version": 4,
+ "manifest": true,
+ "updated": 1792235655511,
+ "deck": {
+  "name": "إتقان",
+  "supervisor": "",
+  "track": "en"
+ },
+ "schools": [],
+ "packs": [
+  {
+   "key": "q-verbal",
+   "name": "القدرات — لفظي",
+   "track": "qudurat",
+   "count": 172,
+   "size": 66810,
+   "audio": 0,
+   "mode": "auto",
+   "schools": [
+    "*"
+   ],
+   "hash": "7de618e8",
+   "files": [
+    {
+     "file": "packs/q-verbal-7de618e8-1.json",
+     "size": 70241,
+     "count": 172
+    }
+   ]
+  },
+  {
+   "key": "q-quant",
+   "name": "القدرات — كمي",
+   "track": "qudurat",
+   "count": 110,
+   "size": 37896,
+   "audio": 0,
+   "mode": "auto",
+   "schools": [
+    "*"
+   ],
+   "hash": "48cdbc70",
+   "files": [
+    {
+     "file": "packs/q-quant-48cdbc70-1.json",
+     "size": 40038,
+     "count": 110
+    }
+   ]
+  }
+ ],
+ "legacyHash": "72d1dba3",
+ "release": {
+  "n": 1,
+  "at": 1792235655511,
+  "total": 282,
+  "added": 282,
+  "updated": 0,
+  "removed": 0
+ },
+ "history": [
+  {
+   "n": 1,
+   "at": 1792235655511,
+   "total": 282,
+   "added": 282,
+   "updated": 0,
+   "removed": 0
+  }
+ ]
+}
