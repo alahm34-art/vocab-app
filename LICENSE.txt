@@ -1,0 +1,19 @@
+إتقان — اتفاقية ترخيص برنامج مملوك
+© 2026 أحمد عطية حسن الزهراني — جميع الحقوق محفوظة.
+(مطوّر برمجيات بموجب وثيقة العمل الحر — متجر مؤشرات)
+
+1. البرنامج (تطبيق الطالب، تطبيق المعلم، سكربت المتابعة، التصميم، والمحتوى التعليمي المرفق) ملك حصري للمالك.
+2. يُسمح للطلاب والمدارس المصرّح لها باستخدام البرنامج من رابطه الرسمي فقط:
+   https://alahm34-art.github.io/vocab-app/Student_App.html
+3. يُمنع دون إذن كتابي من المالك:
+   - نسخ البرنامج أو أي جزء منه، أو إعادة نشره، أو استضافته على أي رابط آخر.
+   - تعديله أو فك تشفيره أو إعادة هندسته أو إزالة إشعارات الحقوق منه.
+   - بيعه أو تأجيره أو استخدامه تجارياً.
+4. وجود الملف على مستودع عام لغرض التشغيل لا يعني أنه مفتوح المصدر، ولا يمنح أي ترخيص.
+5. للاستفسار وطلب الترخيص: تواصل مع المالك.
+
+Etqan — Proprietary Software License
+© 2026 Ahmed Atiyah Hassan AL-Zahrani. All rights reserved.
+This software is not open source. Use is permitted only from the official URL above.
+Copying, re-hosting, modification, reverse engineering, removal of notices, or commercial use
+without the owner's prior written permission is prohibited.
