@@ -2,7 +2,7 @@
  "app": "vocab",
  "version": 4,
  "manifest": true,
- "updated": 1792241763204,
+ "updated": 1792661773150,
  "deck": {
   "name": "إتقان",
   "supervisor": "",
@@ -19,6 +19,10 @@
   }
  ],
  "defaultSchool": "",
+ "listenOpen": {
+  "all": false,
+  "schools": []
+ },
  "packs": [
   {
    "key": "q-verbal",
@@ -65,17 +69,17 @@
    "name": "الإنجليزي — استماع",
    "track": "en",
    "count": 1,
-   "size": 453904,
+   "size": 460337,
    "audio": 1,
    "mode": "auto",
    "schools": [
     "*"
    ],
-   "hash": "27e03aeb",
+   "hash": "04d9d735",
    "files": [
     {
-     "file": "packs/en-listen-27e03aeb-1.json",
-     "size": 454121,
+     "file": "packs/en-listen-04d9d735-1.json",
+     "size": 460554,
      "count": 1
     }
    ]
@@ -83,14 +87,22 @@
  ],
  "legacyHash": "dd1e0dbb",
  "release": {
-  "n": 3,
-  "at": 1792241763204,
+  "n": 4,
+  "at": 1792661773150,
   "total": 309,
   "added": 0,
-  "updated": 0,
+  "updated": 1,
   "removed": 0
  },
  "history": [
+  {
+   "n": 4,
+   "at": 1792661773150,
+   "total": 309,
+   "added": 0,
+   "updated": 1,
+   "removed": 0
+  },
   {
    "n": 3,
    "at": 1792241763204,
